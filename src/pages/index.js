@@ -6,7 +6,7 @@ const Dashboard = () => (
   <>
     <Head>
       <title>
-        Seja+
+        Extensão - Universidade Católica de Brasília
       </title>
     </Head>
     <Box

@@ -18,7 +18,7 @@ const App = (props) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>
-          Seja+
+          Extensão - Universidade Católica de Brasília
         </title>
         <meta
           name="viewport"
