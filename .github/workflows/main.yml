@@ -14,5 +14,5 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "proj-extensao-front-dev" #Must be unique in Heroku
-          heroku_email: "igorsilvadeveloper@gmail.com"
+          heroku_email: "devprojetoextensaoucb@gmail.com"
           buildpack: "https://github.com/mars/create-react-app-buildpack.git"
