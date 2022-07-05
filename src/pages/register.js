@@ -42,13 +42,23 @@ const Register = () => {
         .required(
           'Email is required'),
       name: Yup
+
+        .string()
+        .email(
+          'valid'
+        )
+        .max(255)
+        .required(
+          'Email is required'),
+      name: Yup
         .string()
         .max(255)
         .required(
         )
     }),
     onSubmit: () => {
-        axios.post(`${BASE_API}/auth/signup`, {
+      axios.post(`${BASE_API}/auth/signup`, {
+
         name: formik.values.name,
         email: formik.values.email,
         institutionalEmail: formik.values.institutionalEmail,
@@ -132,6 +142,7 @@ const Register = () => {
               onChange={formik.handleChange}
               type="email"
               value={formik.values.institutionalEmail}
+
               variant="outlined"
             />
 
