@@ -53,11 +53,7 @@ const Register = () => {
         .max(255),
 
       name: Yup
-
         .string()
-        .email(
-          'valid'
-        )
         .max(255)
         .required(
           'É necessário fornecer um nome'),
