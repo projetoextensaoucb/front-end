@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { Box, Container, Grid, TextField, Typography } from '@mui/material';
 import { DashboardLayout } from '../components/dashboard-layout';
+import Login from './login';
 
 
 const Dashboard = () => (
@@ -27,9 +28,9 @@ const Dashboard = () => (
 );
 
 Dashboard.getLayout = (page) => (
-  <DashboardLayout>
+  <Login>
     {page}
-  </DashboardLayout>
+  </Login>
 );
 
 export default Dashboard;
