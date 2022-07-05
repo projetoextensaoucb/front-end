@@ -1,5 +1,3 @@
-import Head from 'next/head';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -14,6 +12,7 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { da } from 'date-fns/locale';
 import { BASE_API } from 'src/configs/appconfigs';
@@ -31,9 +30,6 @@ const Register = () => {
     },
     validationSchema: Yup.object({
       email: Yup
-        .string()
-        .email(
-          'Must be a valid email')
         .max(255)
         .required(
           'Email is required'),
@@ -46,24 +42,23 @@ const Register = () => {
         .required(
           'Email is required'),
       name: Yup
+
+        .string()
+        .email(
+          'valid'
+        )
+        .max(255)
+        .required(
+          'Email is required'),
+      name: Yup
         .string()
         .max(255)
         .required(
-          'Last name is required'),
-      password: Yup
-        .string()
-        .max(255)
-        .required(
-          'Password is required'),
-      policy: Yup
-        .boolean()
-        .oneOf(
-          [true],
-          'This field must be checked'
         )
     }),
     onSubmit: () => {
       axios.post(`${BASE_API}/auth/signup`, {
+
         name: formik.values.name,
         email: formik.values.email,
         institutionalEmail: formik.values.institutionalEmail,
@@ -137,16 +132,17 @@ const Register = () => {
               variant="outlined"
             />
             <TextField
-              error={Boolean(formik.touched.email && formik.errors.email)}
+              error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
               fullWidth
-              helperText={formik.touched.email && formik.errors.email}
-              label="Email Address"
+              helperText={formik.touched.institutionalEmail && formik.errors.institutionalEmail}
+              label="Email Institucional"
               margin="normal"
-              name="email"
+              name="institutionalEmail"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               type="email"
-              value={formik.values.email}
+              value={formik.values.institutionalEmail}
+
               variant="outlined"
             />
 
@@ -176,7 +172,7 @@ const Register = () => {
               value={formik.values.password}
               variant="outlined"
             />
-            
+
             <Box
               sx={{
                 alignItems: 'center',
@@ -261,5 +257,4 @@ const Register = () => {
     </>
   );
 };
-
 export default Register;

@@ -1,6 +1,7 @@
 import Head from 'next/head';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Grid, TextField, Typography } from '@mui/material';
 import { DashboardLayout } from '../components/dashboard-layout';
+
 
 const Dashboard = () => (
   <>
@@ -16,13 +17,10 @@ const Dashboard = () => (
         py: 8
       }}
     >
-      <Container maxWidth="lg">
-        <Typography
-          sx={{ mb: 3 }}
-          variant="h4"
-        >
-          Home
-        </Typography>
+      
+      <Container maxWidth={false}>
+        <Grid container spacing={3}>     
+        </Grid>
       </Container>
     </Box>
   </>

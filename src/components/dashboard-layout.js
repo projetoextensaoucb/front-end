@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, TextField, Toolbar} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { DashboardNavbar } from './dashboard-navbar';
 import { DashboardSidebar } from './dashboard-sidebar';
@@ -34,8 +34,8 @@ export const DashboardLayout = (props) => {
       </DashboardLayoutRoot>
       <DashboardNavbar onSidebarOpen={() => setSidebarOpen(true)} />
       <DashboardSidebar
-        onClose={() => setSidebarOpen(false)} // quando clicar na tela na versao mobile, esconde vertical navbar
-        open={isSidebarOpen} // quando clicar -> abrir tela vertical (versao mobile)
+        onClose={() => setSidebarOpen(false)}
+        open={isSidebarOpen}
       />
     </>
   );
