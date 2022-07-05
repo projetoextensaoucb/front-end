@@ -1,8 +1,7 @@
-import Head from 'next/head';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios'
 import {
   Box,
   Button,
@@ -13,50 +12,56 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { da } from 'date-fns/locale';
+import { BASE_API } from 'src/configs/appconfigs';
 
 const Register = () => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: '',
-      firstName: '',
-      lastName: '',
+      institutionalEmail: '',
+      name: '',
       password: '',
-      policy: false
+      policy: false,
+      foreigner: false
     },
     validationSchema: Yup.object({
       email: Yup
-        .string()
-        .email(
-          'Must be a valid email')
         .max(255)
         .required(
           'Email is required'),
-      firstName: Yup
+      institutionalEmail: Yup
+        .string()
+        .email(
+          'valid'
+        )
+        .max(255)
+        .required(
+          'Email is required'),
+      name: Yup
         .string()
         .max(255)
         .required(
-          'First name is required'),
-      lastName: Yup
-        .string()
-        .max(255)
-        .required(
-          'Last name is required'),
-      password: Yup
-        .string()
-        .max(255)
-        .required(
-          'Password is required'),
-      policy: Yup
-        .boolean()
-        .oneOf(
-          [true],
-          'This field must be checked'
         )
     }),
     onSubmit: () => {
-      router.push('/');
+        axios.post(`${BASE_API}/auth/signup`, {
+        name: formik.values.name,
+        email: formik.values.email,
+        institutionalEmail: formik.values.institutionalEmail,
+        foreigner: formik.values.foreigner,
+        roles: ["user"],
+        password: formik.values.password,
+      })
+        .then(data => {
+          router('/login')
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   });
 
@@ -64,7 +69,7 @@ const Register = () => {
     <>
       <Head>
         <title>
-          Register | Material Kit
+          Cadastro
         </title>
       </Head>
       <Box
@@ -105,40 +110,42 @@ const Register = () => {
               </Typography>
             </Box>
             <TextField
-              error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+              error={Boolean(formik.touched.name && formik.errors.name)}
               fullWidth
-              helperText={formik.touched.firstName && formik.errors.firstName}
-              label="First Name"
+              helperText={formik.touched.name && formik.errors.name}
+              label="Nome"
               margin="normal"
-              name="firstName"
+              name="name"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.firstName}
+              value={formik.values.name}
               variant="outlined"
             />
             <TextField
-              error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+              error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
               fullWidth
-              helperText={formik.touched.lastName && formik.errors.lastName}
-              label="Last Name"
+              helperText={formik.touched.institutionalEmail && formik.errors.institutionalEmail}
+              label="Email Institucional"
               margin="normal"
-              name="lastName"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.lastName}
-              variant="outlined"
-            />
-            <TextField
-              error={Boolean(formik.touched.email && formik.errors.email)}
-              fullWidth
-              helperText={formik.touched.email && formik.errors.email}
-              label="Email Address"
-              margin="normal"
-              name="email"
+              name="institutionalEmail"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               type="email"
-              value={formik.values.email}
+              value={formik.values.institutionalEmail}
+              variant="outlined"
+            />
+
+            <TextField
+              error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
+              fullWidth
+              helperText={formik.touched.institutionalEmail && formik.errors.institutionalEmail}
+              label="Email Institucional"
+              margin="normal"
+              name="institutionalEmail"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              type="email"
+              value={formik.values.institutionalEmail}
               variant="outlined"
             />
             <TextField
@@ -154,6 +161,7 @@ const Register = () => {
               value={formik.values.password}
               variant="outlined"
             />
+
             <Box
               sx={{
                 alignItems: 'center',
@@ -161,6 +169,17 @@ const Register = () => {
                 ml: -1
               }}
             >
+                 <Checkbox
+                checked={formik.values.foreigner}
+                name="foreigner"
+                onChange={formik.handleChange}
+              />
+              <Typography
+                color="textSecondary"
+                variant="body2"
+              >
+                Sou Estrangeiro
+              </Typography>
               <Checkbox
                 checked={formik.values.policy}
                 name="policy"
@@ -170,7 +189,7 @@ const Register = () => {
                 color="textSecondary"
                 variant="body2"
               >
-                I have read the
+                Eu li os
                 {' '}
                 <NextLink
                   href="#"
@@ -181,7 +200,7 @@ const Register = () => {
                     underline="always"
                     variant="subtitle2"
                   >
-                    Terms and Conditions
+                    Termos e Condições
                   </Link>
                 </NextLink>
               </Typography>
@@ -227,5 +246,4 @@ const Register = () => {
     </>
   );
 };
-
 export default Register;

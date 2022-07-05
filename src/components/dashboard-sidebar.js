@@ -2,15 +2,21 @@ import { useEffect } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { Box, Divider, Drawer, useMediaQuery } from '@mui/material';
+import { Avatar, AppBar, Box, Button, Divider, Drawer, Icon, TextField, Typography, Toolbar, IconButton, useMediaQuery } from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { ChartBar as ChartBarIcon } from '../icons/chart-bar';
 import { Cog as CogIcon } from '../icons/cog';
 import { Lock as LockIcon } from '../icons/lock';
+import { Selector as SelectorIcon } from '../icons/selector';
+import { ShoppingBag as ShoppingBagIcon } from '../icons/shopping-bag';
 import { User as UserIcon } from '../icons/user';
 import { UserAdd as UserAddIcon } from '../icons/user-add';
 import { Users as UsersIcon } from '../icons/users';
-// import { Logo } from './logo';
+import { XCircle as XCircleIcon } from '../icons/x-circle';
+import { Logo } from './logo';
 import { NavItem } from './nav-item';
+import { UserCircle as UserCircleIcon } from '../icons/user-circle';
+import styled from '@emotion/styled';
 
 const items = [
   {
@@ -22,6 +28,11 @@ const items = [
     href: '/customers',
     icon: (<UsersIcon fontSize="small" />),
     title: 'Usuários'
+  },
+  {
+    href: '/products',
+    icon: (<ShoppingBagIcon fontSize="small" />),
+    title: 'Produtos'
   },
   {
     href: '/account',
@@ -42,7 +53,7 @@ const items = [
     href: '/register',
     icon: (<UserAddIcon fontSize="small" />),
     title: 'Cadastrar usuários'
-  },
+  }
 ];
 
 export const DashboardSidebar = (props) => {
@@ -76,26 +87,18 @@ export const DashboardSidebar = (props) => {
           height: '100%'
         }}
       >
-        <div>
-          <Box sx={{ p: 3 }}>
-            <NextLink
-              href="/"
-              passHref
-            >
-              <a>
-                logo
-              </a>
-            </NextLink>
-          </Box>
-          <Box sx={{ px: 2 }}>
-          </Box>
-        </div>
-        <Divider
-          sx={{
-            borderColor: '#2D3748',
-            my: 3
-          }}
+        {/* Primeiro divider do dashboard lateral esquerda*/}
+      
+        
+        {/* Chamando logo da UCB */}
+        <Logo>
+        
+        </Logo>
+
+        <Divider sx={{marginTop: 0, marginBottom: 3, borderColor: 'neutral.100'}}
+        
         />
+
         <Box sx={{ flexGrow: 1 }}>
           {items.map((item) => (
             <NavItem
@@ -106,7 +109,7 @@ export const DashboardSidebar = (props) => {
             />
           ))}
         </Box>
-        <Divider sx={{ borderColor: '#2D3748' }} />
+        <Divider sx={{ borderColor: 'neutral.900' }} />
       </Box>
     </>
   );
@@ -118,9 +121,11 @@ export const DashboardSidebar = (props) => {
         open
         PaperProps={{
           sx: {
+            /* Algumas definições da barra lateral esquerda (cor e tamanho)*/
             backgroundColor: 'neutral.900',
+            border: 'none',
             color: '#FFFFFF',
-            width: 280
+            width: 245
           }
         }}
         variant="permanent"

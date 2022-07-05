@@ -7,6 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { createEmotionCache } from '../utils/create-emotion-cache';
 import { theme } from '../theme';
 
+
 const clientSideEmotionCache = createEmotionCache();
 
 const App = (props) => {

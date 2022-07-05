@@ -131,9 +131,12 @@ export const theme = createTheme({
       }
     }
   },
+
+  // Definição de cores para a palheta do site
   palette: {
     neutral: {
-      100: '#F3F4F6',
+      // Cor branca padrão
+      100: '#FFFFFF',
       200: '#E5E7EB',
       300: '#D1D5DB',
       400: '#9CA3AF',
@@ -141,7 +144,8 @@ export const theme = createTheme({
       600: '#4B5563',
       700: '#374151',
       800: '#1F2937',
-      900: '#111827'
+      // Cor padrão Católica
+      900: '#1E3F94'
     },
     action: {
       active: '#6B7280',
@@ -163,7 +167,8 @@ export const theme = createTheme({
       contrastText: '#FFFFFF'
     },
     secondary: {
-      main: '#FFFF',
+      // Cor item selecionado sidebar
+      main: '#fff',
       light: '#3FC79A',
       dark: '#0B815A',
       contrastText: '#FFFFFF'

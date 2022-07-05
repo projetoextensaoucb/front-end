@@ -1,40 +1,15 @@
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { AppBar, Avatar, Badge, Box, IconButton, Toolbar, Tooltip } from '@mui/material';
+import { AppBar, Avatar, Badge, Box, IconButton, TextField, Toolbar, Tooltip, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
-import * as React from 'react';
-import { alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import NextLink from 'next/link';
+import { Users as UsersIcon } from '../icons/users';
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[3]
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
 }));
 
 export const DashboardNavbar = (props) => {
@@ -42,8 +17,35 @@ export const DashboardNavbar = (props) => {
 
   return (
     <>
+    
       <DashboardNavbarRoot
         sx={{
+          left: {
+            lg: 245
+          },
+          width: {
+            lg: 'calc(100% - 280)'
+          }
+        }}
+        {...other}>
+          
+        <Toolbar
+          disableGutters
+          sx={{
+            backgroundColor: 'neutral.900',
+            minHeight: 64,
+            left: 0,
+          }}
+        >
+          <Box sx={{ flexGrow: 1 }} />
+        </Toolbar>
+      </DashboardNavbarRoot>
+
+      <DashboardNavbarRoot
+        sx={{
+          top: {
+            lg: 80
+          },
           left: {
             lg: 280
           },
@@ -52,12 +54,12 @@ export const DashboardNavbar = (props) => {
           }
         }}
         {...other}>
+          
         <Toolbar
           disableGutters
           sx={{
             minHeight: 64,
             left: 0,
-            px: 2
           }}
         >
           <IconButton
@@ -71,26 +73,41 @@ export const DashboardNavbar = (props) => {
           >
             <MenuIcon fontSize="small" />
           </IconButton>
+          <Tooltip title="Search">
+            <IconButton sx={{ ml: 1 }}>
+              <SearchIcon fontSize="medium" />
+            </IconButton>
+          </Tooltip>
           <Box sx={{ flexGrow: 1 }} />
-          <NextLink
-            href="/login"
-            passHref
+          <Tooltip title="Contacts">
+            <IconButton sx={{ ml: 1 }}>
+              <UsersIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Notifications">
+            <IconButton sx={{ ml: 1 }}>
+              <Badge
+                badgeContent={4}
+                color="primary"
+                variant="dot"
+              >
+                <BellIcon fontSize="small" />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+          <Avatar
+            sx={{
+              height: 40,
+              width: 40,
+              ml: 1
+            }}
+            src="/static/images/avatars/avatar_1.png"
           >
-            <a>
-              <Avatar
-                sx={{
-                  height: 40,
-                  width: 40,
-                  ml: 1
-                }}
-                src="" // diretory img
-                >
-              <UserCircleIcon fontSize="small" />
-              </Avatar>
-            </a>
-          </NextLink>
+            <UserCircleIcon fontSize="small" />
+          </Avatar>
         </Toolbar>
       </DashboardNavbarRoot>
+
     </>
   );
 };

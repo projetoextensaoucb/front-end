@@ -53,7 +53,7 @@ export const AccountProfileDetails = (props) => {
           subheader="The information can be edited"
           title="Profile"
         />
-        <Divider />
+        <Divider/>
         <CardContent>
           <Grid
             container
@@ -163,7 +163,7 @@ export const AccountProfileDetails = (props) => {
             </Grid>
           </Grid>
         </CardContent>
-        <Divider />
+        <Divider/>
         <Box
           sx={{
             display: 'flex',

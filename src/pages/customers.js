@@ -1,12 +1,15 @@
 import Head from 'next/head';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
+import { CustomerListResults } from '../components/customer/customer-list-results';
+import { CustomerListToolbar } from '../components/customer/customer-list-toolbar';
 import { DashboardLayout } from '../components/dashboard-layout';
+import { customers } from '../__mocks__/customers';
 
 const Customers = () => (
   <>
     <Head>
       <title>
-        Usuários
+        Customers | Material Kit
       </title>
     </Head>
     <Box
@@ -16,13 +19,11 @@ const Customers = () => (
         py: 8
       }}
     >
-      <Container maxWidth="lg">
-        <Typography
-          sx={{ mb: 3 }}
-          variant="h4"
-        >
-          Usuários
-        </Typography>
+      <Container maxWidth={false}>
+        <CustomerListToolbar />
+        <Box sx={{ mt: 3 }}>
+          <CustomerListResults customers={customers} />
+        </Box>
       </Container>
     </Box>
   </>

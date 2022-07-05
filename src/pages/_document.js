@@ -31,7 +31,7 @@ class CustomDocument extends Document {
           />
           <link
             rel="icon"
-            href="/favicon.png"
+            href="/favicon.ico"
           />
           <link
             rel="icon"
@@ -47,7 +47,7 @@ class CustomDocument extends Document {
           />
           <meta
             name="theme-color"
-            content="#111827"
+            content="#1E3F94"
           />
         </Head>
         <body>
