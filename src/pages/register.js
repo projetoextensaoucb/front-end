@@ -179,16 +179,16 @@ const Register = () => {
               variant="outlined"
             />
             <TextField
-              error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
+              error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
               helperText={formik.touched.email && formik.errors.email}
               label="Email"
               margin="normal"
-              name="institutionalEmail"
+              name="email"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               type="email"
-              value={formik.values.institutionalEmail}
+              value={formik.values.email}
 
               variant="outlined"
             />
