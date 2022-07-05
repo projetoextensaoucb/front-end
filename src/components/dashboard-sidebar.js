@@ -20,7 +20,7 @@ import styled from '@emotion/styled';
 
 const items = [
   {
-    href: '/',
+    href: '/home',
     icon: (<ChartBarIcon fontSize="small" />),
     title: 'Home'
   },
