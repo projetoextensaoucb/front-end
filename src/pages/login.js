@@ -6,8 +6,10 @@ import * as Yup from 'yup';
 import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios'
 import { BASE_API } from 'src/configs/appconfigs';
+import { ReactSession} from 'react-client-session'
 
 const Login = () => {
+
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -35,6 +37,12 @@ const Login = () => {
         password: formik.values.password,
       })
         .then(response => {
+
+          if (typeof window !== 'undefined') {
+            ReactSession.setStoreType("sessionStorage")
+            ReactSession.set("session",response.data)
+          }
+          console.log(response.data)
           router.push('/account')
         })
         .catch(error => {

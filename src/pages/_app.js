@@ -6,7 +6,8 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { createEmotionCache } from '../utils/create-emotion-cache';
 import { theme } from '../theme';
-
+import Login from './login';
+import { ReactSession } from 'react-client-session'
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -14,6 +15,34 @@ const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const getLayout = Component.getLayout ?? ((page) => page);
+
+  var session
+  if (typeof window !== 'undefined') {
+    ReactSession.setStoreType("sessionStorage")
+    session = ReactSession.get("session")
+  }
+
+  if(!session) { 
+    return(
+      <CacheProvider value={emotionCache}>
+      <Head>
+        <title>
+          Extensão - Universidade Católica de Brasília
+        </title>
+        <meta
+          name="viewport"
+          content="initial-scale=1, width=device-width"
+        />
+      </Head>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Login></Login>
+        </ThemeProvider>
+      </LocalizationProvider>
+    </CacheProvider>
+    )
+  }
 
   return (
     <CacheProvider value={emotionCache}>
