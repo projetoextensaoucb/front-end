@@ -116,9 +116,7 @@ const Register = () => {
           if (error.response) {
             alert(`${error.response.data.message}`)
             console.log(error.response.data)
-            // window.location.reload(false);
-            Location.reload(false)     // refresh page
-
+            window.location.reload();// refresh page
           }
         })
     }
