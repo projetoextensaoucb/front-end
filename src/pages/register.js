@@ -168,8 +168,6 @@ const Register = () => {
                 Forneça as informações abaixo para criar sua conta
               </Typography>
             </Box>
-          <Box 
-            sx={{ m: -1 }}>
             <TextField
               error={Boolean(formik.touched.name && formik.errors.name)}
               fullWidth
@@ -236,7 +234,6 @@ const Register = () => {
               value={formik.values.password}
               variant="outlined"
             />
-          </Box>
             {/* TELEFONES */}
             <Box
               sx={{
