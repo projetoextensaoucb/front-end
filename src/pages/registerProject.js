@@ -19,7 +19,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { da } from 'date-fns/locale';
 import { BASE_API } from 'src/configs/appconfigs';
 
-const Register = () => {
+const RegisterProject = () => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -137,19 +137,19 @@ const Register = () => {
           alignItems: 'center',
           display: 'flex',
           flexGrow: 1,
-          minHeight: '100%',
+          minHeight: '100%'
         }}
       >
         <Container maxWidth="sm">
           <NextLink
-            href="/"
+            href="/products"
             passHref
           >
             <Button
               component="a"
               startIcon={<ArrowBackIcon fontSize="small" />}
             >
-              Início
+              Tela de Projetos
             </Button>
           </NextLink>
           <form onSubmit={formik.handleSubmit}>
@@ -158,23 +158,21 @@ const Register = () => {
                 color="textPrimary"
                 variant="h4"
               >
-                Crie uma nova conta
+                Crie um novo projeto de extensão
               </Typography>
               <Typography
                 color="textSecondary"
                 gutterBottom
                 variant="body2"
               >
-                Forneça as informações abaixo para criar sua conta
+                Forneça as informações abaixo para criação do projeto
               </Typography>
             </Box>
-          <Box 
-            sx={{ m: -1 }}>
             <TextField
               error={Boolean(formik.touched.name && formik.errors.name)}
               fullWidth
               helperText={formik.touched.name && formik.errors.name}
-              label="Nome"
+              label="Nome do Projeto"
               margin="normal"
               name="name"
               onBlur={formik.handleBlur}
@@ -186,7 +184,7 @@ const Register = () => {
               error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
               helperText={formik.touched.email && formik.errors.email}
-              label="Email"
+              label="Quantia de vagas disponível"
               margin="normal"
               name="email"
               onBlur={formik.handleBlur}
@@ -198,23 +196,10 @@ const Register = () => {
             />
 
             <TextField
-              error={Boolean(formik.touched.matriculation && formik.errors.matriculation)}
-              fullWidth
-              helperText={formik.touched.matriculation && formik.errors.matriculation}
-              label="Matrícula"
-              margin="normal"
-              name="matriculation"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.matriculation}
-              variant="outlined"
-            />
-
-            <TextField
               error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
               fullWidth
               helperText={formik.touched.institutionalEmail && formik.errors.institutionalEmail}
-              label="Email Universitário"
+              label="Email para contato"
               margin="normal"
               name="institutionalEmail"
               onBlur={formik.handleBlur}
@@ -223,89 +208,27 @@ const Register = () => {
               value={formik.values.institutionalEmail}
               variant="outlined"
             />
-            <TextField
-              error={Boolean(formik.touched.password && formik.errors.password)}
-              fullWidth
-              helperText={formik.touched.password && formik.errors.password}
-              label="Senha"
-              margin="normal"
-              name="password"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              type="password"
-              value={formik.values.password}
-              variant="outlined"
-            />
-          </Box>
+           
             {/* TELEFONES */}
             <Box
               sx={{
                 alignItems: 'center',
                 display: 'flex',
-                m: -1
+                m: 0
               }}
             >
               <TextField
                 error={Boolean(formik.touched.telephone && formik.errors.telephone)}
                 fullWidth
                 helperText={formik.touched.telephone && formik.errors.telephone}
-                label="Telefone Pessoal"
+                label="Telefone para contato"
                 margin="normal"
                 name="telephone"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.telephone}
                 variant="outlined"
-              />
-              {'ㅤ'}
-              <TextField
-                error={Boolean(formik.touched.residentialTelephone && formik.errors.residentialTelephone)}
-                fullWidth
-                helperText={formik.touched.residentialTelephone && formik.errors.residentialTelephone}
-                label="Telefone residencial"
-                margin="normal"
-                name="residentialTelephone"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.residentialTelephone}
-                variant="outlined"
-              />
-            </Box>
-
-            {/* RG E CPF */}
-
-            <Box
-              sx={{
-                alignItems: 'center',
-                display: 'flex',
-                m: -1
-              }}
-            >
-              <TextField
-                error={Boolean(formik.touched.rg && formik.errors.rg)}
-                fullWidth
-                helperText={formik.touched.rg && formik.errors.rg}
-                label="RG"
-                margin="normal"
-                name="rg"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.rg}
-                variant="outlined"
-              />
-              {'ㅤ'}
-              <TextField
-                error={Boolean(formik.touched.cpf && formik.errors.cpf)}
-                fullWidth
-                helperText={formik.touched.cpf && formik.errors.cpf}
-                label="CPF"
-                margin="normal"
-                name="cpf"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.cpf}
-                variant="outlined"
-              />
+              />            
             </Box>
 
             <Box
@@ -315,41 +238,8 @@ const Register = () => {
                 ml: -1
               }}
             >
-              <Checkbox
-                checked={formik.values.foreigner}
-                name="foreigner"
-                onChange={formik.handleChange}
-              />
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                Sou Estrangeiro
-              </Typography>
-              <Checkbox
-                checked={formik.values.policy}
-                name="policy"
-                onChange={formik.handleChange}
-              />
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                Eu li os
-                {'ㅤ'}
-                <NextLink
-                  href="#"
-                  passHref
-                >
-                  <Link
-                    color="primary"
-                    underline="always"
-                    variant="subtitle2"
-                  >
-                    Termos e Condições
-                  </Link>
-                </NextLink>
-              </Typography>
+              
+
             </Box>
             {Boolean(formik.touched.policy && formik.errors.policy) && (
               <FormHelperText error>
@@ -368,28 +258,10 @@ const Register = () => {
                 Cadastrar
               </Button>
             </Box>
-            <Typography
-              color="textSecondary"
-              variant="body2"
-            >
-              Tem uma conta?
-              {' '}
-              <NextLink
-                href="/login"
-                passHref
-              >
-                <Link
-                  variant="subtitle2"
-                  underline="hover"
-                >
-                  Login
-                </Link>
-              </NextLink>
-            </Typography>
           </form>
         </Container>
       </Box>
     </>
   );
 };
-export default Register;
+export default RegisterProject;

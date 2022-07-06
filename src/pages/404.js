@@ -7,7 +7,7 @@ const NotFound = () => (
   <>
     <Head>
       <title>
-        404 | Material Kit
+        404 | Extensão - UCB
       </title>
     </Head>
     <Box
@@ -32,15 +32,15 @@ const NotFound = () => (
             color="textPrimary"
             variant="h1"
           >
-            404: The page you are looking for isn’t here
+            404: A página que você estava procurando não está aqui. 
+            
           </Typography>
           <Typography
             align="center"
             color="textPrimary"
             variant="subtitle2"
           >
-            You either tried some shady route or you came here by mistake.
-            Whichever it is, try using the navigation
+            Você pode ter tentado acessar alguma rota inexistente!
           </Typography>
           <Box sx={{ textAlign: 'center' }}>
             <img
@@ -55,7 +55,7 @@ const NotFound = () => (
             />
           </Box>
           <NextLink
-            href="/"
+            href="/account"
             passHref
           >
             <Button
@@ -64,7 +64,7 @@ const NotFound = () => (
               sx={{ mt: 3 }}
               variant="contained"
             >
-              Go back to dashboard
+              Voltar pra o ínicio
             </Button>
           </NextLink>
         </Box>

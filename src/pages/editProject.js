@@ -1,14 +1,17 @@
 import Head from 'next/head';
-import { Box, Container, Grid, Typography } from '@mui/material';
-import { AccountProfile } from '../components/account/account-profile';
-import { AccountProfileDetails } from '../components/account/account-profile-details';
+import { Box, Container, Grid, Typography, Button } from '@mui/material';
+import { AccountProfile } from '../components/project/project-profile';
+import { AccountProfileDetails } from '../components/project/project-info-details';
 import { DashboardLayout } from '../components/dashboard-layout';
+import NextLink from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 
 const Account = () => (
   <>
     <Head>
       <title>
-        Conta | Extensão - UCB
+        Account | Material Kit
       </title>
     </Head>
     <Box
@@ -18,12 +21,25 @@ const Account = () => (
         py: 15
       }}
     >
-      <Container maxWidth={false}>
-        
+      <Container>
+          <NextLink
+            href="/products"
+            passHref
+          >
+            <Button
+              component="a"
+              startIcon={<ArrowBackIcon fontSize="small" />}
+            >
+              Tela de Projetos
+            </Button>
+          </NextLink>
+        </Container>
+      <Container maxWidth="lg">
         <Typography
           sx={{ mb: 3 }}
+          variant="h4"
         >
-          Conta
+          Edição de Projeto
         </Typography>
         <Grid
           container
