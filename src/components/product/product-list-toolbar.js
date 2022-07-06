@@ -11,6 +11,8 @@ import {
 import { Download as DownloadIcon } from '../../icons/download';
 import { Search as SearchIcon } from '../../icons/search';
 import { Upload as UploadIcon } from '../../icons/upload';
+import NextLink from 'next/link';
+
 
 export const ProductListToolbar = (props) => (
   <Box {...props}>
@@ -27,10 +29,10 @@ export const ProductListToolbar = (props) => (
         sx={{ m: 1 }}
         variant="h4"
       >
-        Products
+        Projetos
       </Typography>
       <Box sx={{ m: 1 }}>
-        <Button
+        {/* <Button
           startIcon={(<UploadIcon fontSize="small" />)}
           sx={{ mr: 1 }}
         >
@@ -41,13 +43,36 @@ export const ProductListToolbar = (props) => (
           sx={{ mr: 1 }}
         >
           Export
-        </Button>
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          Add products
-        </Button>
+        </Button> */}
+
+        <NextLink
+            href="/registerProject"
+            passHref
+          >
+            <Button
+              color="primary"
+              variant="contained"
+            >
+              Adicionar um novo Projeto
+            </Button>
+        </NextLink>
+      
+        {'ㅤ'} 
+        
+        <NextLink
+            href="/editProject"
+            passHref
+          >
+            <Button
+              color="primary"
+              variant="contained"
+            >
+              Editar um Projeto
+            </Button>
+        </NextLink>
+
+
+        
       </Box>
     </Box>
     <Box sx={{ mt: 3 }}>
@@ -68,7 +93,7 @@ export const ProductListToolbar = (props) => (
                   </InputAdornment>
                 )
               }}
-              placeholder="Search product"
+              placeholder="Pesquisar por projeto"
               variant="outlined"
             />
           </Box>

@@ -10,12 +10,12 @@ import {
 } from '@mui/material';
 
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith',
-  timezone: 'GTM-7'
+  avatar: '/static/images/avatars/avatarExt.png',
+  city: 'Brasília - ',
+  country: 'Brasil',
+  // jobTitle: 'Senior Developer',
+  name: 'Projeto Extensão - UCB',
+  // timezone: 'GTM-3'
 };
 
 export const AccountProfile = (props) => (
@@ -64,7 +64,7 @@ export const AccountProfile = (props) => (
         fullWidth
         variant="text"
       >
-        Upload picture
+        Enviar uma imagem
       </Button>
     </CardActions>
   </Card>

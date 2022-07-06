@@ -15,8 +15,8 @@ export const SettingsNotifications = (props) => (
   <form {...props}>
     <Card>
       <CardHeader
-        subheader="Manage the notifications"
-        title="Notifications"
+        subheader="Configure as notificações de acordo com sua preferência."
+        title="Configurações de Notificação"
       />
       <Divider />
       <CardContent>
@@ -40,7 +40,7 @@ export const SettingsNotifications = (props) => (
               gutterBottom
               variant="h6"
             >
-              Notifications
+              Notificações
             </Typography>
             <FormControlLabel
               control={(
@@ -89,7 +89,7 @@ export const SettingsNotifications = (props) => (
               gutterBottom
               variant="h6"
             >
-              Messages
+              Mensagens
             </Typography>
             <FormControlLabel
               control={(
