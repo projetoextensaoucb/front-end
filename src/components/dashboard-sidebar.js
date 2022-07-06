@@ -27,12 +27,12 @@ const items = [
   {
     href: '/',
     icon: (<ChartBarIcon fontSize="small" />),
-    title: 'Home'
+    title: 'Login'
   },
   {
     href: '/settings',
     icon: (<CogIcon fontSize="small" />),
-    title: 'Definições'
+    title: 'Configurações'
   },
   {
     href: '/customers',

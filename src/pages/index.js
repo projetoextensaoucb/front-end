@@ -28,9 +28,9 @@ const Dashboard = () => (
 );
 
 Dashboard.getLayout = (page) => (
-  <DashboardLayout>
+  <Login>
     {page}
-  </DashboardLayout>
+  </Login>
 );
 
 export default Dashboard;
