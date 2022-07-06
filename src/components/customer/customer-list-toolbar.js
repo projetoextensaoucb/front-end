@@ -10,6 +10,7 @@ import {
 import { Search as SearchIcon } from '../../icons/search';
 import { Upload as UploadIcon } from '../../icons/upload';
 import { Download as DownloadIcon } from '../../icons/download';
+import NextLink from 'next/link';
 
 export const CustomerListToolbar = (props) => (
   <Box {...props}>
@@ -26,27 +27,21 @@ export const CustomerListToolbar = (props) => (
         sx={{ m: 1 }}
         variant="h4"
       >
-        Customers
+        Usuários
       </Typography>
-      <Box sx={{ m: 1 }}>
-        <Button
-          startIcon={(<UploadIcon fontSize="small" />)}
-          sx={{ mr: 1 }}
-        >
-          Import
-        </Button>
-        <Button
-          startIcon={(<DownloadIcon fontSize="small" />)}
-          sx={{ mr: 1 }}
-        >
-          Export
-        </Button>
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          Add Customers
-        </Button>
+      <Box sx={{ m: 1 }}>       
+        <NextLink
+            href="/register"
+            passHref
+          >
+            <Button
+              color="primary"
+              variant="contained"
+            >
+              Cadastrar um novo Usuário
+            </Button>
+        </NextLink>
+
       </Box>
     </Box>
     <Box sx={{ mt: 3 }}>
@@ -59,20 +54,29 @@ export const CustomerListToolbar = (props) => (
                 startAdornment: (
                   <InputAdornment position="start">
                     <SvgIcon
-                      color="action"
                       fontSize="small"
+                      color="action"
                     >
                       <SearchIcon />
                     </SvgIcon>
                   </InputAdornment>
                 )
               }}
-              placeholder="Search customer"
+              placeholder="Pesquisar por usuários"
               variant="outlined"
             />
           </Box>
         </CardContent>
       </Card>
     </Box>
+
+
+
+
+
+
+
+
+
   </Box>
 );

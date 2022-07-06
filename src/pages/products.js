@@ -9,14 +9,14 @@ const Products = () => (
   <>
     <Head>
       <title>
-        Products | Material Kit
+        Projetos | Extensão - UCB
       </title>
     </Head>
     <Box
       component="main"
       sx={{
         flexGrow: 1,
-        py: 8
+        py: 15
       }}
     >
       <Container maxWidth={false}>

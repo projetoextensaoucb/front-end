@@ -20,24 +20,14 @@ import styled from '@emotion/styled';
 
 const items = [
   {
-    href: '/home',
-    icon: (<ChartBarIcon fontSize="small" />),
-    title: 'Home'
-  },
-  {
-    href: '/customers',
-    icon: (<UsersIcon fontSize="small" />),
-    title: 'Usuários'
-  },
-  {
-    href: '/products',
-    icon: (<ShoppingBagIcon fontSize="small" />),
-    title: 'Produtos'
-  },
-  {
     href: '/account',
     icon: (<UserIcon fontSize="small" />),
     title: 'Conta'
+  },
+  {
+    href: '/',
+    icon: (<ChartBarIcon fontSize="small" />),
+    title: 'Home'
   },
   {
     href: '/settings',
@@ -45,15 +35,35 @@ const items = [
     title: 'Definições'
   },
   {
-    href: '/login',
-    icon: (<LockIcon fontSize="small" />),
-    title: 'Login'
+    href: '/customers',
+    icon: (<UsersIcon fontSize="small" />),
+    title: 'Usuários'
   },
+  // {
+  //   href: '/register',
+  //   icon: (<UserAddIcon fontSize="small" />),
+  //   title: 'Cadastrar Usuários'
+  // },
   {
-    href: '/register',
-    icon: (<UserAddIcon fontSize="small" />),
-    title: 'Cadastrar usuários'
+    href: '/products',
+    icon: (<ShoppingBagIcon fontSize="small" />),
+    title: 'Projetos'
   }
+  // {
+  //   href: '/login',
+  //   icon: (<LockIcon fontSize="small" />),
+  //   title: 'Login'
+  // },
+  // {
+  //   href: '/registerProject',
+  //   icon: (<UserAddIcon fontSize="small" />),
+  //   title: 'Cadastrar Projetos'
+  // },
+  // {
+  //   href: '/projedit',
+  //   icon: (<UserAddIcon fontSize="small" />),
+  //   title: 'Editar Projetos'
+  // }
 ];
 
 export const DashboardSidebar = (props) => {
