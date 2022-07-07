@@ -28,8 +28,8 @@ const Products = () => (
           >
             {products.map((product) => (
               <Grid
-                // item
-                // key={product.id}
+                item
+                key={product.id}
                 // lg={4}
                 // md={6}
                 // xs={12}
