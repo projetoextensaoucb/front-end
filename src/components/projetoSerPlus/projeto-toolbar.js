@@ -37,12 +37,6 @@ export const ProductListToolbar = (props) => (
         m: 1
       }}
     >       
-      {/* <Typography
-        sx={{ m: 2 }}
-        variant="h4"
-      >
-        Projeto Ser+
-      </Typography> */}
     </Box>
   </Box>
 );
