@@ -53,7 +53,11 @@ const Register = () => {
         .max(255),
 
       name: Yup
+
         .string()
+        .email(
+          'valid'
+        )
         .max(255)
         .required(
           'É necessário fornecer um nome'),
@@ -116,7 +120,7 @@ const Register = () => {
           if (error.response) {
             alert(`${error.response.data.message}`)
             console.log(error.response.data)
-            window.location.reload();// refresh page
+            window.location.reload(false); // refresh page
           }
         })
     }
@@ -135,7 +139,7 @@ const Register = () => {
           alignItems: 'center',
           display: 'flex',
           flexGrow: 1,
-          minHeight: '100%',
+          minHeight: '100%'
         }}
       >
         <Container maxWidth="sm">
@@ -179,16 +183,16 @@ const Register = () => {
               variant="outlined"
             />
             <TextField
-              error={Boolean(formik.touched.email && formik.errors.email)}
+              error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
               fullWidth
               helperText={formik.touched.email && formik.errors.email}
               label="Email"
               margin="normal"
-              name="email"
+              name="institutionalEmail"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               type="email"
-              value={formik.values.email}
+              value={formik.values.institutionalEmail}
 
               variant="outlined"
             />
@@ -252,7 +256,7 @@ const Register = () => {
                 value={formik.values.telephone}
                 variant="outlined"
               />
-              {'ㅤ'}
+
               <TextField
                 error={Boolean(formik.touched.residentialTelephone && formik.errors.residentialTelephone)}
                 fullWidth
@@ -288,7 +292,7 @@ const Register = () => {
                 value={formik.values.rg}
                 variant="outlined"
               />
-              {'ㅤ'}
+
               <TextField
                 error={Boolean(formik.touched.cpf && formik.errors.cpf)}
                 fullWidth
@@ -331,7 +335,7 @@ const Register = () => {
                 variant="body2"
               >
                 Eu li os
-                {'ㅤ'}
+                {' '}
                 <NextLink
                   href="#"
                   passHref
