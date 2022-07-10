@@ -16,34 +16,6 @@ const App = (props) => {
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  var session
-  if (typeof window !== 'undefined') {
-    ReactSession.setStoreType("sessionStorage")
-    session = ReactSession.get("session")
-  }
-
-  if(!session) { 
-    return(
-      <CacheProvider value={emotionCache}>
-      <Head>
-        <title>
-          Extensão - Universidade Católica de Brasília
-        </title>
-        <meta
-          name="viewport"
-          content="initial-scale=1, width=device-width"
-        />
-      </Head>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Login></Login>
-        </ThemeProvider>
-      </LocalizationProvider>
-    </CacheProvider>
-    )
-  }
-
   return (
     <CacheProvider value={emotionCache}>
       <Head>

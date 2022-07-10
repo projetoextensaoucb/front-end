@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Box, Container, Grid, Typography, Button } from '@mui/material';
-import { AccountProfile } from '../components/project/project-profile';
-import { AccountProfileDetails } from '../components/project/project-info-details';
+import { AccountProfile } from '../components/editProject/project-profile';
+import { AccountProfileDetails } from '../components/editProject/project-info-details';
 import { DashboardLayout } from '../components/dashboard-layout';
 import NextLink from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
