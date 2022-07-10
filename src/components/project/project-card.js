@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import { Avatar, Box, Card, CardContent, Divider, Grid, Typography, Button } from '@mui/material';
 import { Clock as ClockIcon } from '../../icons/clock';
-import { Download as DownloadIcon } from '../../icons/download';
 import NextLink from 'next/link';
 
-export const ProductCard = ({ product, ...rest }) => (
+export const ProjectCard = ({ project, ...rest }) => (
   <Card
     sx={{
       display: 'flex',
@@ -23,7 +22,7 @@ export const ProductCard = ({ product, ...rest }) => (
       >
         <Avatar
           alt="Product"
-          src={product.media}
+          src={project.banner}
           variant="square"
         />
       </Box>
@@ -33,14 +32,14 @@ export const ProductCard = ({ product, ...rest }) => (
         gutterBottom
         variant="h5"
       >
-        {product.title}
+        {project.name}
       </Typography>
       <Typography
         align="center"
         color="textPrimary"
         variant="body1"
       >
-        {product.description}
+        {project.description}
       </Typography>
     </CardContent>
     <Box sx={{ flexGrow: 1 }} />
@@ -65,7 +64,7 @@ export const ProductCard = ({ product, ...rest }) => (
             sx={{ pl: 1 }}
             variant="body2"
           >
-            Carga horária: 36 horas.
+            Numero de vagas: {project.vacancies}
           </Typography>
         </Grid>
         <Grid
@@ -75,17 +74,16 @@ export const ProductCard = ({ product, ...rest }) => (
             display: 'flex'
           }}
         >
-          {/* <DownloadIcon color="action" /> */}
+
           <Typography
             color="textSecondary"
             display="inline"
             sx={{ pl: 1 }}
             variant="body2"
           >
-            {product.totalDownloads}
             {' '}
             <NextLink
-            href="/projetoSer+"
+            href="#"
             passHref
           >
             <Button
@@ -102,6 +100,6 @@ export const ProductCard = ({ product, ...rest }) => (
   </Card>
 );
 
-ProductCard.propTypes = {
-  product: PropTypes.object.isRequired
+ProjectCard.propTypes = {
+  project: PropTypes.object.isRequired
 };
