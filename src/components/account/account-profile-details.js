@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -8,211 +8,169 @@ import {
   Divider,
   Grid,
   TextField,
-  Typography
-} from '@mui/material';
-import NextLink from 'next/link';
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
+  Stack,
+} from "@mui/material";
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    name: "nome do usuario",
+    email: "usuario@gmail.com",
+    institutionalEmail: "usuario@ucb.com",
+    password: "12345678",
+    residentialTelephone: "(61) 00000-0000",
+    telephone: "(61) 00000-0000",
+    matriculation: "uc19000111",
+    cpf: "000.000.000.00",
+    rg: "0000000",
+    disabled: true,
   });
+
+  const editDetails = () => {
+    if (values.disabled) {
+      setValues({ disabled: false });
+    } else {
+      setValues({ disabled: true });
+    }
+  };
 
   const handleChange = (event) => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.defaultValue,
     });
   };
 
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      {...props}
-    >
+    <form autoComplete="off" noValidate {...props}>
       <Card>
-        <CardHeader
-          subheader="Essa informação pode ser editada através do botão - Editar detalhes"
-          title="Perfil do Usúario"
-        />
-        <Divider/>
+        <CardHeader title="Perfil do Usúario" />
+        <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                // helperText="Please specify the first name"
-                label="First name"
-                name="firstName"
+                label="Nome completo"
+                name="name"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                defaultValue={values.name}
                 variant="outlined"
-              />
-              
-              {'ㅤ'}
-
-              <TextField
-                fullWidth
-                label="Last name"
-                name="lastName"
-                onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
+                disabled={values.disabled}
               />
             </Grid>
-            {/* <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Last name"
-                name="lastName"
-                onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
-              />
-            </Grid> */}
-            {/* <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Endereço de E-mail"
+                label="Email"
                 name="email"
                 onChange={handleChange}
                 required
-                value={values.email}
+                type="email"
+                defaultValue={values.email}
                 variant="outlined"
-              />
-            </Grid> */}
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Endereço de E-mail"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
+                disabled={values.disabled}
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Phone Number"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Country"
-                name="country"
+                label="Password"
+                name="password"
                 onChange={handleChange}
                 required
-                value={values.country}
+                type="password"
+                defaultValue={values.password}
                 variant="outlined"
+                disabled={values.disabled}
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Select State"
-                name="state"
+                label="Matricula"
+                name="matriculation"
                 onChange={handleChange}
                 required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
+                defaultValue={values.matriculation}
                 variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+                disabled={values.disabled}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Email institucional"
+                name="institutionalEmail"
+                onChange={handleChange}
+                required
+                defaultValue={values.institutionalEmail}
+                variant="outlined"
+                disabled={values.disabled}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Telefone pessoal"
+                name="telephone"
+                onChange={handleChange}
+                defaultValue={values.telephone}
+                variant="outlined"
+                disabled={values.disabled}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Telefone residencial"
+                name="residentialTelephone"
+                onChange={handleChange}
+                defaultValue={values.residentialTelephone}
+                variant="outlined"
+                disabled={values.disabled}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="RG"
+                name="rg"
+                onChange={handleChange}
+                defaultValue={values.rg}
+                variant="outlined"
+                disabled={values.disabled}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="CPF"
+                name="cpf"
+                onChange={handleChange}
+                defaultValue={values.cpf}
+                variant="outlined"
+                disabled={values.disabled}
+              />
             </Grid>
           </Grid>
         </CardContent>
-        <Divider/>
+        <Divider />
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
           }}
         >
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Editar detalhes
-          </Button>
-          {'ㅤ'}
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Salvar detalhes
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button color="primary" variant="contained" onClick={editDetails}>
+              Editar detalhes
+            </Button>
+            <Button color="primary" variant="contained">
+              Salvar detalhes
+            </Button>
+          </Stack>
         </Box>
       </Card>
     </form>
