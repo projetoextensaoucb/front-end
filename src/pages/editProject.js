@@ -23,7 +23,7 @@ const Account = () => (
     >
       <Container>
           <NextLink
-            href="/products"
+            href="/projects"
             passHref
           >
             <Button

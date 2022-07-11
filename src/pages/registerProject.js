@@ -142,7 +142,7 @@ const RegisterProject = () => {
       >
         <Container maxWidth="sm">
           <NextLink
-            href="/products"
+            href="/projects"
             passHref
           >
             <Button
