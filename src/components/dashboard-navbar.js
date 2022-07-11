@@ -17,7 +17,7 @@ export const DashboardNavbar = (props) => {
 
   return (
     <>
-    
+ 
       <DashboardNavbarRoot
         sx={{
           left: {
@@ -37,11 +37,22 @@ export const DashboardNavbar = (props) => {
             left: 0,
           }}
         >
+          <IconButton
+            onClick={onSidebarOpen}
+            sx={{
+              display: {
+                xs: 'inline-flex',
+                lg: 'none'
+              }
+            }}
+          >
+            <MenuIcon fontSize="small" />
+          </IconButton>
           <Box sx={{ flexGrow: 1 }} />
         </Toolbar>
       </DashboardNavbarRoot>
 
-      <DashboardNavbarRoot
+      {/* <DashboardNavbarRoot
         sx={{
           top: {
             lg: 80
@@ -106,7 +117,7 @@ export const DashboardNavbar = (props) => {
             <UserCircleIcon fontSize="small" />
           </Avatar>
         </Toolbar>
-      </DashboardNavbarRoot>
+      </DashboardNavbarRoot> */}
 
     </>
   );
