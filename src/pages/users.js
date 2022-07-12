@@ -4,14 +4,17 @@ import { CustomerListResults } from '../components/customer/customer-list-result
 import { CustomerListToolbar } from '../components/customer/customer-list-toolbar';
 import { DashboardLayout } from '../components/dashboard-layout';
 import { customers } from '../__mocks__/customers';
+import  { useState, useEffect } from 'react'
+import axios from 'axios'
+import { BASE_API } from 'src/configs/appconfigs';
 
-export default function Customers() {
+export default function Users() {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
     const getUsers = async () => {
       console.log("chamou")
-      axios.get(`${BASE_API}/user/all`, {})
+      axios.get(`${BASE_API}/users/all`, {})
         .then(response => {
           console.log("carregou")
           setProjects(response.data.customers)
@@ -49,7 +52,7 @@ export default function Customers() {
   )
 }
 
-Customers.getLayout = (page) => (
+Users.getLayout = (page) => (
   <DashboardLayout>
     {page}
   </DashboardLayout>

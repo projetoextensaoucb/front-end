@@ -24,6 +24,7 @@ export default function Products() {
     }
     getProjects()
   }, [])
+  
   return (
     <>
       <Head>
