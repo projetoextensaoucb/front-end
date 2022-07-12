@@ -33,7 +33,6 @@ const RegisterProject = () => {
     verifySession()
   }, [])
 
-  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: '',
