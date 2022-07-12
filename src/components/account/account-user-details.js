@@ -11,11 +11,20 @@ import {
   Stack,
 } from "@mui/material";
 
-export const AccountProfileDetails = (props) => {
-  const [values, setValues] = useState({
-    password: "********",
-    disabled: true,
-  });
+export const AccountUserDetails = ({userData}) => {
+  const [values, setValues] = useState(
+    {
+      name: userData.name,
+      email: userData.email,
+      institutionalEmail: userData.institutionalEmail,
+      password: "********",
+      residentialTelephone: userData.residentialTelephone,
+      telephone: userData.telephone,
+      matriculation: userData.matriculation,
+      cpf: userData.cpf,
+      rg: userData.rg,
+    }
+  );
 
   const editDetails = () => {
     if (values.disabled) {
@@ -25,22 +34,9 @@ export const AccountProfileDetails = (props) => {
     }
   };
 
-  const [password, setPassword] = useState({
-    password: "********",
-    disabled: true,
-  });
-
-  const editPasswords = () => {
-    if (password.disabled) {
-      setPassword({ disabled: false });
-    } else {
-      setPassword({ disabled: true });
-    }
-  };
-
   const handleChange = (event) => {
     setValues({
-      name: "oi",
+      name: "",
       email: "",
       institutionalEmail: "",
       password: "",
@@ -49,12 +45,11 @@ export const AccountProfileDetails = (props) => {
       matriculation: "",
       cpf: "",
       rg: "",
-      disabled: true,
     });
   };
 
   return (
-    <form autoComplete="off" noValidate {...props}>
+    <form autoComplete="off">
       <Card>
         <CardHeader title="Perfil do Usúario" />
         <Divider />
@@ -95,7 +90,7 @@ export const AccountProfileDetails = (props) => {
                 type="password"
                 defaultValue={values.password}
                 variant="outlined"
-                disabled={password.disabled && values.disabled}
+                disabled={values.disabled}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -177,16 +172,15 @@ export const AccountProfileDetails = (props) => {
           }}
         >
           <Stack direction="row" spacing={2}>
-            <Button color="primary" variant="contained" onClick={editDetails}>
-              Editar detalhes
-            </Button>
+            { values.disabled &&
+
+              <Button color="primary" variant="contained" onClick={editDetails}>
+                Editar detalhes
+              </Button>
+            }
             <Button color="primary" variant="contained">
               Salvar detalhes
             </Button>
-            <Button color="primary" variant="contained" onClick={editPasswords}>
-              Editar senha
-            </Button>
-
           </Stack>
         </Box>
       </Card>
