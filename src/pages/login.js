@@ -42,9 +42,7 @@ const Login = () => {
     onSubmit: () => {
 
       axios.post(`${BASE_API}/auth/signin`, {
-        matriculation: formik.values.login,
-        email: formik.values.login,
-        institucionalEmail: formik.values.login,
+        login: formik.values.login,
         password: formik.values.password,
       })
         .then(response => {
