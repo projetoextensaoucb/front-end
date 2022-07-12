@@ -13,15 +13,15 @@ import {
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
-    name: "nome do usuario",
+    name: "Nome do Aluno",
     email: "usuario@gmail.com",
-    institutionalEmail: "usuario@ucb.com",
-    password: "12345678",
+    institutionalEmail: "aluno@a.ucb.br",
+    password: "********",
     residentialTelephone: "(61) 00000-0000",
     telephone: "(61) 00000-0000",
-    matriculation: "uc19000111",
-    cpf: "000.000.000.00",
-    rg: "0000000",
+    matriculation: "UC22012204",
+    cpf: "000.000.000-00",
+    rg: "00.000.000-0",
     disabled: true,
   });
 
@@ -30,6 +30,19 @@ export const AccountProfileDetails = (props) => {
       setValues({ disabled: false });
     } else {
       setValues({ disabled: true });
+    }
+  };
+
+  const [password, setPassword] = useState({
+    password: "********",
+    disabled: true,
+  });
+
+  const editPasswords = () => {
+    if (password.disabled) {
+      setPassword({ disabled: false });
+    } else {
+      setPassword({ disabled: true });
     }
   };
 
@@ -82,7 +95,7 @@ export const AccountProfileDetails = (props) => {
                 type="password"
                 defaultValue={values.password}
                 variant="outlined"
-                disabled={values.disabled}
+                disabled={password.disabled && values.disabled}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -169,6 +182,9 @@ export const AccountProfileDetails = (props) => {
             </Button>
             <Button color="primary" variant="contained">
               Salvar detalhes
+            </Button>
+            <Button color="primary" variant="contained" onClick={editPasswords}>
+              Editar senha
             </Button>
           </Stack>
         </Box>

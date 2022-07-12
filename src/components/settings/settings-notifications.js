@@ -40,7 +40,7 @@ export const SettingsNotifications = (props) => (
               gutterBottom
               variant="h6"
             >
-              Notificações
+              Receber notificações por:
             </Typography>
             <FormControlLabel
               control={(
@@ -49,7 +49,7 @@ export const SettingsNotifications = (props) => (
                   defaultChecked
                 />
               )}
-              label="Email"
+              label="E-mail"
             />
             <FormControlLabel
               control={(
@@ -58,60 +58,7 @@ export const SettingsNotifications = (props) => (
                   defaultChecked
                 />
               )}
-              label="Push Notifications"
-            />
-            <FormControlLabel
-              control={<Checkbox />}
-              label="Text Messages"
-            />
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  defaultChecked
-                />
-              )}
-              label="Phone calls"
-            />
-          </Grid>
-          <Grid
-            item
-            md={4}
-            sm={6}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-            xs={12}
-          >
-            <Typography
-              color="textPrimary"
-              gutterBottom
-              variant="h6"
-            >
-              Mensagens
-            </Typography>
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  defaultChecked
-                />
-              )}
-              label="Email"
-            />
-            <FormControlLabel
-              control={<Checkbox />}
-              label="Push Notifications"
-            />
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  defaultChecked
-                />
-              )}
-              label="Phone calls"
+              label="Celular"
             />
           </Grid>
         </Grid>
