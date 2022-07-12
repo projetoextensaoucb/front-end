@@ -1,74 +1,53 @@
 import { useEffect } from 'react';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { Avatar, AppBar, Box, Button, Divider, Drawer, Icon, TextField, Typography, Toolbar, IconButton, useMediaQuery } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { ChartBar as ChartBarIcon } from '../icons/chart-bar';
 import { Cog as CogIcon } from '../icons/cog';
-import { Lock as LockIcon } from '../icons/lock';
-import { Selector as SelectorIcon } from '../icons/selector';
 import { ShoppingBag as ShoppingBagIcon } from '../icons/shopping-bag';
 import { User as UserIcon } from '../icons/user';
-import { UserAdd as UserAddIcon } from '../icons/user-add';
 import { Users as UsersIcon } from '../icons/users';
-import { XCircle as XCircleIcon } from '../icons/x-circle';
 import { Logo } from './logo';
 import { NavItem } from './nav-item';
-import { UserCircle as UserCircleIcon } from '../icons/user-circle';
-import styled from '@emotion/styled';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const items = [
   {
-    href: '/account',
-    icon: (<UserIcon fontSize="small" />),
-    title: 'Conta'
-  },
+    href: ' ',
+    icon: (<MenuIcon fontSize="small" />),
+    title: ' '
+  }, 
   {
     href: '/',
     icon: (<ChartBarIcon fontSize="small" />),
-    title: 'Home'
-  },
-  {
-    href: '/settings',
-    icon: (<CogIcon fontSize="small" />),
-    title: 'Definições'
+    title: 'Mural'
   },
   {
     href: '/customers',
     icon: (<UsersIcon fontSize="small" />),
     title: 'Usuários'
   },
-  // {
-  //   href: '/register',
-  //   icon: (<UserAddIcon fontSize="small" />),
-  //   title: 'Cadastrar Usuários'
-  // },
   {
-    href: '/products',
+    href: '/projects',
     icon: (<ShoppingBagIcon fontSize="small" />),
     title: 'Projetos'
+  },
+  {
+    href: '/account',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Conta'
+  },
+  {
+    href: '/settings',
+    icon: (<CogIcon fontSize="small" />),
+    title: 'Definições'
   }
-  // {
-  //   href: '/login',
-  //   icon: (<LockIcon fontSize="small" />),
-  //   title: 'Login'
-  // },
-  // {
-  //   href: '/registerProject',
-  //   icon: (<UserAddIcon fontSize="small" />),
-  //   title: 'Cadastrar Projetos'
-  // },
-  // {
-  //   href: '/projedit',
-  //   icon: (<UserAddIcon fontSize="small" />),
-  //   title: 'Editar Projetos'
-  // }
 ];
 
 export const DashboardSidebar = (props) => {
-  const { open, onClose } = props;
+  const { open, onClose, onSidebarOpen } = props;
   const router = useRouter();
+  
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
     noSsr: false
@@ -99,7 +78,7 @@ export const DashboardSidebar = (props) => {
       >
         {/* Primeiro divider do dashboard lateral esquerda*/}
       
-        
+
         {/* Chamando logo da UCB */}
         <Logo>
         
