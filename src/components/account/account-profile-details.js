@@ -13,7 +13,15 @@ import {
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
+    name: "Nome do Aluno",
+    email: "usuario@gmail.com",
+    institutionalEmail: "aluno@a.ucb.br",
     password: "********",
+    residentialTelephone: "(61) 00000-0000",
+    telephone: "(61) 00000-0000",
+    matriculation: "UC22012204",
+    cpf: "000.000.000-00",
+    rg: "00.000.000-0",
     disabled: true,
   });
 
@@ -40,16 +48,8 @@ export const AccountProfileDetails = (props) => {
 
   const handleChange = (event) => {
     setValues({
-      name: "oi",
-      email: "",
-      institutionalEmail: "",
-      password: "",
-      residentialTelephone: "",
-      telephone: "",
-      matriculation: "",
-      cpf: "",
-      rg: "",
-      disabled: true,
+      ...values,
+      [event.target.name]: event.target.defaultValue,
     });
   };
 
