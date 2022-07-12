@@ -17,10 +17,11 @@ const Dashboard = () => (
       component="main"
       sx={{
         flexGrow: 1,
-        py: 0.1
+        py: 8
       }}
     >
       {/* <MyImageGallery /> */}
+
       <Container maxWidth={false}>
         <Grid container spacing={3}>     
         </Grid>

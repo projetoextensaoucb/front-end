@@ -186,6 +186,7 @@ export const AccountProfileDetails = (props) => {
             <Button color="primary" variant="contained" onClick={editPasswords}>
               Editar senha
             </Button>
+
           </Stack>
         </Box>
       </Card>
