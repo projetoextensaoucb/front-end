@@ -1,9 +1,34 @@
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Box, Card, CardContent, Divider, Grid, Typography, Button } from '@mui/material';
 import { Clock as ClockIcon } from '../../icons/clock';
 import NextLink from 'next/link';
+import Dialog from '@mui/material/Dialog';
+import ListItemText from '@mui/material/ListItemText';
+import ListItem from '@mui/material/ListItem';
+import List from '@mui/material/List';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
 
-export const ProjectCard = ({ project, ...rest }) => (
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+ 
+export const ProjectCard = ({ project, ...rest }) => ( 
+  // const [open, setOpen] = React.useState(false);
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+  
   <Card
     sx={{
       display: 'flex',
@@ -89,6 +114,7 @@ export const ProjectCard = ({ project, ...rest }) => (
             <Button
               color="primary"
               variant="contained"
+              onClick={handleClickOpen}
             >
               Informações
             </Button>
@@ -99,6 +125,7 @@ export const ProjectCard = ({ project, ...rest }) => (
     </Box>
   </Card>
 );
+
 
 ProjectCard.propTypes = {
   project: PropTypes.object.isRequired

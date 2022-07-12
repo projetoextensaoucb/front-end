@@ -18,7 +18,7 @@ export const SettingsPassword = (props) => {
     <form {...props}>
       <Card>
         <CardHeader
-          subheader="Update password"
+          subheader="Atualize sua senha"
           title="Password"
         />
         <Divider />
