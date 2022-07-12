@@ -5,7 +5,36 @@ import { CustomerListToolbar } from '../components/customer/customer-list-toolba
 import { DashboardLayout } from '../components/dashboard-layout';
 import { customers } from '../__mocks__/customers';
 
-const Customers = () => (
+import axios from 'axios'
+import { BASE_API } from 'src/configs/appconfigs';
+import  { useState, useEffect } from 'react'
+
+const Customers = () => {
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    const getUsers = async () => {
+      console.log("chamou")
+      axios.get(`${BASE_API}/user/all`, {}, {
+        headers: {
+          'content-type': 'text/json',
+          'x-access-token': ""
+        }
+      },
+      )
+      .then(response => {
+        console.log("carregou")
+        console.log(response.data);
+        setUsers(response.data.users)
+      })
+      .catch(error => {
+        console.log("error")
+      })
+    }
+    getUsers()
+  }, [])
+
+  return (
   <>
     <Head>
       <title>
@@ -27,7 +56,7 @@ const Customers = () => (
       </Container>
     </Box>
   </>
-);
+)};
 Customers.getLayout = (page) => (
   <DashboardLayout>
     {page}

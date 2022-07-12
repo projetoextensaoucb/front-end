@@ -3,7 +3,8 @@ import { Avatar, Box, Card, CardContent, Divider, Grid, Typography, Button } fro
 import { Clock as ClockIcon } from '../../icons/clock';
 import NextLink from 'next/link';
 
-export const ProjectCard = ({ project, ...rest }) => (
+export const ProjectCard = ({ project, childToParent, ...rest }) => {
+  return (
   <Card
     sx={{
       display: 'flex',
@@ -89,6 +90,7 @@ export const ProjectCard = ({ project, ...rest }) => (
             <Button
               color="primary"
               variant="contained"
+              onClick={() => childToParent(project.id)}
             >
               Informações
             </Button>
@@ -98,7 +100,7 @@ export const ProjectCard = ({ project, ...rest }) => (
       </Grid>
     </Box>
   </Card>
-);
+)};
 
 ProjectCard.propTypes = {
   project: PropTypes.object.isRequired
