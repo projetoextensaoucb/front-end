@@ -35,7 +35,7 @@ const items = [
     title: 'Definições'
   },
   {
-    href: '/users',
+    href: '/customers',
     icon: (<UsersIcon fontSize="small" />),
     title: 'Usuários'
   },

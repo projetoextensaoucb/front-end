@@ -13,15 +13,15 @@ import {
 
 export const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
-    name: "Nome do Aluno",
+    name: "nome do usuario",
     email: "usuario@gmail.com",
-    institutionalEmail: "aluno@a.ucb.br",
-    password: "********",
+    institutionalEmail: "usuario@ucb.com",
+    password: "12345678",
     residentialTelephone: "(61) 00000-0000",
     telephone: "(61) 00000-0000",
-    matriculation: "UC22012204",
-    cpf: "000.000.000-00",
-    rg: "00.000.000-0",
+    matriculation: "uc19000111",
+    cpf: "000.000.000.00",
+    rg: "0000000",
     disabled: true,
   });
 
@@ -30,19 +30,6 @@ export const AccountProfileDetails = (props) => {
       setValues({ disabled: false });
     } else {
       setValues({ disabled: true });
-    }
-  };
-
-  const [password, setPassword] = useState({
-    password: "********",
-    disabled: true,
-  });
-
-  const editPasswords = () => {
-    if (password.disabled) {
-      setPassword({ disabled: false });
-    } else {
-      setPassword({ disabled: true });
     }
   };
 
@@ -95,7 +82,7 @@ export const AccountProfileDetails = (props) => {
                 type="password"
                 defaultValue={values.password}
                 variant="outlined"
-                disabled={password.disabled}
+                disabled={values.disabled}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -168,9 +155,7 @@ export const AccountProfileDetails = (props) => {
             </Grid>
           </Grid>
         </CardContent>
-
         <Divider />
-
         <Box
           sx={{
             display: "flex",
@@ -185,14 +170,9 @@ export const AccountProfileDetails = (props) => {
             <Button color="primary" variant="contained">
               Salvar detalhes
             </Button>
-            <Button color="primary" variant="contained" onClick={editPasswords}>
-              Editar senha
-            </Button>
           </Stack>
         </Box>
       </Card>
-
-      
     </form>
   );
 };

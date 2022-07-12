@@ -7,8 +7,7 @@ import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
 
-const 
-= styled(AppBar)(({ theme }) => ({
+const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[3]
 }));
@@ -18,6 +17,30 @@ export const DashboardNavbar = (props) => {
 
   return (
     <>
+    
+      <DashboardNavbarRoot
+        sx={{
+          left: {
+            lg: 245
+          },
+          width: {
+            lg: 'calc(100% - 280)'
+          }
+        }}
+        {...other}>
+          
+        <Toolbar
+          disableGutters
+          sx={{
+            backgroundColor: 'neutral.900',
+            minHeight: 64,
+            left: 0,
+          }}
+        >
+          <Box sx={{ flexGrow: 1 }} />
+        </Toolbar>
+      </DashboardNavbarRoot>
+
       <DashboardNavbarRoot
         sx={{
           top: {
@@ -84,6 +107,7 @@ export const DashboardNavbar = (props) => {
           </Avatar>
         </Toolbar>
       </DashboardNavbarRoot>
+
     </>
   );
 };
