@@ -1,5 +1,3 @@
-import { parseJSON } from "date-fns"
-
 export const  getUserSession = () => {
     var session = {}
     if (typeof window !== 'undefined') {
@@ -9,5 +7,5 @@ export const  getUserSession = () => {
 }
 
 export const setUserSession = (session) => {
-    window.sessionStorage.setItem('session', JSON.stringify(session))
+    window.sessionStorage.setItem('session', session)
 }
