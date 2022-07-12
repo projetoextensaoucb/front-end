@@ -5,10 +5,21 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios'
+import { getUserSession, setUserSession } from 'src/configs/userSession';
 import { BASE_API } from 'src/configs/appconfigs';
 import { ReactSession} from 'react-client-session'
+import  {useState, useEffect} from 'react'
 
 const Login = () => {
+
+  const [session, setSession] = useState()
+  
+  useEffect(() => { 
+    console.log(getUserSession())
+    if(getUserSession()) { 
+      router.push('/')
+    }
+  })
 
   const router = useRouter();
   const formik = useFormik({
@@ -38,11 +49,9 @@ const Login = () => {
       })
         .then(response => {
           if (typeof window !== 'undefined') {
-            ReactSession.setStoreType("sessionStorage")
-            ReactSession.set("session",response.data)
+            setUserSession(response.data)
+            router.push('/account')
           }
-          console.log(response.data)
-          router.push('/account')
         })
         .catch(error => {
           if (error.response) {

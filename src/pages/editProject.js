@@ -5,9 +5,11 @@ import { AccountProfileDetails } from '../components/editProject/project-info-de
 import { DashboardLayout } from '../components/dashboard-layout';
 import NextLink from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useRouter } from 'next/router';
 
+const Account = () => {
 
-const Account = () => (
+  return(
   <>
     <Head>
       <title>
@@ -65,7 +67,8 @@ const Account = () => (
       </Container>
     </Box>
   </>
-);
+  )
+}
 
 Account.getLayout = (page) => (
   <DashboardLayout>

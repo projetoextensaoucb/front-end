@@ -3,8 +3,20 @@ import { Box, Container, Grid, Typography } from '@mui/material';
 import { AccountProfile } from '../components/account/account-profile';
 import { AccountProfileDetails } from '../components/account/account-profile-details';
 import { DashboardLayout } from '../components/dashboard-layout';
-
-const Account = () => (
+import  {useEffect} from 'react'
+import { getUserSession, setUserSession } from 'src/configs/userSession';
+import { useRouter } from 'next/router';
+const Account = () => {
+  const router = useRouter()
+  useEffect(() => {
+    const verifySession = async () => {
+      if(!getUserSession()) { 
+        router.push('/login')
+      }
+    }
+    verifySession()
+  }, [])
+  return(
   <>
     <Head>
       <title>
@@ -50,7 +62,8 @@ const Account = () => (
       </Container>
     </Box>
   </>
-);
+  )
+}
 
 Account.getLayout = (page) => (
   <DashboardLayout>
