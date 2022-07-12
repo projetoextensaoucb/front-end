@@ -17,7 +17,7 @@ export const DashboardNavbar = (props) => {
 
   return (
     <>
-    
+ 
       <DashboardNavbarRoot
         sx={{
           left: {
@@ -37,31 +37,6 @@ export const DashboardNavbar = (props) => {
             left: 0,
           }}
         >
-          <Box sx={{ flexGrow: 1 }} />
-        </Toolbar>
-      </DashboardNavbarRoot>
-
-      <DashboardNavbarRoot
-        sx={{
-          top: {
-            lg: 80
-          },
-          left: {
-            lg: 280
-          },
-          width: {
-            lg: 'calc(100% - 280px)'
-          }
-        }}
-        {...other}>
-          
-        <Toolbar
-          disableGutters
-          sx={{
-            minHeight: 64,
-            left: 0,
-          }}
-        >
           <IconButton
             onClick={onSidebarOpen}
             sx={{
@@ -73,41 +48,9 @@ export const DashboardNavbar = (props) => {
           >
             <MenuIcon fontSize="small" />
           </IconButton>
-          <Tooltip title="Search">
-            <IconButton sx={{ ml: 1 }}>
-              <SearchIcon fontSize="medium" />
-            </IconButton>
-          </Tooltip>
           <Box sx={{ flexGrow: 1 }} />
-          <Tooltip title="Contacts">
-            <IconButton sx={{ ml: 1 }}>
-              <UsersIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Notifications">
-            <IconButton sx={{ ml: 1 }}>
-              <Badge
-                badgeContent={4}
-                color="primary"
-                variant="dot"
-              >
-                <BellIcon fontSize="small" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
-          <Avatar
-            sx={{
-              height: 40,
-              width: 40,
-              ml: 1
-            }}
-            src="/static/images/avatars/avatar_1.png"
-          >
-            <UserCircleIcon fontSize="small" />
-          </Avatar>
         </Toolbar>
       </DashboardNavbarRoot>
-
     </>
   );
 };
