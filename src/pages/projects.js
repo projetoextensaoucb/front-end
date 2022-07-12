@@ -6,24 +6,62 @@ import { DashboardLayout } from '../components/dashboard-layout';
 import  { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BASE_API } from 'src/configs/appconfigs';
+import { CardProject } from '../components/cardProject/card-project';
+
+import * as React from 'react';
+
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function Products() {
   const [projects, setProjects] = useState([])
+  const [project, setProject] = useState([])
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     const getProjects = async () => {
       console.log("chamou")
       axios.get(`${BASE_API}/project/all`, {})
-        .then(response => {
-          console.log("carregou")
-          setProjects(response.data.projects)
-        })
-        .catch(error => {
-          console.log("error")
-        })
+      .then(response => {
+        console.log(response.data.projects);
+        setProjects(response.data.projects)
+      })
+      .catch(error => {
+        console.log("error")
+      })
     }
     getProjects()
   }, [])
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const childToParent = (childdata) => {
+    console.log(childdata);
+    console.log(projects);
+    projects.find((el) => {
+      if (el.id === childdata) {
+        setProject(el);
+      }
+    })
+    // buscar na lista
+    // passar os dados pro card
+    handleClickOpen();
+  }
+
   return (
     <>
       <Head>
@@ -31,6 +69,29 @@ export default function Products() {
           Projetos | Extensão - UCB
       </title>
       </Head>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        Open full-screen dialog
+      </Button>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: 'relative' }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <CardProject project={project}/>
+      </Dialog>
       <Box
         component="main"
         sx={{
@@ -53,7 +114,7 @@ export default function Products() {
                   md={6}
                   xs={12}
                 >
-                  <ProjectCard project={project} />
+                  <ProjectCard project={project} childToParent={childToParent} />
                 </Grid>
               ))}
             </Grid>
