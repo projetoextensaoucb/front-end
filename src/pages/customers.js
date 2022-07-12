@@ -3,25 +3,23 @@ import { Box, Container } from "@mui/material";
 import { CustomerListResults } from "../components/customer/customer-list-results";
 import { CustomerListToolbar } from "../components/customer/customer-list-toolbar";
 import { DashboardLayout } from "../components/dashboard-layout";
-
 import axios from "axios";
 import { BASE_API } from "src/configs/appconfigs";
 import { useState, useEffect } from "react";
+import { getUserSession, setUserSession } from 'src/configs/userSession';
 
 const Customers = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const getUsers = async () => {
-      console.log("chamou");
+      const session = getUserSession()
       axios
         .get(
           `${BASE_API}/user/all`,
-          {},
           {
             headers: {
-              "content-type": "text/json",
-              "x-access-token": "",
+              "x-access-token": "" + session.accessToken,
             },
           }
         )
@@ -29,7 +27,7 @@ const Customers = () => {
           setUsers(response.data.users);
         })
         .catch((error) => {
-          console.log("error" + error);
+          alert(error.response.data.message)
         });
     };
     getUsers();
