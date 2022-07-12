@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { Box, Container, Typography } from '@mui/material';
 import { DashboardLayout } from '../components/dashboard-layout';
 import { SettingsNotifications } from '../components/settings/settings-notifications';
+import { SettingsPassword } from '../components/settings/settings-password';
 
 const Settings = () => (
   <>
@@ -14,17 +15,20 @@ const Settings = () => (
       component="main"
       sx={{
         flexGrow: 1,
-        py: 5
+        py: 15
       }}
     >
-      <Container maxWidth={false}>
+      <Container maxWidth="lg">
         <Typography
-          sx={{ m: 3 }}
+          sx={{ mb: 3 }}
           variant="h4"
         >
           Configurações
         </Typography>
         <SettingsNotifications />
+        <Box sx={{ pt: 3 }}>
+          <SettingsPassword />
+        </Box>
       </Container>
     </Box>
   </>

@@ -40,7 +40,7 @@ export const SettingsNotifications = (props) => (
               gutterBottom
               variant="h6"
             >
-              Receber notificações por:
+              Notificações
             </Typography>
             <FormControlLabel
               control={(
@@ -49,7 +49,7 @@ export const SettingsNotifications = (props) => (
                   defaultChecked
                 />
               )}
-              label="E-mail"
+              label="Email"
             />
             <FormControlLabel
               control={(
@@ -58,7 +58,60 @@ export const SettingsNotifications = (props) => (
                   defaultChecked
                 />
               )}
-              label="Celular"
+              label="Push Notifications"
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Text Messages"
+            />
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  color="primary"
+                  defaultChecked
+                />
+              )}
+              label="Phone calls"
+            />
+          </Grid>
+          <Grid
+            item
+            md={4}
+            sm={6}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+            xs={12}
+          >
+            <Typography
+              color="textPrimary"
+              gutterBottom
+              variant="h6"
+            >
+              Mensagens
+            </Typography>
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  color="primary"
+                  defaultChecked
+                />
+              )}
+              label="Email"
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Push Notifications"
+            />
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  color="primary"
+                  defaultChecked
+                />
+              )}
+              label="Phone calls"
             />
           </Grid>
         </Grid>
