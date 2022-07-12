@@ -18,8 +18,21 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { da } from 'date-fns/locale';
 import { BASE_API } from 'src/configs/appconfigs';
+import  { useState, useEffect } from 'react'
+import { getUserSession, setUserSession } from 'src/configs/userSession';
 
 const RegisterProject = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    const verifySession = async () => {
+      if(!getUserSession()) { 
+        router.push('/login')
+      }
+    }
+    verifySession()
+  }, [])
+
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
