@@ -18,7 +18,7 @@ const items = [
     title: 'Mural'
   },
   {
-    href: '/customers',
+    href: '/users',
     icon: (<UsersIcon fontSize="small" />),
     title: 'Usuários'
   },
