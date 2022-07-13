@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getUserSession } from 'src/configs/userSession';
 import {
   Box,
   Button,
@@ -12,6 +13,7 @@ import {
 } from "@mui/material";
 
 export const AccountUserDetails = ({userData}) => {
+  const session = getUserSession()
   const [values, setValues] = useState(
     {
       name: userData.name,
@@ -23,6 +25,7 @@ export const AccountUserDetails = ({userData}) => {
       matriculation: userData.matriculation,
       cpf: userData.cpf,
       rg: userData.rg,
+      disabled: true,
     }
   );
 
@@ -172,15 +175,16 @@ export const AccountUserDetails = ({userData}) => {
           }}
         >
           <Stack direction="row" spacing={2}>
-            { values.disabled &&
-
+            { session.roles.find((el) => el === "admin") == "admin" &&
+            <>
               <Button color="primary" variant="contained" onClick={editDetails}>
                 Editar detalhes
               </Button>
+              <Button color="primary" variant="contained">
+                Salvar detalhes
+              </Button>
+            </>
             }
-            <Button color="primary" variant="contained">
-              Salvar detalhes
-            </Button>
           </Stack>
         </Box>
       </Card>
