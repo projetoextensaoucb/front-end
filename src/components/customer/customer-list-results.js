@@ -3,7 +3,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import PropTypes from "prop-types";
 import { AccountUserDetails } from "../account/account-user-details";
 import { AccountProfile } from "../account/account-profile";
-
+import { makeStyles } from '@material-ui/styles';
 import {
   Grid,
   Box,
@@ -16,16 +16,16 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  Dialog,
+  AppBar,
+  Slide,
+  Toolbar,
 } from "@mui/material";
 
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Slide from "@mui/material/Slide";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -36,9 +36,15 @@ export const CustomerListResults = ({ customers, ...rest }) => {
   const [user, setUser] = useState({});
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(0);
-
   const [open, setOpen] = React.useState(false);
 
+  const useStyles = makeStyles({
+    list: {
+      cursor: "pointer"
+    },
+  });
+
+  const classes = useStyles();
   const handleClickOpen = (customer) => {
     setOpen(true);
     customers.find((el) => {
@@ -142,6 +148,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
             <TableBody>
               {customers.slice(0, limit).map((customer) => (
                 <TableRow
+                  className={classes.list}
                   key={customer.id}
                   selected={selectedCustomerIds.indexOf(customer.id) !== -1}
                   onClick={() => handleClickOpen(customer)}
