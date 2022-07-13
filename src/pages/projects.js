@@ -79,12 +79,11 @@ export default function Products() {
           Projetos | Extensão - UCB
       </title>
       </Head>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open full-screen dialog
-      </Button>
       <Dialog
-        fullScreen
+      fullWidth = {true}
+      maxWidth="xl"
         open={open}
+        scroll="body"
         onClose={handleClose}
         TransitionComponent={Transition}
       >

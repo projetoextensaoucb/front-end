@@ -114,8 +114,8 @@ export default function RegisterProject() {
           },
       })
         .then(response => {
-          alert("Cadastrato Realizado!")
-          router.push('/login')
+          alert("Projeto Criado!")
+          router.push('/projects')
         })
         .catch(error => {
           if (error.response) {
@@ -145,7 +145,7 @@ export default function RegisterProject() {
       >
         <Container maxWidth="sm">
           <NextLink
-            href="/products"
+            href="/projects"
             passHref
           >
             <Button
