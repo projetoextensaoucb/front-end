@@ -10,7 +10,7 @@ import {
   Checkbox,
   Container,
   FormHelperText,
-  Link,
+  Avatar,
   TextField,
   Typography
 } from '@mui/material';
@@ -18,107 +18,100 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { da } from 'date-fns/locale';
 import { BASE_API } from 'src/configs/appconfigs';
-import  { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { getUserSession, setUserSession } from 'src/configs/userSession';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Grid from '@mui/material/Grid';
 
-const RegisterProject = () => {
+
+export default function RegisterProject() {
   const router = useRouter()
-
+  const [startDate, setStartDate] = useState(Date());
+  const [endDate, setEndDate] = useState(Date());
+  const [selectedFile, setSelectedFile] = useState(null);
+  var session
   useEffect(() => {
     const verifySession = async () => {
-      if(!getUserSession()) { 
+      session = getUserSession()
+      console.log(session)
+      if (!session) {
         router.push('/login')
       }
     }
     verifySession()
   }, [])
 
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+
   const formik = useFormik({
     initialValues: {
-      email: '',
-      institutionalEmail: '',
       name: '',
-      password: '',
-      residentialTelephone: '',
-      telephone: '',
-      matriculation: '',
-      cpf: '',
-      rg: '',
-      policy: false,
-      foreigner: false
+      address: '',
+      vacancies: 0,
+      startDate: '',
+      endDate: '',
+      summary: '',
+      description: '',
+      city: ''
     },
     validationSchema: Yup.object({
-
-      email: Yup
-        .string()
-        .email(
-          'É necessário inserir um email válido')
-        .max(255)
-        .required(
-          'É necessário um email'),
-
-      institutionalEmail: Yup
-        .string()
-        .email(
-          'É necessário um email institucional válido'
-        )
-        .max(255),
-
       name: Yup
         .string()
         .max(255)
         .required(
-          'É necessário fornecer um nome'),
+          'É necessário um nome para o projeto.'),
 
-      password: Yup
+      address: Yup
+        .string()
+        .max(255),
+
+      vacancies: Yup
+        .number()
+        .required(
+          'É necessário fornecer um número de vagas'),
+      summary: Yup
+        .string()
+        .max(250, 'O resumo deve conter no máximo 250 caracteres'),
+
+      description: Yup
+        .string()
+        .max(800, 'A descrição deve conter no máximo 800 caracteres.'),
+
+      city: Yup
         .string()
         .max(255)
-        .required(
-          'É necessário fornecer uma senha'),
 
-      matriculation: Yup
-        .string()
-        .min(10),
-
-      policy: Yup
-        .boolean()
-        .oneOf(
-          [true],
-          'Para criar uma conta você precisa aceitar os termos e condições.'
-        ),
-
-      residentialTelephone: Yup
-        .string()
-        .max(11),
-
-      telephone: Yup
-        .string()
-        .max(11),
-
-      cpf: Yup
-        .string()
-        .min(11)
-        .max(11),
-
-      rg: Yup
-        .string()
-        .min(8)
-        .max(11)
     }),
-    onSubmit: () => {
-      axios.post(`${BASE_API}/auth/signup`, {
 
-        name: formik.values.name,
-        email: formik.values.email,
-        institutionalEmail: formik.values.institutionalEmail,
-        foreigner: formik.values.foreigner,
-        telephone: formik.values.telephone,
-        residentialTelephone: formik.values.residentialTelephone,
-        rg: formik.values.rg,
-        cpf: formik.values.cpf,
-        matriculation: formik.values.matriculation,
-        roles: ["user"],
-        password: formik.values.password,
+    
+    onSubmit: () => {
+      const userSession = getUserSession()
+      var formmatedStartDate = new Date(startDate)
+      var formmatedEndDate = new Date(endDate)
+      var finalStartDate = formmatedStartDate.getFullYear() + '-' + (formmatedStartDate.getMonth() + 1)  + '-' +  formmatedStartDate.getDate()
+      var finalEndDate =  formmatedEndDate.getFullYear() + '-' + (formmatedEndDate.getMonth() + 1)  + '-' +  formmatedEndDate.getDate()
+      console.log(`DATAS SELECIONADAS ${finalStartDate}`)
+      console.log(`TOKEN: ${userSession.accessToken}`)
+      const projectFormData = new FormData()
+      projectFormData.append("name", formik.values.name)
+      projectFormData.append("address", formik.values.address)
+      projectFormData.append("vacancies", formik.values.vacancies)
+      projectFormData.append("startDate", finalStartDate)
+      projectFormData.append("endDate", finalEndDate)
+      projectFormData.append("summary", formik.values.summary)
+      projectFormData.append("description", formik.values.description)
+      projectFormData.append("city", formik.values.city)
+      projectFormData.append("image", selectedFile);
+      axios.post(`${BASE_API}/project/create`, 
+         projectFormData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            'x-access-token': userSession.accessToken
+          },
       })
         .then(response => {
           alert("Cadastrato Realizado!")
@@ -128,9 +121,7 @@ const RegisterProject = () => {
           if (error.response) {
             alert(`${error.response.data.message}`)
             console.log(error.response.data)
-            // window.location.reload(false);
-            Location.reload(false)     // refresh page
-
+             window.location.reload();
           }
         })
     }
@@ -179,6 +170,20 @@ const RegisterProject = () => {
               >
                 Forneça as informações abaixo para criação do projeto
               </Typography>
+
+              <Avatar
+                alignItems="center"
+                src= {selectedFile ? URL.createObjectURL(selectedFile) : "https://via.placeholder.com/400.png"}
+                sx={{
+                  height: 120,
+                  mb: 2,
+                  width: 120
+                }}
+              />
+              <Button variant="contained" onChange={handleFileSelect} component="label">
+                Adicionar Logo
+               <input hidden accept="image/*" multiple type="file" />
+              </Button>
             </Box>
             <TextField
               error={Boolean(formik.touched.name && formik.errors.name)}
@@ -193,71 +198,88 @@ const RegisterProject = () => {
               variant="outlined"
             />
             <TextField
-              error={Boolean(formik.touched.email && formik.errors.email)}
+              error={Boolean(formik.touched.address && formik.errors.address)}
               fullWidth
-              helperText={formik.touched.email && formik.errors.email}
-              label="Quantia de vagas disponível"
+              helperText={formik.touched.address && formik.errors.address}
+              label="Endereço"
               margin="normal"
-              name="email"
+              name="address"
+              multiline
+              maxRows={4}
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              type="email"
-              value={formik.values.email}
-
+              value={formik.values.address}
               variant="outlined"
             />
 
             <TextField
-              error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
+              error={Boolean(formik.touched.summary && formik.errors.summary)}
               fullWidth
-              helperText={formik.touched.institutionalEmail && formik.errors.institutionalEmail}
-              label="Email para contato"
+              helperText={formik.touched.summary && formik.errors.summary}
+              label="Um breve resumo"
               margin="normal"
-              name="institutionalEmail"
+              name="summary"
+              multiline
+              maxRows={10}
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              type="email"
-              value={formik.values.institutionalEmail}
+              value={formik.values.summary}
               variant="outlined"
             />
-           
-            {/* TELEFONES */}
-            <Box
-              sx={{
-                alignItems: 'center',
-                display: 'flex',
-                m: 0
-              }}
-            >
-              <TextField
-                error={Boolean(formik.touched.telephone && formik.errors.telephone)}
-                fullWidth
-                helperText={formik.touched.telephone && formik.errors.telephone}
-                label="Telefone para contato"
-                margin="normal"
-                name="telephone"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.telephone}
-                variant="outlined"
-              />            
+
+
+            <TextField
+              error={Boolean(formik.touched.description && formik.errors.description)}
+              fullWidth
+              helperText={formik.touched.description && formik.errors.description}
+              label="Proposta do projeto, responsáveis, atividades, história da entidade, contato"
+              margin="normal"
+              name="description"
+              multiline
+              maxRows={10}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.description}
+              variant="outlined"
+            />
+
+            <Box sx={{ py: 2 }}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Data de início"
+                  value={startDate}
+                  onChange={(newValue) => {
+                    setStartDate(newValue);
+                  }}
+                  format="YYYY-MM-DD"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Data de Encerramento"
+                  value={endDate}
+                  onChange={(newValue) => {
+                    setEndDate(newValue);
+                  }}
+                  format="YYYY-MM-DD"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
             </Box>
 
-            <Box
-              sx={{
-                alignItems: 'center',
-                display: 'flex',
-                ml: -1
-              }}
-            >
-              
+            <TextField
+              helperText={formik.touched.vacancies && formik.errors.vacancies}
+              error={Boolean(formik.touched.vacancies && formik.errors.vacancies)}
+              type="number"
+              InputProps={{ inputProps: { min: 0 } }}
+              onChange={formik.handleChange}
+              name="vacancies"
+              value={formik.values.vacancies}
+              label="Quantidade de vagas"
+            />
 
-            </Box>
-            {Boolean(formik.touched.policy && formik.errors.policy) && (
-              <FormHelperText error>
-                {formik.errors.policy}
-              </FormHelperText>
-            )}
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
@@ -276,4 +298,3 @@ const RegisterProject = () => {
     </>
   );
 };
-export default RegisterProject;

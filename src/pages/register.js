@@ -56,7 +56,7 @@ const Register = () => {
 
         .string()
         .email(
-          'valid'
+          'Email inválido'
         )
         .max(255)
         .required(
