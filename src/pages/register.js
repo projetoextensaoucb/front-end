@@ -12,14 +12,59 @@ import {
   FormHelperText,
   Link,
   TextField,
-  Typography
+  Typography,
+  Select,
 } from '@mui/material';
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import { useState, useEffect } from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { da } from 'date-fns/locale';
 import { BASE_API } from 'src/configs/appconfigs';
 
 const Register = () => {
+  const [course, setCourse] = useState("");
+  const [courseList, setCourseList] = useState([{}]);
+  
+  var courseId = 0;
+  
+  const handleChange = (event) => {
+    setCourse(event.target.value);
+    courseList.forEach(element => {
+      if (element.name === course) {
+        courseId = element.id;
+        console.log(courseId)
+      }
+    })
+  };
+  
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      axios
+        .get(
+          `${BASE_API}/course/all`
+        )
+        .then((response) => {
+          console.log("sucesso")
+          console.log(response.data.courses)
+
+          var listCourses = [{}];
+
+          for (let index = 0; index < response.data.courses.length; index++) {
+            listCourses.push({ id: response.data.courses[index].id, name: response.data.courses[index].name })
+          }
+          setCourseList(listCourses);
+          console.log(listCourses)
+        })
+        .catch((error) => {
+          console.log("erro")
+          // alert(error.response.data.message)
+        });
+    }
+    fetchCourse()
+  }, [])
+
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -96,7 +141,6 @@ const Register = () => {
     }),
     onSubmit: () => {
       axios.post(`${BASE_API}/auth/signup`, {
-
         name: formik.values.name,
         email: formik.values.email,
         institutionalEmail: formik.values.institutionalEmail,
@@ -106,6 +150,7 @@ const Register = () => {
         rg: formik.values.rg,
         cpf: formik.values.cpf,
         matriculation: formik.values.matriculation,
+        course: `${courseId}`,
         roles: ["user"],
         password: formik.values.password,
       })
@@ -207,6 +252,17 @@ const Register = () => {
               variant="outlined"
             />
 
+            <Select
+              fullWidth
+              value={course}
+              onChange={handleChange}
+              label="Curso"
+            >
+              {courseList.map((course) => (
+                <MenuItem value={course.id} key={course.id}>{course.name}</MenuItem>
+              ))}
+            </Select>
+
             <TextField
               error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
               fullWidth
@@ -220,6 +276,7 @@ const Register = () => {
               value={formik.values.institutionalEmail}
               variant="outlined"
             />
+
             <TextField
               error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
