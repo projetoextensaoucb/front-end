@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getUserSession } from 'src/configs/userSession';
 import {
   Box,
   Button,
@@ -12,8 +13,19 @@ import {
 } from "@mui/material";
 
 export const AccountProfileDetails = (props) => {
+
+  const session = getUserSession()
+
   const [values, setValues] = useState({
+    name: session.name,
+    email: session.email,
+    institutionalEmail: session.institutionalEmail,
     password: "********",
+    residentialTelephone: session.residentialTelephone,
+    telephone: session.telephone,
+    matriculation: session.matriculation,
+    cpf: session.cpf,
+    rg: session.rg,
     disabled: true,
   });
 
@@ -177,15 +189,16 @@ export const AccountProfileDetails = (props) => {
           }}
         >
           <Stack direction="row" spacing={2}>
-            <Button color="primary" variant="contained" onClick={editDetails}>
-              Editar detalhes
-            </Button>
-            <Button color="primary" variant="contained">
-              Salvar detalhes
-            </Button>
-            <Button color="primary" variant="contained" onClick={editPasswords}>
-              Editar senha
-            </Button>
+            { session &&
+              <>
+                <Button color="primary" variant="contained" onClick={editPasswords}>
+                  Editar senha
+                </Button>
+                <Button color="primary" variant="contained">
+                    Salvar detalhes
+                </Button>
+              </>
+            }
 
           </Stack>
         </Box>

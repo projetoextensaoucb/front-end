@@ -13,11 +13,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const items = [
   {
-    href: ' ',
-    icon: (<MenuIcon fontSize="small" />),
-    title: ' '
-  }, 
-  {
     href: '/',
     icon: (<ChartBarIcon fontSize="small" />),
     title: 'Mural'
@@ -47,7 +42,7 @@ const items = [
 export const DashboardSidebar = (props) => {
   const { open, onClose, onSidebarOpen } = props;
   const router = useRouter();
-  
+
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
     noSsr: false
@@ -77,15 +72,15 @@ export const DashboardSidebar = (props) => {
         }}
       >
         {/* Primeiro divider do dashboard lateral esquerda*/}
-      
+
 
         {/* Chamando logo da UCB */}
         <Logo>
-        
+
         </Logo>
 
         <Divider sx={{marginTop: 0, marginBottom: 3, borderColor: 'neutral.100'}}
-        
+
         />
 
         <Box sx={{ flexGrow: 1 }}>
