@@ -26,13 +26,13 @@ const Register = () => {
   const [course, setCourse] = useState("");
   const [courseList, setCourseList] = useState([{}]);
   
-  var courseId = 0;
+  var courseId = 1;
   
   const handleChange = (event) => {
     setCourse(event.target.value);
-    courseList.forEach(element => {
-      if (element.name === course) {
-        courseId = element.id;
+    courseList.forEach( element => { 
+      if( element.name === course ) {
+        courseId = element.id
         console.log(courseId)
       }
     })
@@ -46,20 +46,19 @@ const Register = () => {
           `${BASE_API}/course/all`
         )
         .then((response) => {
-          console.log("sucesso")
-          console.log(response.data.courses)
 
           var listCourses = [{}];
 
           for (let index = 0; index < response.data.courses.length; index++) {
+            console.log(response.data.courses[index].name)
             listCourses.push({ id: response.data.courses[index].id, name: response.data.courses[index].name })
           }
           setCourseList(listCourses);
-          console.log(listCourses)
+          console.log(`Lista criada: ${listCourses}`)
         })
         .catch((error) => {
           console.log("erro")
-          // alert(error.response.data.message)
+          alert(error.response.data.message)
         });
     }
     fetchCourse()
@@ -150,7 +149,7 @@ const Register = () => {
         rg: formik.values.rg,
         cpf: formik.values.cpf,
         matriculation: formik.values.matriculation,
-        course: `${courseId}`,
+        course: courseId,
         roles: ["user"],
         password: formik.values.password,
       })
@@ -162,7 +161,7 @@ const Register = () => {
           if (error.response) {
             alert(`${error.response.data.message}`)
             console.log(error.response.data)
-            window.location.reload(false); // refresh page
+            window.location.reload(); // refresh page
           }
         })
     }
@@ -259,9 +258,10 @@ const Register = () => {
               label="Curso"
             >
               {courseList.map((course) => (
-                <MenuItem value={course.id} key={course.id}>{course.name}</MenuItem>
+                <MenuItem value={course.name} key={course.id}>{course.name}</MenuItem>
               ))}
             </Select>
+            <FormHelperText>Selecione seu curso</FormHelperText>
 
             <TextField
               error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
