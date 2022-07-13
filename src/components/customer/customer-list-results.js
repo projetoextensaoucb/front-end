@@ -36,7 +36,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
   const [user, setUser] = useState({});
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(0);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const useStyles = makeStyles({
     list: {
@@ -46,6 +46,8 @@ export const CustomerListResults = ({ customers, ...rest }) => {
 
   const classes = useStyles();
   const handleClickOpen = (customer) => {
+  
+    console.log(JSON.stringify(customer))
     setOpen(true);
     customers.find((el) => {
       if (el.id === customer.id) {
