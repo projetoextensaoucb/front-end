@@ -149,7 +149,7 @@ const Register = () => {
         cpf: formik.values.cpf,
         matriculation: formik.values.matriculation,
         course: courseId,
-        roles: ["user"],
+        roles: ["aluno"],
         password: formik.values.password,
       })
         .then(response => {
