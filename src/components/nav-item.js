@@ -10,7 +10,6 @@ export const NavItem = (props) => {
 
   return (
     <ListItem
-      disableGutters
       sx={{
         display: 'flex',
         mb: 0.5,

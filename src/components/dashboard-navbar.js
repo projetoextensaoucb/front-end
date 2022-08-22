@@ -28,7 +28,7 @@ export const DashboardNavbar = (props) => {
           }
         }}
         {...other}>
-        <AppBar disableGutters>
+        <AppBar>
           <Toolbar>
           <IconButton
             size="large"

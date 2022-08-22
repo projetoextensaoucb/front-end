@@ -14,8 +14,8 @@ import { Upload as UploadIcon } from '../../icons/upload';
 import NextLink from 'next/link';
 
 
-export const ProductListToolbar = (props) => (
-  <Box {...props}>
+export const ProductListToolbar = ({userAccess}) => (
+  <Box>
     <Box
       sx={{
         alignItems: 'center',
@@ -31,6 +31,7 @@ export const ProductListToolbar = (props) => (
       >
         Projetos
       </Typography>
+      { userAccess &&
       <Box sx={{ m: 1 }}>
         <NextLink
             href="/registerProject"
@@ -57,10 +58,8 @@ export const ProductListToolbar = (props) => (
               Editar um Projeto
             </Button>
         </NextLink>
-
-
-        
       </Box>
+      }
     </Box>
     <Box sx={{ mt: 3 }}>
       <Card>
