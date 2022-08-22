@@ -14,6 +14,7 @@ import {
   TextField,
   Typography,
   Select,
+  FormControl,
 } from '@mui/material';
 
 import InputLabel from '@mui/material/InputLabel';
@@ -30,6 +31,8 @@ const Register = () => {
   
   const handleChange = (event) => {
     setCourse(event.target.value);
+    console.log(course);
+    console.log(courseList);
     courseList.forEach( element => { 
       if( element.name === course ) {
         courseId = element.id
@@ -46,15 +49,11 @@ const Register = () => {
           `${BASE_API}/course/all`
         )
         .then((response) => {
-
-          var listCourses = [{}];
-
-          for (let index = 0; index < response.data.courses.length; index++) {
-            console.log(response.data.courses[index].name)
-            listCourses.push({ id: response.data.courses[index].id, name: response.data.courses[index].name })
-          }
+          var listCourses = [];
+          response.data.courses.forEach(element => {
+            listCourses.push(element)
+          });
           setCourseList(listCourses);
-          console.log(`Lista criada: ${listCourses}`)
         })
         .catch((error) => {
           console.log("erro")
@@ -238,7 +237,7 @@ const Register = () => {
               variant="outlined"
             />
 
-            <TextField
+            {/* <TextField
               error={Boolean(formik.touched.matriculation && formik.errors.matriculation)}
               fullWidth
               helperText={formik.touched.matriculation && formik.errors.matriculation}
@@ -249,19 +248,27 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.matriculation}
               variant="outlined"
-            />
-
-            <Select
-              fullWidth
-              value={course}
-              onChange={handleChange}
-              label="Curso"
-            >
-              {courseList.map((course) => (
-                <MenuItem value={course.name} key={course.id}>{course.name}</MenuItem>
-              ))}
-            </Select>
-            <FormHelperText>Selecione seu curso</FormHelperText>
+            /> */}
+            <FormControl sx={{ my: 1, minWidth: 1 }}>
+              <InputLabel>Curso</InputLabel>
+              <Select
+                fullWidth
+                value={course}
+                onChange={handleChange}
+                label="Curso"
+                name="Curso"
+                labelId="demo-simple-select-readonly-label"
+                id="demo-simple-select-readonly"
+              >
+                {courseList.map((course) => (
+                  <MenuItem
+                    value={course.name} 
+                    key={course.id}>
+                    {course.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
             <TextField
               error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
@@ -291,7 +298,7 @@ const Register = () => {
               variant="outlined"
             />
             {/* TELEFONES */}
-            <Box
+            {/* <Box
               sx={{
                 alignItems: 'center',
                 display: 'flex',
@@ -323,11 +330,11 @@ const Register = () => {
                 value={formik.values.residentialTelephone}
                 variant="outlined"
               />
-            </Box>
+            </Box> */}
 
             {/* RG E CPF */}
 
-            <Box
+            {/* <Box
               sx={{
                 alignItems: 'center',
                 display: 'flex',
@@ -359,7 +366,7 @@ const Register = () => {
                 value={formik.values.cpf}
                 variant="outlined"
               />
-            </Box>
+            </Box> */}
 
             <Box
               sx={{
@@ -368,7 +375,7 @@ const Register = () => {
                 ml: -1
               }}
             >
-              <Checkbox
+              {/* <Checkbox
                 checked={formik.values.foreigner}
                 name="foreigner"
                 onChange={formik.handleChange}
@@ -378,7 +385,7 @@ const Register = () => {
                 variant="body2"
               >
                 Sou Estrangeiro
-              </Typography>
+              </Typography> */}
               <Checkbox
                 checked={formik.values.policy}
                 name="policy"
