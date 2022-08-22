@@ -35,7 +35,9 @@ export default function RegisterProject() {
   useEffect(() => {
     const verifySession = async () => {
       session = getUserSession()
-      console.log(session)
+      console.log(session.roles)
+      let data = session.roles.find((el) => el === 'admin');
+      console.log(data);
       if (!session) {
         router.push('/login')
       }

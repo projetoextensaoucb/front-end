@@ -16,6 +16,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { getUserSession, setUserSession } from 'src/configs/userSession';
+
 import { useRouter } from 'next/router';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -26,9 +27,13 @@ export default function Products() {
   const [projects, setProjects] = useState([])
   const [project, setProject] = useState([])
   const [open, setOpen] = React.useState(false);
+  const [user, setUser] = React.useState({})
   const router = useRouter()
 
   useEffect(() => {
+    const userSession = getUserSession()
+    let userAccess = userSession.roles.find((role) => role === 'admin')
+    setUser(userAccess)
     const verifySession = async () => {
       if(!getUserSession()) { 
         router.push('/login')
@@ -109,7 +114,7 @@ export default function Products() {
         }}
       >
         <Container maxWidth={false}>
-          <ProductListToolbar />
+          <ProductListToolbar userAccess={user} />
           <Box sx={{ pt: 3 }}>
             <Grid
               container

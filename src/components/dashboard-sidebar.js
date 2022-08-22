@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { Avatar, AppBar, Box, Button, Divider, Drawer, Icon, TextField, Typography, Toolbar, IconButton, useMediaQuery } from '@mui/material';
+import { Box, Divider, Drawer, useMediaQuery } from '@mui/material';
 import { ChartBar as ChartBarIcon } from '../icons/chart-bar';
 import { Cog as CogIcon } from '../icons/cog';
 import { ShoppingBag as ShoppingBagIcon } from '../icons/shopping-bag';
@@ -9,7 +9,6 @@ import { User as UserIcon } from '../icons/user';
 import { Users as UsersIcon } from '../icons/users';
 import { Logo } from './logo';
 import { NavItem } from './nav-item';
-import MenuIcon from '@mui/icons-material/Menu';
 
 const items = [
   {
