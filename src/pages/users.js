@@ -7,9 +7,11 @@ import axios from "axios";
 import { BASE_API } from "src/configs/appconfigs";
 import { useState, useEffect } from "react";
 import { getUserSession, setUserSession } from 'src/configs/userSession';
+import { useRouter } from 'next/router';
 
 const Customers = () => {
   const [users, setUsers] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const getUsers = async () => {
@@ -28,6 +30,7 @@ const Customers = () => {
         })
         .catch((error) => {
           alert(error.response.data.message)
+          router.push('/settings')
         });
     };
     getUsers();

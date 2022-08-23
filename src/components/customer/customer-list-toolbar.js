@@ -69,14 +69,5 @@ export const CustomerListToolbar = (props) => (
         </CardContent>
       </Card>
     </Box>
-
-
-
-
-
-
-
-
-
   </Box>
 );
