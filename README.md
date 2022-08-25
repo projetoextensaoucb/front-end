@@ -93,4 +93,4 @@ material-kit-react
 ## Contact Us
 
 - Email Us: support@deviasio.zendesk.com
-- [Follow us on Instagram](https://www.instagram.com/deviasio/)
+- [Follow us on Instagram](https://www.instagram.com/deviasio/) - - - 
