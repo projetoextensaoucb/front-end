@@ -55,7 +55,7 @@ material-kit-react
 ├── .gitignore
 ├── CHANGELOG.md
 ├── jsconfig.json
-├── LICENSE.md
+├── LICENSE.mddsfdsfsdfds
 ├── package.json
 ├── README.md
 ├── public
