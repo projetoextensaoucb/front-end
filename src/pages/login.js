@@ -146,7 +146,7 @@ const Login = () => {
                Entrar
               </Button>
             </Box>
-            <Typography
+            {/* <Typography
               color="textSecondary"
               variant="body2"
             >
@@ -166,7 +166,7 @@ const Login = () => {
                   Cadastrar
                 </Link>
               </NextLink>
-            </Typography>
+            </Typography> */}
           </form>
         </Container>
       </Box>
