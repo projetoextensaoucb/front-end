@@ -12,19 +12,22 @@ import {
   FormHelperText,
   Avatar,
   TextField,
-  Typography
+  Typography,
+  Snackbar,
+  SnackbarAlert,
+  Alert
+
 } from '@mui/material';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { da } from 'date-fns/locale';
 import { BASE_API } from 'src/configs/appconfigs';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, handleClose, handleClick } from 'react'
 import { getUserSession, setUserSession } from 'src/configs/userSession';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Grid from '@mui/material/Grid';
-
 
 export default function RegisterProject() {
   const router = useRouter()
@@ -170,11 +173,17 @@ export default function RegisterProject() {
                 gutterBottom
                 variant="body2"
               >
-                Forneça as informações abaixo para criação do projeto
+                Forneça as informações abaixo para criação do projeto.
               </Typography>
+            </Box>
 
+            {/* Box logo do projeto */}
+            <Box sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
               <Avatar
-                alignItems="center"
                 src= {selectedFile ? URL.createObjectURL(selectedFile) : "https://via.placeholder.com/400.png"}
                 sx={{
                   height: 120,
@@ -182,69 +191,92 @@ export default function RegisterProject() {
                   width: 120
                 }}
               />
+              
+            </Box>
+            
+            {/* Box adicionar logo */}
+            <Box sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
               <Button variant="contained" onChange={handleFileSelect} component="label">
                 Adicionar Logo
                <input hidden accept="image/*" multiple type="file" />
               </Button>
             </Box>
-            <TextField
-              error={Boolean(formik.touched.name && formik.errors.name)}
-              fullWidth
-              helperText={formik.touched.name && formik.errors.name}
-              label="Nome do Projeto"
-              margin="normal"
-              name="name"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.name}
-              variant="outlined"
-            />
-            <TextField
-              error={Boolean(formik.touched.address && formik.errors.address)}
-              fullWidth
-              helperText={formik.touched.address && formik.errors.address}
-              label="Endereço"
-              margin="normal"
-              name="address"
-              multiline
-              maxRows={4}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.address}
-              variant="outlined"
-            />
+            
+            {/* Box nome do projeto */}
+            <Box>
+              <TextField
+                error={Boolean(formik.touched.name && formik.errors.name)}
+                fullWidth
+                helperText={formik.touched.name && formik.errors.name}
+                label="Nome do Projeto"
+                margin="normal"
+                name="name"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.name}
+                variant="outlined"
+              />
+            </Box>
+            
+            {/* Box endereço */}
+            <Box>
+              <TextField
+                error={Boolean(formik.touched.address && formik.errors.address)}
+                fullWidth
+                helperText={formik.touched.address && formik.errors.address}
+                label="Endereço"
+                margin="normal"
+                name="address"
+                multiline
+                maxRows={4}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.address}
+                variant="outlined"
+              />
+            </Box>
 
-            <TextField
-              error={Boolean(formik.touched.summary && formik.errors.summary)}
-              fullWidth
-              helperText={formik.touched.summary && formik.errors.summary}
-              label="Um breve resumo"
-              margin="normal"
-              name="summary"
-              multiline
-              maxRows={10}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.summary}
-              variant="outlined"
-            />
+            {/* Box breve resumo */}
+            <Box>
+              <TextField
+                error={Boolean(formik.touched.summary && formik.errors.summary)}
+                fullWidth
+                helperText={formik.touched.summary && formik.errors.summary}
+                label="Um breve resumo"
+                margin="normal"
+                name="summary"
+                multiline
+                maxRows={10}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.summary}
+                variant="outlined"
+              />
+            </Box>
 
-
-            <TextField
-              error={Boolean(formik.touched.description && formik.errors.description)}
-              fullWidth
-              helperText={formik.touched.description && formik.errors.description}
-              label="Proposta do projeto, responsáveis, atividades, história da entidade, contato"
-              margin="normal"
-              name="description"
-              multiline
-              maxRows={10}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.description}
-              variant="outlined"
-            />
-
+            {/* Box propostas do projeto */}    
+            <Box>
+              <TextField
+                error={Boolean(formik.touched.description && formik.errors.description)}
+                fullWidth
+                helperText={formik.touched.description && formik.errors.description}
+                label="Proposta do projeto, responsáveis, atividades, história da entidade, contato"
+                margin="normal"
+                name="description"
+                multiline
+                maxRows={10}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.description}
+                variant="outlined"
+              />
+            </Box>
+            
+            {/* Box data de início */}  
             <Box sx={{ py: 2 }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
@@ -257,30 +289,36 @@ export default function RegisterProject() {
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
-
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
-                  label="Data de Encerramento"
-                  value={endDate}
-                  onChange={(newValue) => {
-                    setEndDate(newValue);
-                  }}
-                  format="YYYY-MM-DD"
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
             </Box>
 
-            <TextField
-              helperText={formik.touched.vacancies && formik.errors.vacancies}
-              error={Boolean(formik.touched.vacancies && formik.errors.vacancies)}
-              type="number"
-              InputProps={{ inputProps: { min: 0 } }}
-              onChange={formik.handleChange}
-              name="vacancies"
-              value={formik.values.vacancies}
-              label="Quantidade de vagas"
-            />
+            {/* Box data de encerramento */}  
+            <Box sx={{py:2}}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label="Data de encerramento"
+                    value={endDate}
+                    onChange={(newValue) => {
+                      setEndDate(newValue);
+                    }}
+                    format="YYYY-MM-DD"
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+            </Box>
+
+            {/* Box quantidades de vagas do projeto */}  
+            <Box sx={{py:1}}>
+              <TextField
+                helperText={formik.touched.vacancies && formik.errors.vacancies}
+                error={Boolean(formik.touched.vacancies && formik.errors.vacancies)}
+                type="number"
+                InputProps={{ inputProps: { min: 0 } }}
+                onChange={formik.handleChange}
+                name="vacancies"
+                value={formik.values.vacancies}
+                label="Quantidade de vagas"
+              />
+            </Box>
 
             <Box sx={{ py: 2 }}>
               <Button

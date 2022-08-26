@@ -1,12 +1,15 @@
 import Head from "next/head";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Snackbar } from "@mui/material";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import { CustomerListResults } from "../components/customer/customer-list-results";
 import { CustomerListToolbar } from "../components/customer/customer-list-toolbar";
 import { DashboardLayout } from "../components/dashboard-layout";
 import axios from "axios";
 import { BASE_API } from "src/configs/appconfigs";
-import { useState, useEffect } from "react";
-import { getUserSession, setUserSession } from 'src/configs/userSession';
+import { useState, useEffect, open } from "react";
+import { getUserSession } from 'src/configs/userSession';
 import { useRouter } from 'next/router';
 
 const Customers = () => {
@@ -29,6 +32,10 @@ const Customers = () => {
           setUsers(response.data.users);
         })
         .catch((error) => {
+          // Colocar Alert da Mui
+          // <Alert variant="filled" severity="error">
+          //     Sem autorização!
+          // </Alert>
           alert(error.response.data.message)
           router.push('/settings')
         });
