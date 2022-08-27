@@ -35,34 +35,23 @@ const Settings = () => {
           py: 5,
         }}
       >
-        <Container maxWidth={false}>
-          <Typography sx={{ m: 3 }} variant="h4">
-            Configurações
-          </Typography>
-          <CardContent>
-            <Grid container spacing={6} wrap="wrap">
-              <Grid
-                item
-                md={4}
-                sm={6}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-                xs={12}
-              >
-
-                {user && (
-                  <NextLink href="/users" passHref>
-                    <Button variant="outlined" startIcon={<UsersIcon />}>
-                      Usuários
-                    </Button>
-                  </NextLink>
-                )}
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Container>
+        <Typography sx={{ m: 3 }} variant="h4">
+          Configurações
+        </Typography>
+        
+        {user && (
+          <NextLink href="/users" passHref>
+            <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              }}>
+              <Button variant="outlined" size="medium" startIcon={<UsersIcon/>}>
+                Usuários
+              </Button>
+            </Box>
+          </NextLink>
+        )}
       </Box>
     </>
   );
