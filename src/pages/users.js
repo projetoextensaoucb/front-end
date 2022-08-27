@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Box, Container, Snackbar } from "@mui/material";
+import { Box, Container, Snackbar, CircularProgress } from "@mui/material";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
@@ -15,10 +15,12 @@ import { useRouter } from 'next/router';
 const Customers = () => {
   const [users, setUsers] = useState([]);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
       const session = getUserSession()
+      setLoading(true);
       axios
         .get(
           `${BASE_API}/user/all`,
@@ -30,6 +32,7 @@ const Customers = () => {
         )
         .then((response) => {
           setUsers(response.data.users);
+          setLoading(false);
         })
         .catch((error) => {
           // Colocar Alert da Mui
@@ -57,9 +60,20 @@ const Customers = () => {
       >
         <Container maxWidth={false}>
           <CustomerListToolbar />
+          { loading
+            ?
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              padding: '2rem',
+            }}>
+            <CircularProgress></CircularProgress>
+          </Box>
+          :
           <Box sx={{ mt: 3 }}>
             <CustomerListResults customers={users} />
           </Box>
+          }
         </Container>
       </Box>
     </>
