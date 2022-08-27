@@ -1,22 +1,21 @@
 import Head from 'next/head';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Link, TextField, Typography, LinearProgress } from '@mui/material';
 import axios from 'axios'
 import { getUserSession, setUserSession } from 'src/configs/userSession';
 import { BASE_API } from 'src/configs/appconfigs';
-import { ReactSession} from 'react-client-session'
 import  {useState, useEffect} from 'react'
 
 const Login = () => {
 
-  const [session, setSession] = useState()
-  
-  useEffect(() => { 
+  const [loading, setLoading] = useState(false);
+
+
+  useEffect(() => {
     console.log(getUserSession())
-    if(getUserSession()) { 
+    if(getUserSession()) {
       router.push('/')
     }
   })
@@ -40,7 +39,7 @@ const Login = () => {
           'É necessário fornecer uma senha')
     }),
     onSubmit: () => {
-
+      setLoading(true);
       axios.post(`${BASE_API}/auth/signin`, {
         login: formik.values.login,
         password: formik.values.password,
@@ -48,6 +47,7 @@ const Login = () => {
         .then(response => {
           if (typeof window !== 'undefined') {
             setUserSession(response.data)
+            setLoading(false);
             router.push('/account')
           }
         })
@@ -134,6 +134,12 @@ const Login = () => {
               value={formik.values.password}
               variant="outlined"
             />
+            {
+              loading &&
+              <>
+                <LinearProgress />
+              </>
+            }
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
