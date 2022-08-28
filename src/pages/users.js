@@ -35,7 +35,7 @@ const Customers = () => {
           })
           .catch((error) => {
             alert(error.response.data.message);
-            router.push("/");
+            router.push("/settings");
           });
       } else {
         router.push("/");
