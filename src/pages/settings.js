@@ -1,9 +1,10 @@
 import Head from "next/head";
-import { Box, Container, Typography, CardContent, Grid, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import { Users as UsersIcon } from "../icons/users";
 import { DashboardLayout } from "../components/dashboard-layout";
-import { getUserSession, setUserSession } from "src/configs/userSession";
-import { useState, useEffect } from "react";
+import { getUserSession } from "src/configs/userSession";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import * as React from 'react';
@@ -38,20 +39,26 @@ const Settings = () => {
         <Typography sx={{ m: 3 }} variant="h4">
           Configurações
         </Typography>
-        
-        {user && (
-          <NextLink href="/users" passHref>
-            <Box sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              }}>
-              <Button variant="outlined" size="medium" startIcon={<UsersIcon/>}>
-                Usuários
+
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          {user && (
+            <NextLink href="/users" passHref>
+              <Button variant="outlined" size="medium" startIcon={<UsersIcon/>} sx={{mr: 1}}>
+               Usuários
               </Button>
-            </Box>
+            </NextLink>
+          )}
+
+          <NextLink href="/registerCourse" passHref>
+            <Button variant="outlined" size="medium" startIcon={<AddIcon/>} sx={{ml: 1}}>
+              Criar curso
+            </Button>
           </NextLink>
-        )}
+        </Box>
       </Box>
     </>
   );
