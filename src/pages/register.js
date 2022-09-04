@@ -15,6 +15,7 @@ import {
   Typography,
   Select,
   FormControl,
+  CircularProgress,
 } from '@mui/material';
 
 import InputLabel from '@mui/material/InputLabel';
@@ -26,24 +27,26 @@ import { BASE_API } from 'src/configs/appconfigs';
 const Register = () => {
   const [course, setCourse] = useState("");
   const [courseList, setCourseList] = useState([{}]);
-  
+  const [loading, setLoading] = useState(false);
+
   var courseId = 1;
-  
+
   const handleChange = (event) => {
     setCourse(event.target.value);
     console.log(course);
     console.log(courseList);
-    courseList.forEach( element => { 
+    courseList.forEach( element => {
       if( element.name === course ) {
         courseId = element.id
         console.log(courseId)
       }
     })
   };
-  
+
 
   useEffect(() => {
     const fetchCourse = async () => {
+      setLoading(true);
       axios
         .get(
           `${BASE_API}/course/all`
@@ -53,7 +56,7 @@ const Register = () => {
           response.data.courses.forEach(element => {
             listCourses.push(element)
           });
-          setCourseList(listCourses);
+          setLoading(false);
         })
         .catch((error) => {
           console.log("erro")
@@ -249,6 +252,7 @@ const Register = () => {
               value={formik.values.matriculation}
               variant="outlined"
             /> */}
+
             <FormControl sx={{ my: 1, minWidth: 1 }}>
               <InputLabel>Curso</InputLabel>
               <Select
@@ -260,13 +264,19 @@ const Register = () => {
                 labelId="demo-simple-select-readonly-label"
                 id="demo-simple-select-readonly"
               >
-                {courseList.map((course) => (
-                  <MenuItem
-                    value={course.name} 
-                    key={course.id}>
-                    {course.name}
-                  </MenuItem>
-                ))}
+                { loading ?
+                  <Box>
+                    <CircularProgress />
+                  </Box>
+                  :
+                  courseList.map((course) => (
+                    <MenuItem
+                      value={course.name}
+                      key={course.id}>
+                      {course.name}
+                    </MenuItem>
+                  ))
+                }
               </Select>
             </FormControl>
 

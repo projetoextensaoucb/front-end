@@ -1,37 +1,45 @@
 import Head from "next/head";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Snackbar, CircularProgress } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 import { CustomerListResults } from "../components/customer/customer-list-results";
 import { CustomerListToolbar } from "../components/customer/customer-list-toolbar";
 import { DashboardLayout } from "../components/dashboard-layout";
 import axios from "axios";
 import { BASE_API } from "src/configs/appconfigs";
-import { useState, useEffect } from "react";
-import { getUserSession, setUserSession } from 'src/configs/userSession';
-import { useRouter } from 'next/router';
+import { useState, useEffect, open } from "react";
+import { getUserSession } from "src/configs/userSession";
+import { useRouter } from "next/router";
 
 const Customers = () => {
   const [users, setUsers] = useState([]);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
-      const session = getUserSession()
-      axios
-        .get(
-          `${BASE_API}/user/all`,
-          {
+      const session = getUserSession();
+      setLoading(true);
+      let data = session.roles.find((el) => el === "admin");
+      if (data) {
+        axios
+          .get(`${BASE_API}/user/all`, {
             headers: {
               "x-access-token": "" + session.accessToken,
             },
-          }
-        )
-        .then((response) => {
-          setUsers(response.data.users);
-        })
-        .catch((error) => {
-          alert(error.response.data.message)
-          router.push('/settings')
-        });
+          })
+          .then((response) => {
+            setUsers(response.data.users);
+            setLoading(false);
+          })
+          .catch((error) => {
+            alert(error.response.data.message);
+            router.push("/");
+          });
+      } else {
+        router.push("/");
+      }
     };
     getUsers();
   }, []);
@@ -50,9 +58,21 @@ const Customers = () => {
       >
         <Container maxWidth={false}>
           <CustomerListToolbar />
-          <Box sx={{ mt: 3 }}>
-            <CustomerListResults customers={users} />
-          </Box>
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "2rem",
+              }}
+            >
+              <CircularProgress></CircularProgress>
+            </Box>
+          ) : (
+            <Box sx={{ mt: 3 }}>
+              <CustomerListResults customers={users} />
+            </Box>
+          )}
         </Container>
       </Box>
     </>

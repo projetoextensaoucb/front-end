@@ -23,16 +23,15 @@ export const ProductListToolbar = ({userAccess}) => (
         justifyContent: 'space-between',
         flexWrap: 'wrap',
         m: -1
-      }}
-    >
+      }}>
       <Typography
-        sx={{ m: 1 }}
+      
         variant="h4"
       >
         Projetos
       </Typography>
       { userAccess &&
-      <Box sx={{ m: 1 }}>
+      <Box>
         <NextLink
             href="/registerProject"
             passHref
@@ -40,27 +39,30 @@ export const ProductListToolbar = ({userAccess}) => (
             <Button
               color="primary"
               variant="contained"
+              
+              sx={{ m: 1 }}
             >
               Adicionar um novo Projeto
             </Button>
         </NextLink>
-      
-        {'ㅤ'} 
-        
+
         <NextLink
-            href="/editProject"
-            passHref
+          href="/editProject"
+          passHref
           >
-            <Button
-              color="primary"
-              variant="contained"
+          <Button
+            color="primary"
+            variant="contained"
+
+            sx={{ m: 1 }}
             >
-              Editar um Projeto
-            </Button>
+            Editar um Projeto
+          </Button>
         </NextLink>
       </Box>
       }
     </Box>
+    
     <Box sx={{ mt: 3 }}>
       <Card>
         <CardContent>

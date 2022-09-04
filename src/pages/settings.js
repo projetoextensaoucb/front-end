@@ -1,9 +1,10 @@
 import Head from "next/head";
-import { Box, Container, Typography, CardContent, Grid, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import { Users as UsersIcon } from "../icons/users";
 import { DashboardLayout } from "../components/dashboard-layout";
-import { getUserSession, setUserSession } from "src/configs/userSession";
-import { useState, useEffect } from "react";
+import { getUserSession } from "src/configs/userSession";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import * as React from 'react';
@@ -35,34 +36,29 @@ const Settings = () => {
           py: 5,
         }}
       >
-        <Container maxWidth={false}>
-          <Typography sx={{ m: 3 }} variant="h4">
-            Configurações
-          </Typography>
-          <CardContent>
-            <Grid container spacing={6} wrap="wrap">
-              <Grid
-                item
-                md={4}
-                sm={6}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-                xs={12}
-              >
+        <Typography sx={{ m: 3 }} variant="h4">
+          Configurações
+        </Typography>
 
-                {user && (
-                  <NextLink href="/users" passHref>
-                    <Button variant="outlined" startIcon={<UsersIcon />}>
-                      Usuários
-                    </Button>
-                  </NextLink>
-                )}
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Container>
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          {user && (
+            <NextLink href="/users" passHref>
+              <Button variant="outlined" size="medium" startIcon={<UsersIcon/>} sx={{mr: 1}}>
+               Usuários
+              </Button>
+            </NextLink>
+          )}
+
+          <NextLink href="/registerCourse" passHref>
+            <Button variant="outlined" size="medium" startIcon={<AddIcon/>} sx={{ml: 1}}>
+              Criar curso
+            </Button>
+          </NextLink>
+        </Box>
       </Box>
     </>
   );
