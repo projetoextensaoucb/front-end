@@ -32,31 +32,28 @@ export default function Products() {
   const router = useRouter();
 
   useEffect(() => {
-    const userSession = getUserSession();
-    let userAccess = userSession.roles.find((role) => role === "admin");
-    setUser(userAccess);
-    const verifySession = async () => {
-      if (!getUserSession()) {
-        router.push("/login");
-      }
-    };
-    verifySession();
-  }, []);
-
-  useEffect(() => {
     setLoading(true);
-    const getProjects = async () => {
-      axios
-        .get(`${BASE_API}/project/all`, {})
-        .then((response) => {
-          setProjects(response.data.projects);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log("error");
-        });
-    };
-    getProjects();
+    const user = getUserSession();
+    const hasAccess = user.roles.find((role) => role === "admin");
+    setUser(hasAccess);
+
+    if (!getUserSession()) {
+      router.push("/login");
+    }
+
+    axios
+      .get(`${BASE_API}/project/all`, {
+        headers: {
+          "x-access-token": user.accessToken,
+        },
+      })
+      .then((response) => {
+        setProjects(response.data.projects);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const handleClickOpen = () => {
@@ -67,8 +64,6 @@ export default function Products() {
     setOpen(false);
   };
   const childToParent = (childdata) => {
-    console.log(childdata);
-    console.log(projects);
     projects.find((el) => {
       if (el.id === childdata) {
         setProject(el);
