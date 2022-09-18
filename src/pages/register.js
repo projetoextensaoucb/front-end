@@ -18,17 +18,18 @@ import {
   CircularProgress,
 } from '@mui/material';
 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useState, useEffect } from 'react'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { BASE_API } from 'src/configs/appconfigs';
+import { getUserSession } from 'src/configs/userSession';
 
 const Register = () => {
   const [course, setCourse] = useState("");
   const [courseList, setCourseList] = useState([{}]);
   const [loading, setLoading] = useState(false);
-
+  const user = getUserSession();
   var courseId = 1;
 
   const handleChange = (event) => {
@@ -45,11 +46,15 @@ const Register = () => {
 
 
   useEffect(() => {
-    const fetchCourse = async () => {
-      setLoading(true);
+    setLoading(true);
+    if (user.accessToken) {    
       axios
         .get(
           `${BASE_API}/course/all`
+          // ,{
+          //   headers: {
+          //   "x-access-token": user.accessToken
+          // }}
         )
         .then((response) => {
           var listCourses = [];
@@ -59,11 +64,10 @@ const Register = () => {
           setLoading(false);
         })
         .catch((error) => {
-          console.log("erro")
-          alert(error.response.data.message)
+          alert(error.message)
+          router.push('/')
         });
     }
-    fetchCourse()
   }, [])
 
   const router = useRouter();

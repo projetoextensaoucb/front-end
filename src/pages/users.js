@@ -1,8 +1,5 @@
 import Head from "next/head";
-import { Box, Container, Snackbar, CircularProgress } from "@mui/material";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
+import { Box, Container, CircularProgress } from "@mui/material";
 import { CustomerListResults } from "../components/customer/customer-list-results";
 import { CustomerListToolbar } from "../components/customer/customer-list-toolbar";
 import { DashboardLayout } from "../components/dashboard-layout";
@@ -13,35 +10,32 @@ import { getUserSession } from "src/configs/userSession";
 import { useRouter } from "next/router";
 
 const Customers = () => {
+  const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getUsers = async () => {
-      const session = getUserSession();
-      setLoading(true);
-      let data = session.roles.find((el) => el === "admin");
-      if (data) {
-        axios
-          .get(`${BASE_API}/user/all`, {
-            headers: {
-              "x-access-token": "" + session.accessToken,
-            },
-          })
-          .then((response) => {
-            setUsers(response.data.users);
-            setLoading(false);
-          })
-          .catch((error) => {
-            alert(error.response.data.message);
-            router.push("/");
-          });
-      } else {
-        router.push("/");
-      }
-    };
-    getUsers();
+    setLoading(true);
+    const session = getUserSession();
+    let data = session.roles.find((el) => el === "admin");
+    if (data) {
+      axios
+        .get(`${BASE_API}/user/all`, {
+          headers: {
+            "x-access-token": "" + session.accessToken,
+          },
+        })
+        .then((response) => {
+          setUsers(response.data.users);
+          setLoading(false);
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+          router.push("/");
+        });
+    } else {
+      router.push("/");
+    }
   }, []);
 
   return (
