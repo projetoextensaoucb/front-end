@@ -3,7 +3,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import PropTypes from "prop-types";
 import { AccountUserDetails } from "../account/account-user-details";
 import { AccountProfile } from "../account/account-profile";
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from "@material-ui/styles";
 import {
   Grid,
   Box,
@@ -22,16 +22,16 @@ import {
   Toolbar,
 } from "@mui/material";
 
-import * as React from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
+import { forwardRef } from "react";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const CustomerListResults = ({ customers, ...rest }) => {
+export function CustomerListResults({ customers }) {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [user, setUser] = useState({});
   const [limit, setLimit] = useState(5);
@@ -40,27 +40,27 @@ export const CustomerListResults = ({ customers, ...rest }) => {
 
   const useStyles = makeStyles({
     list: {
-      cursor: "pointer"
+      cursor: "pointer",
+      "&:hover": {
+        backgroundColor: "#2222",
+      },
     },
   });
 
-  const classes = useStyles();
-  const handleClickOpen = (customer) => {
-  
-    console.log(JSON.stringify(customer))
-    setOpen(true);
-    customers.find((el) => {
-      if (el.id === customer.id) {
-        setUser(el);
-      }
-    })
-  };
+  const style = useStyles();
 
-  const handleClose = () => {
+  function handleClickOpen(customer) {
+    if (customer) {
+      setUser(customer);
+      setOpen(true);
+    }
+  }
+
+  function handleClose() {
     setOpen(false);
-  };
+  }
 
-  const handleSelectAll = (event) => {
+  function handleSelectAll(event) {
     let newSelectedCustomerIds;
 
     if (event.target.checked) {
@@ -70,9 +70,9 @@ export const CustomerListResults = ({ customers, ...rest }) => {
     }
 
     setSelectedCustomerIds(newSelectedCustomerIds);
-  };
+  }
 
-  const handleSelectOne = (event, id) => {
+  function handleSelectOne(event, id) {
     const selectedIndex = selectedCustomerIds.indexOf(id);
     let newSelectedCustomerIds = [];
 
@@ -90,7 +90,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
     }
 
     setSelectedCustomerIds(newSelectedCustomerIds);
-  };
+  }
 
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
@@ -101,7 +101,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
   };
   // name, email, matriculation, telephone, createdAt
   return (
-    <Card {...rest}>
+    <Card>
       {/* inicio do dialog */}
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar sx={{ position: "relative" }}>
@@ -127,7 +127,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                 <AccountProfile />
               </Grid>
               <Grid item lg={8} md={6} xs={12}>
-                <AccountUserDetails userData={user}/>
+                <AccountUserDetails userData={user} />
               </Grid>
             </Grid>
           </Container>
@@ -150,7 +150,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
             <TableBody>
               {customers.slice(0, limit).map((customer) => (
                 <TableRow
-                  className={classes.list}
+                  className={style.list}
                   key={customer.id}
                   selected={selectedCustomerIds.indexOf(customer.id) !== -1}
                   onClick={() => handleClickOpen(customer)}
@@ -178,7 +178,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
       />
     </Card>
   );
-};
+}
 
 CustomerListResults.propTypes = {
   customers: PropTypes.array.isRequired,

@@ -52,7 +52,8 @@ export default function Products() {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        confirm(error)
+        router.push('/')
       });
   }, []);
 
