@@ -31,12 +31,12 @@ const Login = () => {
         .string()
         .max(255)
         .required(
-          'Deve ser fornecido um email ou matrícula válidos'),
+          'Deve ser fornecido um e-mail ou matrícula válidos.'),
       password: Yup
         .string()
         .max(255)
         .required(
-          'É necessário fornecer uma senha')
+          'É necessário fornecer uma senha.')
     }),
     onSubmit: () => {
       setLoading(true);
@@ -89,7 +89,7 @@ const Login = () => {
                 gutterBottom
                 variant="body2"
               >
-                Utilize o seu email, email universitário ou matrícula
+                Utilize o seu e-mail, e-mail universitário ou matrícula.
               </Typography>
             </Box>
             <Grid
@@ -125,7 +125,7 @@ const Login = () => {
               error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
               helperText={formik.touched.password && formik.errors.password}
-              label="Password"
+              label="Senha"
               margin="normal"
               name="password"
               onBlur={formik.handleBlur}
@@ -151,6 +151,7 @@ const Login = () => {
               >
                Entrar
               </Button>
+              <p align="right"><a href='/recoverPassword'>Recuperar senha</a></p>
             </Box>
             {/* <Typography
               color="textSecondary"
