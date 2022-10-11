@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -31,12 +32,12 @@ const Login = () => {
         .string()
         .max(255)
         .required(
-          'Deve ser fornecido um email ou matrícula válidos'),
+          'Deve ser fornecido um e-mail ou matrícula válidos.'),
       password: Yup
         .string()
         .max(255)
         .required(
-          'É necessário fornecer uma senha')
+          'É necessário fornecer uma senha.')
     }),
     onSubmit: () => {
       setLoading(true);
@@ -89,7 +90,7 @@ const Login = () => {
                 gutterBottom
                 variant="body2"
               >
-                Utilize o seu email, email universitário ou matrícula
+                Utilize o seu e-mail, e-mail universitário ou matrícula.
               </Typography>
             </Box>
             <Grid
@@ -125,7 +126,7 @@ const Login = () => {
               error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
               helperText={formik.touched.password && formik.errors.password}
-              label="Password"
+              label="Senha"
               margin="normal"
               name="password"
               onBlur={formik.handleBlur}
@@ -151,6 +152,18 @@ const Login = () => {
               >
                Entrar
               </Button>
+              <NextLink
+                  href="/recoverPassword"
+                  passHref
+                >
+                  <Link
+                    color="primary"
+                    underline="always"
+                    variant="subtitle2"
+                  >
+                    Recuperar Senha
+                  </Link>
+                </NextLink>
             </Box>
             {/* <Typography
               color="textSecondary"

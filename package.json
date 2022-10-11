@@ -3,6 +3,9 @@
   "author": "Devias IO",
   "licence": "MIT",
   "version": "3.1.0",
+  "engines": {
+    "node": "16.17.1"
+  },
   "private": false,
   "scripts": {
     "dev": "next",
