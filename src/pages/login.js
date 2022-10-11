@@ -152,6 +152,10 @@ const Login = () => {
               >
                Entrar
               </Button>
+            </Box>
+            <Box
+            textAlign={'right'}
+            >
               <NextLink
                   href="/recoverPassword"
                   passHref

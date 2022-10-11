@@ -78,7 +78,7 @@ export default function RedefinePassword() {
                 gutterBottom
                 variant="body2"
               >
-                Infrorme seu e-mail, e-mail universitário ou matrícula.
+                Informe seu e-mail, e-mail universitário ou matrícula.
               </Typography>
             </Box>
             
