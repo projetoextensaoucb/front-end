@@ -9,7 +9,8 @@ import {
   Button,
   Container,
   TextField,
-  Typography
+  Typography,
+  LinearProgress
 } from '@mui/material';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -18,8 +19,8 @@ import { useState, useEffect } from 'react'
 import { getUserSession } from 'src/configs/userSession';
 
 export default function RedefinePassword() {
-    useEffect(() => {
-        console.log(getUserSession())
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
         if(getUserSession()) {
           router.push('/')
         }
@@ -37,6 +38,20 @@ export default function RedefinePassword() {
       }),
     });
 
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      let login = formik.values.name;
+      setLoading(true);
+      await axios.post(`${BASE_API}/auth/recoverPassword`, {
+        login: login
+      }).then((response) => {
+        setLoading(false)
+        window.alert('Verifique o seu email')
+      }).catch((error) => {
+        setLoading(false)
+        window.alert('Error!')
+      })
+    }
   return (
     <>
       <Head>
@@ -65,7 +80,7 @@ export default function RedefinePassword() {
               Voltar
             </Button>
           </NextLink>
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography
                 color="textPrimary"
@@ -82,7 +97,6 @@ export default function RedefinePassword() {
               </Typography>
             </Box>
             
-            {/* Box nome do curso */}
             <Box>
               <TextField
                 error={Boolean(formik.touched.name && formik.errors.name)}
@@ -97,7 +111,12 @@ export default function RedefinePassword() {
                 variant="outlined"
               />
             </Box>
-            
+            {
+              loading &&
+              <>
+                <LinearProgress />
+              </>
+            }
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
