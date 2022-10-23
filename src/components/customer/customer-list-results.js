@@ -1,4 +1,5 @@
 import { useState } from "react";
+import * as React from 'react';
 import PerfectScrollbar from "react-perfect-scrollbar";
 import PropTypes from "prop-types";
 import { AccountUserDetails } from "../account/account-user-details";
@@ -20,6 +21,9 @@ import {
   AppBar,
   Slide,
   Toolbar,
+  DataGrid,
+  GridColDef,
+  GridValueGetterParams
 } from "@mui/material";
 
 import IconButton from "@mui/material/IconButton";
@@ -35,8 +39,10 @@ export function CustomerListResults({ customers }) {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [user, setUser] = useState({});
   const [limit, setLimit] = useState(5);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = React.useState(0);
   const [open, setOpen] = useState(false);
+
+  let inicioLista = 0;
 
   const useStyles = makeStyles({
     list: {
@@ -93,12 +99,21 @@ export function CustomerListResults({ customers }) {
   }
 
   const handleLimitChange = (event) => {
-    setLimit(event.target.value);
+    setLimit(parseInt(event.target.value));
+    setPage(0);
   };
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
+  function alteraInicioLista(inicioLista){
+    inicioLista += 5;
+    console.log("Valor de inicioLista: "+inicioLista);
   };
+
+  function handleChangePage (event, newPage) {
+    setPage(newPage);
+    console.log("Valor de newPage: "+newPage);
+    alteraInicioLista(inicioLista);
+  };
+
   // name, email, matriculation, telephone, createdAt
   return (
     <Card>
@@ -148,7 +163,7 @@ export function CustomerListResults({ customers }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {customers.slice(inicioLista, limit).map((customer) => (
                 <TableRow
                   className={style.list}
                   key={customer.id}
@@ -170,11 +185,11 @@ export function CustomerListResults({ customers }) {
       <TablePagination
         component="div"
         count={customers.length}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleLimitChange}
         page={page}
+        onPageChange={handleChangePage}
         rowsPerPage={limit}
-        rowsPerPageOptions={[1, 5]}
+        onRowsPerPageChange={handleLimitChange}
+        rowsPerPageOptions={[5, 10, 25]}
       />
     </Card>
   );

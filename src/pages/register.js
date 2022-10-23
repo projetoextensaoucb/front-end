@@ -44,19 +44,11 @@ const Register = () => {
     })
   };
 
-
-  useEffect(() => {
+useEffect(() => {
     setLoading(true);
     if (user.accessToken) {    
-      axios
-        .get(
-          `${BASE_API}/course/all`
-          // ,{
-          //   headers: {
-          //   "x-access-token": user.accessToken
-          // }}
-        )
-        .then((response) => {
+      axios.get(`${BASE_API}/course/all`
+      ).then((response) => {
           var listCourses = [];
           response.data.courses.forEach(element => {
             listCourses.push(element)
@@ -89,31 +81,24 @@ const Register = () => {
 
       email: Yup
         .string()
-        .email(
-          'É necessário inserir um email válido')
+        .email('É necessário inserir um email válido')
         .max(255)
-        .required(
-          'É necessário um email'),
+        .required('É necessário um email'),
 
       institutionalEmail: Yup
         .string()
-        .email(
-          'É necessário um email institucional válido'
-        )
+        .email('É necessário um email institucional válido')
         .max(255),
 
       name: Yup
-
         .string()
         .max(255)
-        .required(
-          'É necessário fornecer um nome'),
+        .required('É necessário fornecer um nome'),
 
       password: Yup
         .string()
         .max(255)
-        .required(
-          'É necessário fornecer uma senha'),
+        .required('É necessário fornecer uma senha'),
 
       matriculation: Yup
         .string()
@@ -121,10 +106,7 @@ const Register = () => {
 
       policy: Yup
         .boolean()
-        .oneOf(
-          [true],
-          'Para criar uma conta você precisa aceitar os termos e condições.'
-        ),
+        .oneOf([true], 'Para criar uma conta você precisa aceitar os termos e condições.'),
 
       residentialTelephone: Yup
         .string()
@@ -144,6 +126,7 @@ const Register = () => {
         .min(8)
         .max(11)
     }),
+    
     onSubmit: () => {
       axios.post(`${BASE_API}/auth/signup`, {
         name: formik.values.name,
