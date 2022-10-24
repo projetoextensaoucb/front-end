@@ -4,30 +4,23 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios'
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography
-} from '@mui/material';
-
+import { Box, Button, Container, TextField, Typography, LinearProgress } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { BASE_API } from 'src/configs/appconfigs';
 import { useState, useEffect } from 'react'
 import { getUserSession } from 'src/configs/userSession';
-import { AdminPanelSettings } from '@mui/icons-material';
 
 export default function RegisterCourse() {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter()
   var session
 
   useEffect(() => {
-
-    // Verificando se o usuário é Admin, senão redirecionando ele para o /login
     const verifySession = async () => {
       session = getUserSession()
       console.log(session.roles)
-      let data = session.roles.find((el) => el === 'admin' || 'professor');
+      let data = session.roles.find((el) => el === 'admin');
+      console.log(data);
       if (!session) {
         router.push('/login')
       }
@@ -35,7 +28,6 @@ export default function RegisterCourse() {
     verifySession()
   }, [])
 
-  // Pegando o nome para o curso
   const formik = useFormik({
     initialValues: {
       name: ''
@@ -44,26 +36,40 @@ export default function RegisterCourse() {
       name: Yup
         .string()
         .max(255)
-        .required('É necessário um nome para o curso.'),
+        .required(
+          'É necessário um nome para o curso.')
     }),
+    
+    onSubmit: async () => {
+      const userSession = getUserSession()
+
+      let nameCourse = formik.values.name;
+      let accessToken = userSession.accessToken;
+
+      console.log(`NOME PASSADO PARA O CURSO: ${nameCourse}`)
+      console.log(`TOKEN: ${accessToken}`)
+      
+      setLoading(true);
+      axios.post(`${BASE_API}/course/create`,{
+        body: {
+          nameCourse: nameCourse
+        },
+        headers: {
+          'x-access-token': accessToken
+        }
+      }).then(response => {
+          alert("Curso Criado!")
+          router.push('/setings')
+        })
+        .catch(error => {
+          if (error.response) {
+            alert(`${error.response.data.message}`)
+            console.log(error.response.data)
+             window.location.reload();
+          }
+        })
+    }
   });
-
-  // Criação de projeto pela API
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const userSession = getUserSession()
-    console.log(`TOKEN: ${userSession.accessToken}`)
-
-    await axios.post(`${BASE_API}/course/create`, {
-      'x-access-token': userSession.accessToken,
-      'name': 'name'
-    }).then((response) => {
-      window.alert('Curso criado com sucesso.')
-    }).catch((error) => {
-      window.alert('Error!')
-    })
-  }
 
   return (
     <>
@@ -93,7 +99,7 @@ export default function RegisterCourse() {
               Voltar
             </Button>
           </NextLink>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography
                 color="textPrimary"
@@ -110,13 +116,13 @@ export default function RegisterCourse() {
               </Typography>
             </Box>
 
-            {/* Box nome do curso */}
+           {/* Box nome do curso */}
             <Box>
               <TextField
                 error={Boolean(formik.touched.name && formik.errors.name)}
                 fullWidth
                 helperText={formik.touched.name && formik.errors.name}
-                label="Nome do curso"
+                label="Nome do Curso"
                 margin="normal"
                 name="name"
                 onBlur={formik.handleBlur}
@@ -125,6 +131,13 @@ export default function RegisterCourse() {
                 variant="outlined"
               />
             </Box>
+
+            {
+              loading &&
+              <>
+                <LinearProgress />
+              </>
+            }
 
             <Box sx={{ py: 2 }}>
               <Button
@@ -135,7 +148,7 @@ export default function RegisterCourse() {
                 type="submit"
                 variant="contained"
               >
-                Cadastrar
+                Criar curso
               </Button>
             </Box>
           </form>
