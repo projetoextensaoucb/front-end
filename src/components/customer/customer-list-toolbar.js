@@ -8,6 +8,7 @@ import {
   SvgIcon, Typography
 } from '@mui/material';
 import { Search as SearchIcon } from '../../icons/search';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Upload as UploadIcon } from '../../icons/upload';
 import { Download as DownloadIcon } from '../../icons/download';
 import NextLink from 'next/link';
@@ -23,26 +24,41 @@ export const CustomerListToolbar = (props) => (
         m: -1
       }}
     >
-      <Typography
+    <Box sx={{ mb: 10 }}>
+      <NextLink
+        href="/settings"
+        passHref
+      >
+      <Button
+        component="a"
+        startIcon={<ArrowBackIcon fontSize="small" />}
+      >
+        Voltar
+      </Button>
+      </NextLink>
+    </Box>
+
+    <Typography
         sx={{ m: 1 }}
         variant="h4"
+    >
+      Usuários
+    </Typography>
+    
+    <Box sx={{ m: 1 }}>       
+      <NextLink
+        href="/register"
+        passHref
       >
-        Usuários
-      </Typography>
-      <Box sx={{ m: 1 }}>       
-        <NextLink
-            href="/register"
-            passHref
-          >
-            <Button
-              color="primary"
-              variant="contained"
-            >
-              Cadastrar um novo Usuário
-            </Button>
-        </NextLink>
+      <Button
+        color="primary"
+        variant="contained"
+      >
+        Cadastrar um novo Usuário
+      </Button>
+      </NextLink>
+    </Box>
 
-      </Box>
     </Box>
     <Box sx={{ mt: 3 }}>
       <Card>

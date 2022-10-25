@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { AccountUserDetails } from "../account/account-user-details";
 import { AccountProfile } from "../account/account-profile";
 import { makeStyles } from "@material-ui/styles";
-import {
+import { 
   Grid,
   Box,
   Card,
@@ -21,9 +21,9 @@ import {
   AppBar,
   Slide,
   Toolbar,
-  DataGrid,
-  GridColDef,
-  GridValueGetterParams
+  // DataGrid,
+  // GridColDef,
+  // GridValueGetterParams
 } from "@mui/material";
 
 import IconButton from "@mui/material/IconButton";
@@ -38,7 +38,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 export function CustomerListResults({ customers }) {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [user, setUser] = useState({});
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(customers.length);
   const [page, setPage] = React.useState(0);
   const [open, setOpen] = useState(false);
 
@@ -108,11 +108,11 @@ export function CustomerListResults({ customers }) {
     console.log("Valor de inicioLista: "+inicioLista);
   };
 
-  function handleChangePage (event, newPage) {
-    setPage(newPage);
-    console.log("Valor de newPage: "+newPage);
-    alteraInicioLista(inicioLista);
-  };
+  // function handleChangePage (event, newPage) {
+  //   setPage(newPage);
+  //   console.log("Valor de newPage: "+newPage);
+  //   alteraInicioLista(inicioLista);
+  // };
 
   // name, email, matriculation, telephone, createdAt
   return (
@@ -163,7 +163,7 @@ export function CustomerListResults({ customers }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(inicioLista, limit).map((customer) => (
+              {customers.slice(0, limit).map((customer) => (
                 <TableRow
                   className={style.list}
                   key={customer.id}
@@ -182,15 +182,15 @@ export function CustomerListResults({ customers }) {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <TablePagination
+      {/* <TablePagination
         component="div"
         count={customers.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={limit}
-        onRowsPerPageChange={handleLimitChange}
         rowsPerPageOptions={[5, 10, 25]}
-      />
+        onRowsPerPageChange={handleLimitChange}
+      /> */}
     </Card>
   );
 }

@@ -51,15 +51,14 @@ export default function RegisterCourse() {
       
       setLoading(true);
       axios.post(`${BASE_API}/course/create`,{
-        body: {
-          nameCourse: nameCourse
-        },
+          name: nameCourse
+        },{
         headers: {
           'x-access-token': accessToken
         }
-      }).then(response => {
+        }).then(response => {
           alert("Curso Criado!")
-          router.push('/setings')
+          router.push('/settings')
         })
         .catch(error => {
           if (error.response) {
