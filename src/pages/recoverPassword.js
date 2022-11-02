@@ -1,22 +1,14 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import * as Yup from 'yup';
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios'
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-  LinearProgress
-} from '@mui/material';
-
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { BASE_API } from 'src/configs/appconfigs';
-import { useState, useEffect } from 'react'
 import { getUserSession } from 'src/configs/userSession';
+import { BASE_API } from 'src/configs/appconfigs';
+import { LogoPrincipal } from 'src/components/logoPrincipal';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Button, Container, TextField, Typography, LinearProgress } from '@mui/material';
 
 export default function RedefinePassword() {
   const [loading, setLoading] = useState(false);
@@ -59,6 +51,11 @@ export default function RedefinePassword() {
             Recuperar senha
         </title>
       </Head>
+
+      <Box sx={{alignSelf: 'center', my: 5}}>
+            <LogoPrincipal></LogoPrincipal>
+      </Box>
+
       <Box
         component="main"
         sx={{

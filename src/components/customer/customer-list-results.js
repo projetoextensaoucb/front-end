@@ -1,40 +1,18 @@
-import { useState } from "react";
 import * as React from 'react';
-import PerfectScrollbar from "react-perfect-scrollbar";
-import PropTypes from "prop-types";
+import { useState } from "react";
+import { forwardRef } from "react";
 import { AccountUserDetails } from "../account/account-user-details";
 import { AccountProfile } from "../account/account-profile";
+import PropTypes from "prop-types";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import { makeStyles } from "@material-ui/styles";
-import { 
-  Grid,
-  Box,
-  Card,
-  Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Typography,
-  Dialog,
-  AppBar,
-  Slide,
-  Toolbar,
-  // DataGrid,
-  // GridColDef,
-  // GridValueGetterParams
-} from "@mui/material";
-
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-
-import { forwardRef } from "react";
+import { Grid, Box, Card, Container, Table, TableBody, TableCell, TableHead, TableRow, Typography, Dialog, AppBar, Slide, Toolbar,  } from "@mui/material"; // DataGrid, GridColDef, GridValueGetterParams,TablePagination
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export function CustomerListResults({ customers }) {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [user, setUser] = useState({});

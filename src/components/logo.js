@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
-import { height, width } from '@mui/system';
 
 export const Logo = styled((props) => {
   return (

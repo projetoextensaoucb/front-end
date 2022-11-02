@@ -1,28 +1,20 @@
-import Head from "next/head";
-import { Box, Container, Grid, Pagination, CircularProgress } from "@mui/material";
-import { ProductListToolbar } from "../components/project/project-list-toolbar";
-import { ProjectCard } from "../components/project/project-card";
-import { DashboardLayout } from "../components/dashboard-layout";
+import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BASE_API } from "src/configs/appconfigs";
-import { CardProject } from "../components/cardProject/card-project";
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Slide from "@mui/material/Slide";
 import { getUserSession, setUserSession } from "src/configs/userSession";
-
+import { BASE_API } from "src/configs/appconfigs";
+import { DashboardLayout } from "../components/dashboard-layout";
+import { ProductListToolbar } from "../components/project/project-list-toolbar";
+import { CardProject } from "../components/cardProject/card-project";
+import { ProjectCard } from "../components/project/project-card";
+import Head from "next/head";
 import { useRouter } from "next/router";
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, Container, Grid, Pagination, CircularProgress, Dialog, AppBar, Toolbar, IconButton, Slide } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function Products() {
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState([]);
