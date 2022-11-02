@@ -1,34 +1,18 @@
-import Head from 'next/head';
-import NextLink from 'next/link';
+import { useState, useEffect } from 'react'
+import { getUserSession } from 'src/configs/userSession';
+import axios from 'axios'
+import * as Yup from 'yup';
+import { DashboardLayout } from "../components/dashboard-layout";
+import { BASE_API } from 'src/configs/appconfigs';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios'
-import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  FormHelperText,
-  Avatar,
-  TextField,
-  Typography,
-  Snackbar,
-  SnackbarAlert,
-  Alert
-
-} from '@mui/material';
-
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { da } from 'date-fns/locale';
-import { BASE_API } from 'src/configs/appconfigs';
-import { useState, useEffect, handleClose, handleClick } from 'react'
-import { getUserSession, setUserSession } from 'src/configs/userSession';
+import Head from 'next/head';
+import NextLink from 'next/link';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Grid from '@mui/material/Grid';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Button, Container, Avatar, TextField, Typography, Grid } from '@mui/material';
 export default function RegisterProject() {
   const router = useRouter()
   const [startDate, setStartDate] = useState(Date());
@@ -91,8 +75,7 @@ export default function RegisterProject() {
         .max(255)
 
     }),
-
-    
+   
     onSubmit: () => {
       const userSession = getUserSession()
       var formmatedStartDate = new Date(startDate)
@@ -157,7 +140,7 @@ export default function RegisterProject() {
               component="a"
               startIcon={<ArrowBackIcon fontSize="small" />}
             >
-              Tela de Projetos
+              Voltar
             </Button>
           </NextLink>
           <form onSubmit={formik.handleSubmit}>
@@ -207,12 +190,12 @@ export default function RegisterProject() {
             </Box>
             
             {/* Box nome do projeto */}
-            <Box>
+            <Box sx={{ paddingTop: 2 }}>
               <TextField
                 error={Boolean(formik.touched.name && formik.errors.name)}
                 fullWidth
                 helperText={formik.touched.name && formik.errors.name}
-                label="Nome do Projeto"
+                label="Nome do projeto"
                 margin="normal"
                 name="name"
                 onBlur={formik.handleBlur}
@@ -264,7 +247,7 @@ export default function RegisterProject() {
                 error={Boolean(formik.touched.description && formik.errors.description)}
                 fullWidth
                 helperText={formik.touched.description && formik.errors.description}
-                label="Proposta do projeto, responsáveis, atividades, história da entidade, contato"
+                label="Proposta do projeto, responsáveis, atividades, história da entidade, contato..."
                 margin="normal"
                 name="description"
                 multiline
@@ -275,39 +258,42 @@ export default function RegisterProject() {
                 variant="outlined"
               />
             </Box>
+
+            <Box sx={{ width: '100%', py: 2 }}>
+              <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                <Grid item xs={6}>
+                  {/* Box data de início */}  
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      label="Data de início"
+                      value={startDate}
+                      onChange={(newValue) => {
+                        setStartDate(newValue);
+                      }}
+                      format="YYYY-MM-DD"
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+                <Grid item xs={6}>
+                  {/* Box data de encerramento */}  
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      label="Data de encerramento"
+                      value={endDate}
+                      onChange={(newValue) => {
+                        setEndDate(newValue);
+                      }}
+                      format="YYYY-MM-DD"
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+              </Grid>
+            </Box>
             
-            {/* Box data de início */}  
-            <Box sx={{ py: 2 }}>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
-                  label="Data de início"
-                  value={startDate}
-                  onChange={(newValue) => {
-                    setStartDate(newValue);
-                  }}
-                  format="YYYY-MM-DD"
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-            </Box>
-
-            {/* Box data de encerramento */}  
-            <Box sx={{py:2}}>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    label="Data de encerramento"
-                    value={endDate}
-                    onChange={(newValue) => {
-                      setEndDate(newValue);
-                    }}
-                    format="YYYY-MM-DD"
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-            </Box>
-
             {/* Box quantidades de vagas do projeto */}  
-            <Box sx={{py:1}}>
+            <Box sx={{py:2}}>
               <TextField
                 helperText={formik.touched.vacancies && formik.errors.vacancies}
                 error={Boolean(formik.touched.vacancies && formik.errors.vacancies)}
@@ -320,6 +306,7 @@ export default function RegisterProject() {
               />
             </Box>
 
+            {/* Box cadastrar */} 
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
@@ -338,3 +325,5 @@ export default function RegisterProject() {
     </>
   );
 };
+
+RegisterProject.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;

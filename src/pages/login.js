@@ -8,6 +8,7 @@ import axios from 'axios'
 import { getUserSession, setUserSession } from 'src/configs/userSession';
 import { BASE_API } from 'src/configs/appconfigs';
 import  {useState, useEffect} from 'react'
+import { LogoPrincipal } from 'src/components/logoPrincipal';
 
 const Login = () => {
 
@@ -67,6 +68,11 @@ const Login = () => {
       <Head>
         <title>Login</title>
       </Head>
+      
+      <Box sx={{alignSelf: 'center', my: 5}}>
+            <LogoPrincipal></LogoPrincipal>
+      </Box>
+      
       <Box
         component="main"
         sx={{
@@ -75,7 +81,7 @@ const Login = () => {
           flexGrow: 1,
           minHeight: '100%'
         }}
-      >
+      > 
         <Container maxWidth="sm">
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
@@ -110,6 +116,7 @@ const Login = () => {
               >
               </Grid>
             </Grid>
+
             <TextField
               error={Boolean(formik.touched.login && formik.errors.login)}
               fullWidth
@@ -122,6 +129,7 @@ const Login = () => {
               value={formik.values.login}
               variant="outlined"
             />
+
             <TextField
               error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
@@ -135,12 +143,14 @@ const Login = () => {
               value={formik.values.password}
               variant="outlined"
             />
+
             {
               loading &&
               <>
                 <LinearProgress />
               </>
             }
+
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
@@ -153,6 +163,7 @@ const Login = () => {
                Entrar
               </Button>
             </Box>
+
             <Box
             textAlign={'right'}
             >
@@ -169,27 +180,6 @@ const Login = () => {
                   </Link>
                 </NextLink>
             </Box>
-            {/* <Typography
-              color="textSecondary"
-              variant="body2"
-            >
-              Não tem uma conta?
-              {' '}
-              <NextLink
-                href="/register"
-              >
-                <Link
-                  to="/register"
-                  variant="subtitle2"
-                  underline="hover"
-                  sx={{
-                    cursor: 'pointer'
-                  }}
-                >
-                  Cadastrar
-                </Link>
-              </NextLink>
-            </Typography> */}
           </form>
         </Container>
       </Box>

@@ -1,3 +1,6 @@
+import NextLink from 'next/link';
+import { Search as SearchIcon } from '../../icons/search';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {
   Box,
   Button,
@@ -5,13 +8,9 @@ import {
   CardContent,
   TextField,
   InputAdornment,
-  SvgIcon, Typography
+  SvgIcon,
+  Typography
 } from '@mui/material';
-import { Search as SearchIcon } from '../../icons/search';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Upload as UploadIcon } from '../../icons/upload';
-import { Download as DownloadIcon } from '../../icons/download';
-import NextLink from 'next/link';
 
 export const CustomerListToolbar = (props) => (
   <Box {...props}>

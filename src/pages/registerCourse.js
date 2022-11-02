@@ -1,89 +1,85 @@
-import Head from 'next/head';
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
-import { useFormik } from 'formik';
+import { useState, useEffect } from "react";
+import { DashboardLayout } from "../components/dashboard-layout";
+import axios from "axios";
+import { getUserSession } from "src/configs/userSession";
+import { BASE_API } from "src/configs/appconfigs";
 import * as Yup from 'yup';
-import axios from 'axios'
+import Head from "next/head";
+import NextLink from 'next/link';
+import { useRouter } from "next/router";
+import { useFormik } from 'formik';
 import { Box, Button, Container, TextField, Typography, LinearProgress } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { BASE_API } from 'src/configs/appconfigs';
-import { useState, useEffect } from 'react'
-import { getUserSession } from 'src/configs/userSession';
-
 export default function RegisterCourse() {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter()
-  var session
-
-  useEffect(() => {
-    const verifySession = async () => {
-      session = getUserSession()
-      console.log(session.roles)
-      let data = session.roles.find((el) => el === 'admin');
-      console.log(data);
-      if (!session) {
-        router.push('/login')
-      }
-    }
-    verifySession()
-  }, [])
-
-  const formik = useFormik({
-    initialValues: {
-      name: ''
-    },
-    validationSchema: Yup.object({
-      name: Yup
-        .string()
-        .max(255)
-        .required(
-          'É necessário um nome para o curso.')
-    }),
-    
-    onSubmit: async () => {
-      const userSession = getUserSession()
-
-      let nameCourse = formik.values.name;
-      let accessToken = userSession.accessToken;
-
-      console.log(`NOME PASSADO PARA O CURSO: ${nameCourse}`)
-      console.log(`TOKEN: ${accessToken}`)
-      
-      setLoading(true);
-      axios.post(`${BASE_API}/course/create`,{
-          name: nameCourse
-        },{
-        headers: {
-          'x-access-token': accessToken
+    const [loading, setLoading] = useState(false);
+    const router = useRouter()
+    var session
+  
+    useEffect(() => {
+      const verifySession = async () => {
+        session = getUserSession()
+        console.log(session.roles)
+        let data = session.roles.find((el) => el === 'admin');
+        console.log(data);
+        if (!session) {
+          router.push('/login')
         }
-        }).then(response => {
-          alert("Curso Criado!")
-          router.push('/settings')
-        })
-        .catch(error => {
-          if (error.response) {
-            alert(`${error.response.data.message}`)
-            console.log(error.response.data)
-             window.location.reload();
+      }
+      verifySession()
+    }, [])
+  
+    const formik = useFormik({
+      initialValues: {
+        name: ''
+      },
+      validationSchema: Yup.object({
+        name: Yup
+          .string()
+          .max(255)
+          .required(
+            'É necessário um nome para o curso.')
+      }),
+      
+      onSubmit: async () => {
+        const userSession = getUserSession()
+  
+        let nameCourse = formik.values.name;
+        let accessToken = userSession.accessToken;
+  
+        console.log(`NOME PASSADO PARA O CURSO: ${nameCourse}`)
+        console.log(`TOKEN: ${accessToken}`)
+        
+        setLoading(true);
+        axios.post(`${BASE_API}/course/create`,{
+            name: nameCourse
+          },{
+          headers: {
+            'x-access-token': accessToken
           }
-        })
-    }
-  });
-
+          }).then(response => {
+            alert("Curso Criado!")
+            window.location.reload();
+          })
+          .catch(error => {
+            if (error.response) {
+              alert(`${error.response.data.message}`)
+              console.log(error.response.data)
+               window.location.reload();
+            }
+          })
+      }
+    });
+    
   return (
     <>
       <Head>
-        <title>
-          Cadastro de curso
-        </title>
+        <title>Cadastro de curso | Extensão - UCB</title>
       </Head>
       <Box
         component="main"
         sx={{
-          alignItems: 'center',
-          display: 'flex',
           flexGrow: 1,
-          minHeight: '100%'
+          py: 8,
         }}
       >
         <Container maxWidth="sm">
@@ -156,3 +152,5 @@ export default function RegisterCourse() {
     </>
   );
 };
+
+RegisterCourse.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
