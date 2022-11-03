@@ -1,19 +1,6 @@
-import PropTypes from "prop-types";
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  Typography,
-  Button,
-  Link,
-} from "@mui/material";
-import { Clock as ClockIcon } from "../../icons/clock";
-import { Download as DownloadIcon } from "../../icons/download";
+import { Avatar, Box, Card, CardContent, Typography, Button, Link } from "@mui/material";
 import NextLink from "next/link";
-import { getUserSession, setUserSession } from "src/configs/userSession";
+import { getUserSession } from "src/configs/userSession";
 import { BASE_API } from "src/configs/appconfigs";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -102,8 +89,8 @@ export const CardInstitution = ({ institution }) => {
             }}
           >
             <Avatar
-              alt="project"
-              src={project.banner}
+              alt="institution"
+              src={institution.banner}
               variant="square"
               sx={{
                 height: 100,
@@ -115,10 +102,10 @@ export const CardInstitution = ({ institution }) => {
 
           {/* // Typography para ajustes do Titulo */}
           <Typography align="center" color="textPrimary" gutterBottom variant="h5">
-            {project.title}
+            {institution.title}
           </Typography>
           <Typography align="center" color="textPrimary" variant="body1">
-            {/* {project.description} */}
+            {/* {institution.description} */}
 
             <Box
               sx={{
@@ -128,7 +115,7 @@ export const CardInstitution = ({ institution }) => {
               }}
             >
               <Typography description="Coordenador" variant="h5">
-                {project.name}
+                {institution.name}
               </Typography>
             </Box>
 
@@ -145,7 +132,7 @@ export const CardInstitution = ({ institution }) => {
                 Resumo:
                 <Box sx={{ pb: 1 }} />
                 <Typography description="Coordenador" variant="body2">
-                  {project.summary}
+                  {institution.summary}
                 </Typography>
               </Typography>
             </Box>
@@ -161,7 +148,7 @@ export const CardInstitution = ({ institution }) => {
                 Informações Relevantes:
                 <Box sx={{ pb: 1 }} />
                 <Typography description="Coordenador" variant="body2">
-                  {project.description}
+                  {institution.description}
                   <Link href="https://ucb.catolica.edu.br/portal/wp-content/uploads/2022/03/EDITAL-UCB-016.2022-PROGRAMA-SER1-2022-REPUBLICACAO.pdf">
                     {" edital aqui."}
                   </Link>
@@ -230,7 +217,7 @@ export const CardInstitution = ({ institution }) => {
                 Localização:
                 <Box sx={{ pb: 1 }} />
                 <Typography description="Coordenador" variant="body2">
-                  {project.address} - {project.city}
+                  {institution.address} - {institution.city}
                 </Typography>
               </Typography>
             </Box>
