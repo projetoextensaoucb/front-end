@@ -35,10 +35,15 @@ export const CardInstitution = ({ institution }) => {
     formmatedEndDate.getFullYear();
 
   const [isSubscriber, setIsSubscriber] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const verifySession = () => {
       const userSession = getUserSession();
+      const validate = userSession.roles.find((el) => el === "admin");
+      if (validate) {
+        setIsAdmin(true);
+      }
       // Editar para institutions depois
       if (userSession.inscribedProjects) {
         for (let i = 0; i < userSession.inscribedProjects.length; i++) {
@@ -52,9 +57,7 @@ export const CardInstitution = ({ institution }) => {
   }, []);
 
   const subscriptionProject = () => {
-    console.log(institution.id);
     const session = getUserSession();
-    console.log(session.id);
     axios
       .post(
         `${BASE_API}/project/subscription`,
@@ -99,8 +102,8 @@ export const CardInstitution = ({ institution }) => {
             }}
           >
             <Avatar
-              alt="institution"
-              src={institution.banner}
+              alt="project"
+              src={project.banner}
               variant="square"
               sx={{
                 height: 100,
@@ -112,10 +115,10 @@ export const CardInstitution = ({ institution }) => {
 
           {/* // Typography para ajustes do Titulo */}
           <Typography align="center" color="textPrimary" gutterBottom variant="h5">
-            {institution.title}
+            {project.title}
           </Typography>
           <Typography align="center" color="textPrimary" variant="body1">
-            {/* {institution.description} */}
+            {/* {project.description} */}
 
             <Box
               sx={{
@@ -125,7 +128,7 @@ export const CardInstitution = ({ institution }) => {
               }}
             >
               <Typography description="Coordenador" variant="h5">
-                {institution.name}
+                {project.name}
               </Typography>
             </Box>
 
@@ -142,7 +145,7 @@ export const CardInstitution = ({ institution }) => {
                 Resumo:
                 <Box sx={{ pb: 1 }} />
                 <Typography description="Coordenador" variant="body2">
-                  {institution.summary}
+                  {project.summary}
                 </Typography>
               </Typography>
             </Box>
@@ -158,7 +161,7 @@ export const CardInstitution = ({ institution }) => {
                 Informações Relevantes:
                 <Box sx={{ pb: 1 }} />
                 <Typography description="Coordenador" variant="body2">
-                  {institution.description}
+                  {project.description}
                   <Link href="https://ucb.catolica.edu.br/portal/wp-content/uploads/2022/03/EDITAL-UCB-016.2022-PROGRAMA-SER1-2022-REPUBLICACAO.pdf">
                     {" edital aqui."}
                   </Link>
@@ -227,7 +230,7 @@ export const CardInstitution = ({ institution }) => {
                 Localização:
                 <Box sx={{ pb: 1 }} />
                 <Typography description="Coordenador" variant="body2">
-                  {institution.address} - {institution.city}
+                  {project.address} - {project.city}
                 </Typography>
               </Typography>
             </Box>
@@ -247,29 +250,22 @@ export const CardInstitution = ({ institution }) => {
           }}
           variant="body2"
         >
-          <Button
-            color="primary"
-            hidden={isSubscriber}
-            variant="contained"
-          >
-            Ocultar
-          </Button>
-          <Button
-            color="primary"
-            hidden={isSubscriber}
-            variant="contained"
-          >
-            Excluir
-          </Button>
-          <NextLink href={"/editProject"}>
-            <Button
-              color="primary"
-              hidden={isSubscriber}
-              variant="contained"
-            >
-              Editar
-            </Button>
-          </NextLink>
+          {isAdmin && (
+            <>
+              <Button color="primary" hidden={isSubscriber} variant="contained">
+                Ocultar
+              </Button>
+
+              <Button color="primary" hidden={isSubscriber} variant="contained">
+                Excluir
+              </Button>
+              <NextLink href={"/editProject"}>
+                <Button color="primary" hidden={isSubscriber} variant="contained">
+                  Editar
+                </Button>
+              </NextLink>
+            </>
+          )}
           <Button
             color="primary"
             hidden={isSubscriber}
