@@ -11,7 +11,7 @@ import {
 import { Search as SearchIcon } from "../../icons/search";
 import NextLink from "next/link";
 
-export const ProductListToolbar = ({ userAccess }) => (
+export const ProductListToolbar = ({ userAccess, searchInstitutionName }) => (
   <Box>
     <Box
       sx={{
@@ -51,6 +51,7 @@ export const ProductListToolbar = ({ userAccess }) => (
               }}
               placeholder="Pesquisar instituição"
               variant="outlined"
+              onChange={searchInstitutionName}
             />
           </Box>
         </CardContent>

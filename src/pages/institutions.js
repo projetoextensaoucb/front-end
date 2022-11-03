@@ -28,7 +28,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 export default function Products() {
   const [institutions, setInstitutions] = useState([]);
-  const [institution, setProject] = useState([]);
+  const [searchInstitutions, setSearchInstitutions] = useState([]);
+  const [institution, setInstitution] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = React.useState({});
   const [loading, setLoading] = useState(false);
@@ -71,13 +72,20 @@ export default function Products() {
   const childToParent = (childdata) => {
     institutions.find((el) => {
       if (el.id === childdata) {
-        setProject(el);
+        setInstitution(el);
       }
     });
     // buscar na lista
     // passar os dados pro card
     handleClickOpen();
   };
+
+  function searchInstitutionName(payload) {
+    let newList = institutions.filter((el) =>
+      el.name.toLowerCase().includes(payload.target.value.toLowerCase())
+    );
+    setSearchInstitutions(newList);
+  }
 
   return (
     <>
@@ -119,10 +127,10 @@ export default function Products() {
           </Box>
         ) : (
           <Container maxWidth={false}>
-            <ProductListToolbar userAccess={user} />
+            <ProductListToolbar userAccess={user} searchInstitutionName={searchInstitutionName} />
             <Box sx={{ pt: 3 }}>
               <Grid container spacing={3}>
-                {institutions.map((institution) => (
+                {searchInstitutions.map((institution) => (
                   <Grid item key={institution.id} lg={4} md={6} xs={12}>
                     <InstitutionCard institution={institution} childToParent={childToParent} />
                   </Grid>
@@ -136,7 +144,7 @@ export default function Products() {
                 pt: 3,
               }}
             >
-              <Pagination color="primary" count={3} size="small" />
+              {/* <Pagination color="primary" count={3} size="small" /> */}
             </Box>
           </Container>
         )}
