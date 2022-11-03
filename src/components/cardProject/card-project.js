@@ -14,37 +14,47 @@ export const CardProject = ({ project }) => {
   var finalStartDate = formmatedStartDate.getDate() + '/' + (formmatedStartDate.getMonth() + 1) + '/' + formmatedStartDate.getFullYear()
   var finalEndDate = formmatedEndDate.getDate() + '/' + (formmatedEndDate.getMonth() + 1) + '/' + formmatedEndDate.getFullYear()
 
-  const [isSubscriber, setIsSubscriber] = useState(false)
-
+  const [isSubscriber, setIsSubscriber] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const verifySession = async () => {
-      const userSession = getUserSession()
-      for (let i = 0; i < userSession.inscribedProjects.length; i++) {
-        if (userSession.inscribedProjects[i].id === project.id) {
-            setIsSubscriber(true)
+    const verifySession = () => {
+      const userSession = getUserSession();
+      const validate = userSession.roles.find((el) => el === "admin");
+      if (validate) {
+        setIsAdmin(true)
+      }
+      // Editar para institutions depois
+      if (userSession.inscribedProjects) {
+        for (let i = 0; i < userSession.inscribedProjects.length; i++) {
+          if (userSession.inscribedProjects[i].id === institution.id) {
+            setIsSubscriber(true);
+          }
         }
       }
-    }
-    verifySession()
-  }, [])
+    };
+    verifySession();
+  }, []);
 
   const subscriptionProject = () => {
-    console.log(project.id)
-    const session = getUserSession()
-    console.log(session.id)
-    axios.post(`${BASE_API}/project/subscription`, {
-      projectId: project.id,
-    }, {
-      headers: {
-        'x-access-token': session.accessToken
-      },
-    })
-      .then(response => {
-        alert(response.data.message)
-        setIsSubscriber(true)
+    const session = getUserSession();
+    axios
+      .post(
+        `${BASE_API}/project/subscription`,
+        {
+          projectId: institution.id,
+        },
+        {
+          headers: {
+            "x-access-token": session.accessToken,
+          },
+        }
+      )
+      .then((response) => {
+        alert(response.data.message);
+        setIsSubscriber(true);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response) {
           alert(`${error.response.data.message}`)
           console.log(error.response.data)
@@ -72,7 +82,10 @@ export const CardProject = ({ project }) => {
               pb: 3,
             }}
           >
-            <Avatar alt="project" src={project.banner} variant="square" sx={{
+            <Avatar alt="project"
+src={project.banner}
+variant="square"
+sx={{
               height: 100,
               mb: 2,
               width: 100
@@ -80,10 +93,15 @@ export const CardProject = ({ project }) => {
           </Box>
 
           {/* // Typography para ajustes do Titulo */}
-          <Typography align="center" color="textPrimary" gutterBottom variant="h5">
+          <Typography align="center"
+color="textPrimary"
+gutterBottom
+variant="h5">
             {project.title}
           </Typography>
-          <Typography align="center" color="textPrimary" variant="body1">
+          <Typography align="center"
+color="textPrimary"
+variant="body1">
             {/* {project.description} */}
 
             <Box
@@ -93,7 +111,8 @@ export const CardProject = ({ project }) => {
                 pb: 3,
               }}
             >
-              <Typography description="Coordenador" variant="h5">
+              <Typography description="Coordenador"
+variant="h5">
                 {project.name}
               </Typography>
             </Box>
@@ -110,7 +129,8 @@ export const CardProject = ({ project }) => {
               <Typography variant="subtitle1">
                 Resumo:
               <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador" variant="body2">
+                <Typography description="Coordenador"
+variant="body2">
                   {project.summary}
                 </Typography>
               </Typography>
@@ -126,7 +146,8 @@ export const CardProject = ({ project }) => {
               <Typography variant="subtitle1">
                 Informações Relevantes:
               <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador" variant="body2">
+                <Typography description="Coordenador"
+variant="body2">
                   {project.description}
                   <Link href="https://ucb.catolica.edu.br/portal/wp-content/uploads/2022/03/EDITAL-UCB-016.2022-PROGRAMA-SER1-2022-REPUBLICACAO.pdf">
                     {" edital aqui."}
@@ -145,7 +166,8 @@ export const CardProject = ({ project }) => {
               <Typography variant="subtitle1">
                 Data de inicio:
               <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador" variant="body2">
+                <Typography description="Coordenador"
+variant="body2">
                   {finalStartDate}
                 </Typography>
               </Typography>
@@ -161,7 +183,8 @@ export const CardProject = ({ project }) => {
               <Typography variant="subtitle1">
                 Data de Encerramento:
               <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador" variant="body2">
+                <Typography description="Coordenador"
+variant="body2">
                   {finalEndDate}
                 </Typography>
               </Typography>
@@ -177,7 +200,8 @@ export const CardProject = ({ project }) => {
               <Typography variant="subtitle1">
                 Contatos:
               <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador" variant="body2">
+                <Typography description="Coordenador"
+variant="body2">
                   Coordenador: José Ivaldo Araújo de Lucena
               </Typography>
                 <Typography variant="body2">
@@ -195,7 +219,8 @@ export const CardProject = ({ project }) => {
               <Typography variant="subtitle1">
                 Localização:
               <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador" variant="body2">
+                <Typography description="Coordenador"
+variant="body2">
                   {project.address} - {project.city}
                 </Typography>
               </Typography>
@@ -206,12 +231,45 @@ export const CardProject = ({ project }) => {
 
         <Box />
         {/* <DownloadIcon color="action" /> */}
-        <Typography color="textSecondary" display="inline" sx={{
-          display: "flex",
-          justifyContent: "center",
-          pb: 3,
-        }} variant="body2">
-          <Button color="primary" hidden = {isSubscriber} onClick={subscriptionProject} variant="contained">
+        <Typography
+          color="textSecondary"
+          display="inline"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            pb: 3,
+            gap: 1,
+          }}
+          variant="body2"
+        >
+          {isAdmin && (
+            <>
+              <Button color="primary"
+hidden={isSubscriber}
+variant="contained">
+                Ocultar
+              </Button>
+
+              <Button color="primary"
+hidden={isSubscriber}
+variant="contained">
+                Excluir
+              </Button>
+              <NextLink href={"/editProject"}>
+                <Button color="primary"
+hidden={isSubscriber}
+variant="contained">
+                  Editar
+                </Button>
+              </NextLink>
+            </>
+          )}
+          <Button
+            color="primary"
+            hidden={isSubscriber}
+            onClick={subscriptionProject}
+            variant="contained"
+          >
             Inscrever-se
                 </Button>
         </Typography>
