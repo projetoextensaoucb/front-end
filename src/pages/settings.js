@@ -25,13 +25,6 @@ const Settings = () => {
     verifySession();
   }, []);
 
-  function logout() {
-    const validate = confirm("Tem certeza de que deseja encerrar a sessão?");
-    if (validate) {
-      window.sessionStorage.clear();
-      router.push("/login");
-    }
-  }
   return (
     <>
       <Head>
@@ -68,9 +61,6 @@ const Settings = () => {
               Criar curso
             </Button>
           </NextLink>
-          <Button variant="outlined" size="medium" sx={{ ml: 1 }} onClick={logout}>
-            Sair
-          </Button>
         </Box>
       </Box>
     </>

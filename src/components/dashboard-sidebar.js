@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import { Box, Divider, Drawer, useMediaQuery } from "@mui/material";
+import { useRouter } from "next/router";
+import { Box, Divider, Drawer, useMediaQuery, Button } from "@mui/material";
 import { ChartBar as ChartBarIcon } from "../icons/chart-bar";
 import { Cog as CogIcon } from "../icons/cog";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { ShoppingBag as ShoppingBagIcon } from "../icons/shopping-bag";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { User as UserIcon } from "../icons/user";
@@ -35,12 +36,21 @@ const items = [
     href: "/settings",
     icon: <CogIcon fontSize="small" />,
     title: "Definições",
-  },
+  }
 ];
 
 export const DashboardSidebar = (props) => {
   const { open, onClose, onSidebarOpen } = props;
   const router = useRouter();
+
+  // Função para logout do sistema
+  function logout() {
+    const validate = confirm("Tem certeza de que deseja encerrar a sessão?");
+    if (validate) {
+      window.sessionStorage.clear();
+      router.push("/login");
+    }
+  }
 
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"), {
     defaultMatches: true,
@@ -82,6 +92,12 @@ export const DashboardSidebar = (props) => {
             <NavItem key={item.title} icon={item.icon} href={item.href} title={item.title} />
           ))}
         </Box>
+        
+        {/* Botão de logout do sistema */}
+        <Button color="secondary" variant="outlined" size="medium" sx={{ m: 1 }} onClick={logout}>
+          Sair
+        </Button>
+        
         <Divider sx={{ borderColor: "neutral.900" }} />
       </Box>
     </>

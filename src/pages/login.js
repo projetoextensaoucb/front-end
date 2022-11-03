@@ -72,7 +72,7 @@ const Login = () => {
       <Box sx={{alignSelf: 'center', my: 5}}>
             <LogoPrincipal></LogoPrincipal>
       </Box>
-      
+
       <Box
         component="main"
         sx={{
