@@ -4,20 +4,31 @@ import axios from "axios";
 import { getUserSession, setUserSession } from "src/configs/userSession";
 import { BASE_API } from "src/configs/appconfigs";
 import { DashboardLayout } from "../components/dashboard-layout";
-import { ProductListToolbar } from "../components/project/project-list-toolbar";
-import { CardProject } from "../components/cardProject/card-project";
-import { ProjectCard } from "../components/project/project-card";
+import { ProductListToolbar } from "../components/institution/instinution-list-toolbar";
+import { CardInstitution } from "../components/cardInstitution/card-institution";
+import { InstitutionCard } from "../components/institution/institution-card";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Container, Grid, Pagination, CircularProgress, Dialog, AppBar, Toolbar, IconButton, Slide } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Pagination,
+  CircularProgress,
+  Dialog,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Slide,
+} from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function Products() {
-  const [projects, setProjects] = useState([]);
-  const [project, setProject] = useState([]);
+  const [institutions, setInstitutions] = useState([]);
+  const [institution, setProject] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = React.useState({});
   const [loading, setLoading] = useState(false);
@@ -35,17 +46,18 @@ export default function Products() {
 
     axios
       .get(`${BASE_API}/project/all`, {
+        // Editar para institutions/all
         headers: {
           "x-access-token": user.accessToken,
         },
       })
       .then((response) => {
-        setProjects(response.data.projects);
+        setInstitutions(response.data.projects); // Editar depois para institutions
         setLoading(false);
       })
       .catch((error) => {
-        confirm(error)
-        router.push('/')
+        confirm(error);
+        router.push("/");
       });
   }, []);
 
@@ -57,7 +69,7 @@ export default function Products() {
     setOpen(false);
   };
   const childToParent = (childdata) => {
-    projects.find((el) => {
+    institutions.find((el) => {
       if (el.id === childdata) {
         setProject(el);
       }
@@ -87,7 +99,7 @@ export default function Products() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <CardProject project={project} />
+        <CardInstitution institution={institution} />
       </Dialog>
       <Box
         component="main"
@@ -110,9 +122,9 @@ export default function Products() {
             <ProductListToolbar userAccess={user} />
             <Box sx={{ pt: 3 }}>
               <Grid container spacing={3}>
-                {projects.map((project) => (
-                  <Grid item key={project.id} lg={4} md={6} xs={12}>
-                    <ProjectCard project={project} childToParent={childToParent} />
+                {institutions.map((institution) => (
+                  <Grid item key={institution.id} lg={4} md={6} xs={12}>
+                    <InstitutionCard institution={institution} childToParent={childToParent} />
                   </Grid>
                 ))}
               </Grid>

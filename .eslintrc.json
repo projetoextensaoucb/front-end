@@ -4,10 +4,15 @@
     "@next/next/no-img-element": "off",
     "jsx-a11y/alt-text": "off",
     "react/display-name": "off",
-    "react/jsx-max-props-per-line": [
-      1,
+    "no-undef-init": 1,
+    "no-trailing-spaces": 0,
+    "no-unused-vars": 0,
+    "no-param-reassign": 0,
+    "space-before-function-paren": [
+      "error",
       {
-        "maximum": 1
+        "anonymous": "always",
+        "named": "always",
       }
     ]
   }
