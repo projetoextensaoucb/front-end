@@ -42,7 +42,7 @@ export const CardInstitution = ({ institution }) => {
       const userSession = getUserSession();
       const validate = userSession.roles.find((el) => el === "admin");
       if (validate) {
-        setIsAdmin(true)
+        setIsAdmin(true);
       }
       // Editar para institutions depois
       if (userSession.inscribedProjects) {
@@ -101,26 +101,23 @@ export const CardInstitution = ({ institution }) => {
               pb: 3,
             }}
           >
-            <Avatar alt="project"
-src={project.banner}
-variant="square"
-sx={{
-              height: 100,
-              mb: 2,
-              width: 100
-            }} />
+            <Avatar
+              alt="project"
+              src={project.banner}
+              variant="square"
+              sx={{
+                height: 100,
+                mb: 2,
+                width: 100,
+              }}
+            />
           </Box>
 
           {/* // Typography para ajustes do Titulo */}
-          <Typography align="center"
-color="textPrimary"
-gutterBottom
-variant="h5">
+          <Typography align="center" color="textPrimary" gutterBottom variant="h5">
             {project.title}
           </Typography>
-          <Typography align="center"
-color="textPrimary"
-variant="body1">
+          <Typography align="center" color="textPrimary" variant="body1">
             {/* {project.description} */}
 
             <Box
@@ -130,8 +127,7 @@ variant="body1">
                 pb: 3,
               }}
             >
-              <Typography description="Coordenador"
-variant="h5">
+              <Typography description="Coordenador" variant="h5">
                 {project.name}
               </Typography>
             </Box>
@@ -147,9 +143,8 @@ variant="h5">
             >
               <Typography variant="subtitle1">
                 Resumo:
-              <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador"
-variant="body2">
+                <Box sx={{ pb: 1 }} />
+                <Typography description="Coordenador" variant="body2">
                   {project.summary}
                 </Typography>
               </Typography>
@@ -164,9 +159,8 @@ variant="body2">
             >
               <Typography variant="subtitle1">
                 Informações Relevantes:
-              <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador"
-variant="body2">
+                <Box sx={{ pb: 1 }} />
+                <Typography description="Coordenador" variant="body2">
                   {project.description}
                   <Link href="https://ucb.catolica.edu.br/portal/wp-content/uploads/2022/03/EDITAL-UCB-016.2022-PROGRAMA-SER1-2022-REPUBLICACAO.pdf">
                     {" edital aqui."}
@@ -184,9 +178,8 @@ variant="body2">
             >
               <Typography variant="subtitle1">
                 Data de inicio:
-              <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador"
-variant="body2">
+                <Box sx={{ pb: 1 }} />
+                <Typography description="Coordenador" variant="body2">
                   {finalStartDate}
                 </Typography>
               </Typography>
@@ -201,9 +194,8 @@ variant="body2">
             >
               <Typography variant="subtitle1">
                 Data de Encerramento:
-              <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador"
-variant="body2">
+                <Box sx={{ pb: 1 }} />
+                <Typography description="Coordenador" variant="body2">
                   {finalEndDate}
                 </Typography>
               </Typography>
@@ -218,9 +210,8 @@ variant="body2">
             >
               <Typography variant="subtitle1">
                 Contatos:
-              <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador"
-variant="body2">
+                <Box sx={{ pb: 1 }} />
+                <Typography description="Coordenador" variant="body2">
                   Coordenador: José Ivaldo Araújo de Lucena
                 </Typography>
                 <Typography variant="body2">
@@ -237,9 +228,8 @@ variant="body2">
             >
               <Typography variant="subtitle1">
                 Localização:
-              <Box sx={{ pb: 1 }} />
-                <Typography description="Coordenador"
-variant="body2">
+                <Box sx={{ pb: 1 }} />
+                <Typography description="Coordenador" variant="body2">
                   {project.address} - {project.city}
                 </Typography>
               </Typography>
@@ -262,21 +252,15 @@ variant="body2">
         >
           {isAdmin && (
             <>
-              <Button color="primary"
-hidden={isSubscriber}
-variant="contained">
+              <Button color="primary" hidden={isSubscriber} variant="contained">
                 Ocultar
               </Button>
 
-              <Button color="primary"
-hidden={isSubscriber}
-variant="contained">
+              <Button color="primary" hidden={isSubscriber} variant="contained">
                 Excluir
               </Button>
               <NextLink href={"/editProject"}>
-                <Button color="primary"
-hidden={isSubscriber}
-variant="contained">
+                <Button color="primary" hidden={isSubscriber} variant="contained">
                   Editar
                 </Button>
               </NextLink>
