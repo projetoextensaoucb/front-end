@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -8,74 +8,45 @@ import {
   Divider,
   Grid,
   TextField,
-  Typography
-} from '@mui/material';
+} from "@mui/material";
 
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
-
-export const AccountProfileDetails = (props) => {
+export const InstitutionDetails = (props) => {
   const [values, setValues] = useState({
-    firstName: 'Projeto Extensão - UCB',
-    lastName: '50',
-    email: 'extensão@ucb.br',
-    phone: '',
+    firstName: "Instituição - UCB",
+    lastName: "50",
+    email: "extensão@ucb.br",
+    phone: "",
   });
 
   const handleChange = (event) => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      {...props}
-    >
+    <form autoComplete="off" noValidate {...props}>
       <Card>
         <CardHeader
-          subheader="Para realizar a edição nas informações do projeto basta inserir os novos dados e salvar os detalhes."
-          title="Informações do Projeto"
+          subheader="Para realizar a edição nas informações da Instituição basta inserir os novos dados e salvar os detalhes."
+          title="Informações da Instituição"
         />
-        <Divider/>
+        <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                // helperText="Please specify the first name"
-                label="Nome do Projeto"
+                label="Nome da instituição"
                 name="firstName"
                 onChange={handleChange}
                 required
                 value={values.firstName}
                 variant="outlined"
               />
-              
-              {'ㅤ'}
-
+            </Grid>
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Quantia de vagas disponível"
@@ -86,41 +57,7 @@ export const AccountProfileDetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            {/* <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Last name"
-                name="lastName"
-                onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
-              />
-            </Grid> */}
-            {/* <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Endereço de E-mail"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
-              />
-            </Grid> */}
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="E-mail para contato"
@@ -131,11 +68,7 @@ export const AccountProfileDetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Telefone para contato"
@@ -148,18 +81,15 @@ export const AccountProfileDetails = (props) => {
             </Grid>
           </Grid>
         </CardContent>
-        <Divider/>
+        <Divider />
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
           }}
         >
-          <Button
-            color="primary"
-            variant="contained"
-          >
+          <Button color="primary" variant="contained">
             Salvar detalhes
           </Button>
         </Box>
