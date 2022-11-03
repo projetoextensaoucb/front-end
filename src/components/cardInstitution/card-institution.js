@@ -1,18 +1,38 @@
-import PropTypes from 'prop-types';
-import { Avatar, Box, Card, CardContent, Divider, Grid, Typography, Button, Link } from '@mui/material';
-import { Clock as ClockIcon } from '../../icons/clock';
-import { Download as DownloadIcon } from '../../icons/download';
-import NextLink from 'next/link';
-import { getUserSession, setUserSession } from 'src/configs/userSession';
-import { BASE_API } from 'src/configs/appconfigs';
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import PropTypes from "prop-types";
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  Typography,
+  Button,
+  Link,
+} from "@mui/material";
+import { Clock as ClockIcon } from "../../icons/clock";
+import { Download as DownloadIcon } from "../../icons/download";
+import NextLink from "next/link";
+import { getUserSession, setUserSession } from "src/configs/userSession";
+import { BASE_API } from "src/configs/appconfigs";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-export const CardProject = ({ project }) => {
-  const formmatedStartDate = new Date(project.startDate)
-  const formmatedEndDate = new Date(project.endDate)
-  var finalStartDate = formmatedStartDate.getDate() + '/' + (formmatedStartDate.getMonth() + 1) + '/' + formmatedStartDate.getFullYear()
-  var finalEndDate = formmatedEndDate.getDate() + '/' + (formmatedEndDate.getMonth() + 1) + '/' + formmatedEndDate.getFullYear()
+export const CardInstitution = ({ institution }) => {
+  const formmatedStartDate = new Date(institution.startDate);
+  const formmatedEndDate = new Date(institution.endDate);
+  var finalStartDate =
+    formmatedStartDate.getDate() +
+    "/" +
+    (formmatedStartDate.getMonth() + 1) +
+    "/" +
+    formmatedStartDate.getFullYear();
+  var finalEndDate =
+    formmatedEndDate.getDate() +
+    "/" +
+    (formmatedEndDate.getMonth() + 1) +
+    "/" +
+    formmatedEndDate.getFullYear();
 
   const [isSubscriber, setIsSubscriber] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -56,12 +76,11 @@ export const CardProject = ({ project }) => {
       })
       .catch((error) => {
         if (error.response) {
-          alert(`${error.response.data.message}`)
-          console.log(error.response.data)
+          alert(`${error.response.data.message}`);
+          console.log(error.response.data);
           window.location.reload();
         }
-      })
-
+      });
   };
   return (
     <>
@@ -203,10 +222,10 @@ variant="body2">
                 <Typography description="Coordenador"
 variant="body2">
                   Coordenador: José Ivaldo Araújo de Lucena
-              </Typography>
+                </Typography>
                 <Typography variant="body2">
                   Contatos: projetosermais@ucb.br / (61) 3356-9032
-              </Typography>
+                </Typography>
               </Typography>
             </Box>
             <Box
@@ -225,7 +244,6 @@ variant="body2">
                 </Typography>
               </Typography>
             </Box>
-
           </Typography>
         </CardContent>
 
@@ -271,9 +289,9 @@ variant="contained">
             variant="contained"
           >
             Inscrever-se
-                </Button>
+          </Button>
         </Typography>
       </Card>
     </>
-  )
-}
+  );
+};
