@@ -24,9 +24,9 @@ export const ProductListToolbar = ({ userAccess, searchInstitutionName }) => (
     >
       <Typography variant="h4">Instituições</Typography>
       {userAccess && (
-        <Box>
+        <Box sx={{ mt: 3 }}>
           <NextLink href="/registerInstitution" passHref>
-            <Button color="primary" variant="contained" sx={{ m: 1 }}>
+            <Button color="primary" variant="contained">
               Adicionar uma nova Instituição
             </Button>
           </NextLink>

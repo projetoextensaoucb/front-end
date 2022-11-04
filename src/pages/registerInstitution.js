@@ -12,7 +12,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Box, Button, Container, Avatar, TextField, Typography, Grid } from "@mui/material";
+import { Box, Button, Container, Avatar, TextField, Typography, Grid, Card, CardContent } from "@mui/material";
 export default function registerInstitution() {
   const router = useRouter();
   const [startDate, setStartDate] = useState(Date());
@@ -129,7 +129,16 @@ export default function registerInstitution() {
               Voltar
             </Button>
           </NextLink>
-          <form onSubmit={formik.handleSubmit}>
+
+          <Card
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+            }}
+          >
+            <CardContent>
+            <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography color="textPrimary" variant="h4">
                 Crie um novo projeto de extensão
@@ -306,6 +315,8 @@ export default function registerInstitution() {
               </Button>
             </Box>
           </form>
+            </CardContent>
+          </Card>
         </Container>
       </Box>
     </>

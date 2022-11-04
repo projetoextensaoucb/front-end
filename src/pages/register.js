@@ -24,6 +24,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState, useEffect } from 'react'
 import { BASE_API } from 'src/configs/appconfigs';
 import { getUserSession } from 'src/configs/userSession';
+import { LogoPrincipal } from 'src/components/logoPrincipal';
 
 const Register = () => {
   const [course, setCourse] = useState("");
@@ -163,6 +164,11 @@ useEffect(() => {
           Cadastro
         </title>
       </Head>
+
+      <Box sx={{alignSelf: 'center', my: 5}}>
+        <LogoPrincipal></LogoPrincipal>
+      </Box>
+
       <Box
         component="main"
         sx={{

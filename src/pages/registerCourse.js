@@ -8,8 +8,9 @@ import Head from "next/head";
 import NextLink from 'next/link';
 import { useRouter } from "next/router";
 import { useFormik } from 'formik';
-import { Box, Button, Container, TextField, Typography, LinearProgress } from '@mui/material';
+import { Box, Button, Container, TextField, Card, LinearProgress, CardHeader, Divider, CardContent, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 export default function RegisterCourse() {
     const [loading, setLoading] = useState(false);
     const router = useRouter()
@@ -72,9 +73,11 @@ export default function RegisterCourse() {
     
   return (
     <>
+
       <Head>
         <title>Cadastro de curso | Extensão - UCB</title>
       </Head>
+
       <Box
         component="main"
         sx={{
@@ -83,6 +86,7 @@ export default function RegisterCourse() {
         }}
       >
         <Container maxWidth="sm">
+
           <NextLink
             href="/settings"
             passHref
@@ -94,59 +98,72 @@ export default function RegisterCourse() {
               Voltar
             </Button>
           </NextLink>
-          <form onSubmit={formik.handleSubmit}>
-            <Box sx={{ my: 3 }}>
-              <Typography
-                color="textPrimary"
-                variant="h4"
-              >
-                Crie um novo curso
-              </Typography>
-              <Typography
-                color="textSecondary"
-                gutterBottom
-                variant="body2"
-              >
-                Forneça as informações abaixo para o cadastro do curso.
-              </Typography>
-            </Box>
 
-           {/* Box nome do curso */}
-            <Box>
-              <TextField
-                error={Boolean(formik.touched.name && formik.errors.name)}
-                fullWidth
-                helperText={formik.touched.name && formik.errors.name}
-                label="Nome do Curso"
-                margin="normal"
-                name="name"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.name}
-                variant="outlined"
-              />
-            </Box>
+          <Card
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+            }}
+          >
 
-            {
-              loading &&
-              <>
-                <LinearProgress />
-              </>
-            }
+            <CardContent>
+              <form onSubmit={formik.handleSubmit}>
 
-            <Box sx={{ py: 2 }}>
-              <Button
-                color="primary"
-                disabled={formik.isSubmitting}
-                fullWidth
-                size="large"
-                type="submit"
-                variant="contained"
-              >
-                Criar curso
-              </Button>
-            </Box>
-          </form>
+                <Box sx={{ my: 3 }}>
+                  <Typography
+                    color="textPrimary"
+                    variant="h4"
+                  >
+                    Crie um novo curso
+                  </Typography>
+                  <Typography
+                    color="textSecondary"
+                    gutterBottom
+                    variant="body2"
+                  >
+                    Forneça as informações abaixo para o cadastro do curso.
+                  </Typography>
+                </Box>
+
+                {/* Box nome do curso */}
+                <Box>
+                  <TextField
+                    error={Boolean(formik.touched.name && formik.errors.name)}
+                    fullWidth
+                    helperText={formik.touched.name && formik.errors.name}
+                    label="Nome do Curso"
+                    margin="normal"
+                    name="name"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                    variant="outlined"
+                  />
+                </Box>
+
+                {
+                  loading &&
+                  <>
+                    <LinearProgress />
+                  </>
+                }
+
+                <Box sx={{ py: 2 }}>
+                  <Button
+                    color="primary"
+                    disabled={formik.isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                  >
+                    Criar curso
+                  </Button>
+                </Box>
+              </form>
+            </CardContent>
+          </Card>
         </Container>
       </Box>
     </>
