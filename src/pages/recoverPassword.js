@@ -8,7 +8,7 @@ import { getUserSession } from 'src/configs/userSession';
 import { BASE_API } from 'src/configs/appconfigs';
 import { LogoPrincipal } from 'src/components/logoPrincipal';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Box, Button, Container, TextField, Typography, LinearProgress } from '@mui/material';
+import { Box, Button, Container, TextField, Typography, LinearProgress, Card, CardContent } from '@mui/material';
 
 export default function RedefinePassword() {
   const [loading, setLoading] = useState(false);
@@ -77,56 +77,67 @@ export default function RedefinePassword() {
               Voltar
             </Button>
           </NextLink>
-          <form onSubmit={handleSubmit}>
-            <Box sx={{ my: 3 }}>
-              <Typography
-                color="textPrimary"
-                variant="h4"
-              >
-                Recuperar senha
-              </Typography>
-              <Typography
-                color="textSecondary"
-                gutterBottom
-                variant="body2"
-              >
-                Informe seu e-mail, e-mail universitário ou matrícula.
-              </Typography>
-            </Box>
-            
-            <Box>
-              <TextField
-                error={Boolean(formik.touched.name && formik.errors.name)}
-                fullWidth
-                helperText={formik.touched.name && formik.errors.name}
-                label="E-mail ou matrícula"
-                margin="normal"
-                name="name"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.name}
-                variant="outlined"
-              />
-            </Box>
-            {
-              loading &&
-              <>
-                <LinearProgress />
-              </>
-            }
-            <Box sx={{ py: 2 }}>
-              <Button
-                color="primary"
-                disabled={formik.isSubmitting}
-                fullWidth
-                size="large"
-                type="submit"
-                variant="contained"
-              >
-                Recuperar
-              </Button>
-            </Box>
-          </form>
+
+          <Card
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+            }}
+          >
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <Box sx={{ my: 3 }}>
+                  <Typography
+                    color="textPrimary"
+                    variant="h4"
+                  >
+                    Recuperar senha
+                  </Typography>
+                  <Typography
+                    color="textSecondary"
+                    gutterBottom
+                    variant="body2"
+                  >
+                    Informe seu e-mail, e-mail universitário ou matrícula.
+                  </Typography>
+                </Box>
+                
+                <Box>
+                  <TextField
+                    error={Boolean(formik.touched.name && formik.errors.name)}
+                    fullWidth
+                    helperText={formik.touched.name && formik.errors.name}
+                    label="E-mail ou matrícula"
+                    margin="normal"
+                    name="name"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                    variant="outlined"
+                  />
+                </Box>
+                {
+                  loading &&
+                  <>
+                    <LinearProgress />
+                  </>
+                }
+                <Box sx={{ py: 2 }}>
+                  <Button
+                    color="primary"
+                    disabled={formik.isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                  >
+                    Recuperar
+                  </Button>
+                </Box>
+              </form>
+            </CardContent>
+          </Card>
         </Container>
       </Box>
     </>

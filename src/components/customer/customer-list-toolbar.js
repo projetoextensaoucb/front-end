@@ -24,17 +24,17 @@ export const CustomerListToolbar = (props) => (
       }}
     >
     <Box sx={{ mb: 10 }}>
-      <NextLink
-        href="/settings"
-        passHref
-      >
-      <Button
-        component="a"
-        startIcon={<ArrowBackIcon fontSize="small" />}
-      >
-        Voltar
-      </Button>
-      </NextLink>
+          <NextLink
+            href="/settings"
+            passHref
+          >
+            <Button
+              component="a"
+              startIcon={<ArrowBackIcon fontSize="small" />}
+            >
+              Voltar
+            </Button>
+          </NextLink>
     </Box>
 
     <Typography
@@ -44,7 +44,7 @@ export const CustomerListToolbar = (props) => (
       Usuários
     </Typography>
     
-    <Box sx={{ m: 1 }}>       
+    <Box sx={{ mt: 3 }}>       
       <NextLink
         href="/register"
         passHref

@@ -3,7 +3,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Grid, Link, TextField, Typography, LinearProgress } from '@mui/material';
+import { Box, Button, Container, Grid, Link, TextField, Typography, LinearProgress, Card, CardHeader, CardContent, Divider } from '@mui/material';
 import axios from 'axios'
 import { getUserSession, setUserSession } from 'src/configs/userSession';
 import { BASE_API } from 'src/configs/appconfigs';
@@ -14,7 +14,6 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
 
-
   useEffect(() => {
     console.log(getUserSession())
     if(getUserSession()) {
@@ -23,6 +22,7 @@ const Login = () => {
   })
 
   const router = useRouter();
+  
   const formik = useFormik({
     initialValues: {
       login: '',
@@ -66,11 +66,11 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Login | Extensão UCB</title>
       </Head>
       
       <Box sx={{alignSelf: 'center', my: 5}}>
-            <LogoPrincipal></LogoPrincipal>
+        <LogoPrincipal></LogoPrincipal>
       </Box>
 
       <Box
@@ -83,91 +83,101 @@ const Login = () => {
         }}
       > 
         <Container maxWidth="sm">
-          <form onSubmit={formik.handleSubmit}>
-            <Box sx={{ my: 3 }}>
-              <Typography
-                color="textPrimary"
-                variant="h4"
-              >
-                Login
-              </Typography>
-              <Typography
-                color="textSecondary"
-                gutterBottom
-                variant="body2"
-              >
-                Utilize o seu e-mail, e-mail universitário ou matrícula.
-              </Typography>
-            </Box>
-            <Grid
-              container
-              spacing={3}
-            >
+
+        <Card
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+            }}
+        >
+          <CardContent>
+            <form onSubmit={formik.handleSubmit}>
+              <Box sx={{ my: 3 }}>
+                <Typography
+                  color="textPrimary"
+                  variant="h4"
+                >
+                  Login
+                </Typography>
+                <Typography
+                  color="textSecondary"
+                  gutterBottom
+                  variant="body2"
+                >
+                  Utilize o seu e-mail, e-mail universitário ou matrícula.
+                </Typography>
+              </Box>
+
               <Grid
-                item
-                xs={12}
-                md={6}
+                container
+                spacing={3}
               >
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                >
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                >
+                </Grid>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                md={6}
-              >
-              </Grid>
-            </Grid>
 
-            <TextField
-              error={Boolean(formik.touched.login && formik.errors.login)}
-              fullWidth
-              helperText={formik.touched.login && formik.errors.login}
-              label="Email ou Matrícula"
-              margin="normal"
-              name="login"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.login}
-              variant="outlined"
-            />
-
-            <TextField
-              error={Boolean(formik.touched.password && formik.errors.password)}
-              fullWidth
-              helperText={formik.touched.password && formik.errors.password}
-              label="Senha"
-              margin="normal"
-              name="password"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              type="password"
-              value={formik.values.password}
-              variant="outlined"
-            />
-
-            {
-              loading &&
-              <>
-                <LinearProgress />
-              </>
-            }
-
-            <Box sx={{ py: 2 }}>
-              <Button
-                color="primary"
-                disabled={formik.isSubmitting}
+              <TextField
+                error={Boolean(formik.touched.login && formik.errors.login)}
                 fullWidth
-                size="large"
-                type="submit"
-                variant="contained"
-              >
-               Entrar
-              </Button>
-            </Box>
+                helperText={formik.touched.login && formik.errors.login}
+                label="Email ou Matrícula"
+                margin="normal"
+                name="login"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.login}
+                variant="outlined"
+              />
 
-            <Box
-            textAlign={'right'}
-            >
-              <NextLink
+              <TextField
+                error={Boolean(formik.touched.password && formik.errors.password)}
+                fullWidth
+                helperText={formik.touched.password && formik.errors.password}
+                label="Senha"
+                margin="normal"
+                name="password"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                type="password"
+                value={formik.values.password}
+                variant="outlined"
+              />
+
+              {
+                loading &&
+                <>
+                  <LinearProgress />
+                </>
+              }
+
+              <Box sx={{ py: 2 }}>
+                <Button
+                  color="primary"
+                  disabled={formik.isSubmitting}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                >
+                Entrar
+                </Button>
+              </Box>
+
+              <Box
+              textAlign={'right'}
+              >
+                <NextLink
                   href="/recoverPassword"
                   passHref
                 >
@@ -179,11 +189,13 @@ const Login = () => {
                     Recuperar Senha
                   </Link>
                 </NextLink>
-            </Box>
-          </form>
-        </Container>
-      </Box>
-    </>
+              </Box>
+            </form>
+          </CardContent>
+        </Card>
+      </Container>
+    </Box>
+  </>
   );
 };
 

@@ -92,6 +92,7 @@ export default function Products() {
       <Head>
         <title>Projetos | Extensão - UCB</title>
       </Head>
+
       <Dialog
         fullWidth={true}
         maxWidth="xl"
@@ -100,6 +101,7 @@ export default function Products() {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
+    
         <AppBar sx={{ position: "relative" }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -107,8 +109,11 @@ export default function Products() {
             </IconButton>
           </Toolbar>
         </AppBar>
+
         <CardInstitution institution={institution} />
+
       </Dialog>
+
       <Box
         component="main"
         sx={{
@@ -137,6 +142,7 @@ export default function Products() {
                 ))}
               </Grid>
             </Box>
+            
             <Box
               sx={{
                 display: "flex",
