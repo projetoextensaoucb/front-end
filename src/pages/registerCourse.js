@@ -82,22 +82,10 @@ export default function RegisterCourse() {
         component="main"
         sx={{
           flexGrow: 1,
-          py: 8,
+          py: 8
         }}
       >
         <Container maxWidth="sm">
-
-          <NextLink
-            href="/settings"
-            passHref
-          >
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon fontSize="small" />}
-            >
-              Voltar
-            </Button>
-          </NextLink>
 
           <Card
             sx={{
@@ -108,6 +96,19 @@ export default function RegisterCourse() {
           >
 
             <CardContent>
+
+              <NextLink
+                href="/settings"
+                passHref
+              >
+                <Button
+                  component="a"
+                  startIcon={<ArrowBackIcon fontSize="small" />}
+                >
+                  Voltar
+                </Button>
+              </NextLink>
+
               <form onSubmit={formik.handleSubmit}>
 
                 <Box sx={{ my: 3 }}>

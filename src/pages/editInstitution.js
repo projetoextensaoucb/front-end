@@ -131,9 +131,8 @@ export default function registerInstitution() {
               Voltar
             </Button>
           </NextLink>
-                    
-          <InstitutionDetails />
 
+          <InstitutionDetails />
         </Container>
       </Box>
     </>

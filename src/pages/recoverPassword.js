@@ -52,13 +52,10 @@ export default function RedefinePassword() {
         </title>
       </Head>
 
-      <Box sx={{alignSelf: 'center', my: 5}}>
-            <LogoPrincipal></LogoPrincipal>
-      </Box>
-
       <Box
         component="main"
         sx={{
+          backgroundColor: '#323287',
           alignItems: 'center',
           display: 'flex',
           flexGrow: 1,
@@ -66,17 +63,17 @@ export default function RedefinePassword() {
         }}
       >
         <Container maxWidth="sm">
-          <NextLink
-            href="/login"
-            passHref
-          >
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon fontSize="small" />}
-            >
-              Voltar
-            </Button>
-          </NextLink>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            my: 5
+          }}
+        >
+          <LogoPrincipal/>        
+        </Box>
+
 
           <Card
             sx={{
@@ -86,6 +83,19 @@ export default function RedefinePassword() {
             }}
           >
             <CardContent>
+
+              <NextLink
+                href="/login"
+                passHref
+              >
+                <Button 
+                  component="a"
+                  startIcon={<ArrowBackIcon fontSize="small"/>}
+                >
+                  Voltar
+                </Button>
+              </NextLink>
+              
               <form onSubmit={handleSubmit}>
                 <Box sx={{ my: 3 }}>
                   <Typography

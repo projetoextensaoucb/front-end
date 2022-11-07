@@ -43,7 +43,7 @@ const Customers = () => {
       <Head>
         <title>Usuarios | Extensão - UCB</title>
       </Head>
-      <Box
+      <Box 
         component="main"
         sx={{
           flexGrow: 1,

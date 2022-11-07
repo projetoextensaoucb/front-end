@@ -35,7 +35,7 @@ const items = [
   {
     href: "/settings",
     icon: <CogIcon fontSize="small" />,
-    title: "Definições",
+    title: "Administrador",
   }
 ];
 
