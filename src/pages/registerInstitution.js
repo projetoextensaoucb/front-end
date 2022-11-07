@@ -48,7 +48,7 @@ export default function registerInstitution() {
       city: "",
     },
     validationSchema: Yup.object({
-      name: Yup.string().max(255).required("É necessário um nome para o projeto."),
+      name: Yup.string().max(255).required("É necessário um nome para a Instituição."),
 
       address: Yup.string().max(255),
 
@@ -78,25 +78,25 @@ export default function registerInstitution() {
         formmatedEndDate.getDate();
       console.log(`DATAS SELECIONADAS ${finalStartDate}`);
       console.log(`TOKEN: ${userSession.accessToken}`);
-      const projectFormData = new FormData();
-      projectFormData.append("name", formik.values.name);
-      projectFormData.append("address", formik.values.address);
-      projectFormData.append("vacancies", formik.values.vacancies);
-      projectFormData.append("startDate", finalStartDate);
-      projectFormData.append("endDate", finalEndDate);
-      projectFormData.append("summary", formik.values.summary);
-      projectFormData.append("description", formik.values.description);
-      projectFormData.append("city", formik.values.city);
-      projectFormData.append("image", selectedFile);
+      const institutionFormData = new FormData();
+      institutionFormData.append("name", formik.values.name);
+      institutionFormData.append("address", formik.values.address);
+      institutionFormData.append("vacancies", formik.values.vacancies);
+      institutionFormData.append("startDate", finalStartDate);
+      institutionFormData.append("endDate", finalEndDate);
+      institutionFormData.append("summary", formik.values.summary);
+      institutionFormData.append("description", formik.values.description);
+      institutionFormData.append("city", formik.values.city);
+      institutionFormData.append("image", selectedFile);
       axios
-        .post(`${BASE_API}/project/create`, projectFormData, {
+        .post(`${BASE_API}/institution/create`, institutionFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "x-access-token": userSession.accessToken,
           },
         })
         .then((response) => {
-          alert("Projeto Criado!");
+          alert("instituição Criada!");
           router.push("/institutions");
         })
         .catch((error) => {
@@ -141,14 +141,14 @@ export default function registerInstitution() {
             <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography color="textPrimary" variant="h4">
-                Crie um novo projeto de extensão
+                Crie um novo instituição de extensão
               </Typography>
               <Typography color="textSecondary" gutterBottom variant="body2">
-                Forneça as informações abaixo para criação do projeto.
+                Forneça as informações abaixo para criação da instituição.
               </Typography>
             </Box>
 
-            {/* Box logo do projeto */}
+            {/* Box logo da instituição */}
             <Box
               sx={{
                 display: "flex",
@@ -184,13 +184,13 @@ export default function registerInstitution() {
               </Button>
             </Box>
 
-            {/* Box nome do projeto */}
+            {/* Box nome da instituição */}
             <Box sx={{ paddingTop: 2 }}>
               <TextField
                 error={Boolean(formik.touched.name && formik.errors.name)}
                 fullWidth
                 helperText={formik.touched.name && formik.errors.name}
-                label="Nome do projeto"
+                label="Nome da instituição"
                 margin="normal"
                 name="name"
                 onBlur={formik.handleBlur}
@@ -236,13 +236,13 @@ export default function registerInstitution() {
               />
             </Box>
 
-            {/* Box propostas do projeto */}
+            {/* Box propostas da instituição */}
             <Box>
               <TextField
                 error={Boolean(formik.touched.description && formik.errors.description)}
                 fullWidth
                 helperText={formik.touched.description && formik.errors.description}
-                label="Proposta do projeto, responsáveis, atividades, história da entidade, contato..."
+                label="Proposta da instituição, responsáveis, atividades, história da entidade, contato..."
                 margin="normal"
                 name="description"
                 multiline
@@ -287,7 +287,7 @@ export default function registerInstitution() {
               </Grid>
             </Box>
 
-            {/* Box quantidades de vagas do projeto */}
+            {/* Box quantidades de vagas da instituição */}
             <Box sx={{ py: 2 }}>
               <TextField
                 helperText={formik.touched.vacancies && formik.errors.vacancies}
