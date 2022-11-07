@@ -9,6 +9,7 @@ import { getUserSession, setUserSession } from 'src/configs/userSession';
 import { BASE_API } from 'src/configs/appconfigs';
 import  {useState, useEffect} from 'react'
 import { LogoPrincipal } from 'src/components/logoPrincipal';
+import { ClassNames } from '@emotion/react';
 
 const Login = () => {
 
@@ -68,21 +69,28 @@ const Login = () => {
       <Head>
         <title>Login | Extensão UCB</title>
       </Head>
-      
-      <Box sx={{alignSelf: 'center', my: 5}}>
-        <LogoPrincipal></LogoPrincipal>
-      </Box>
 
-      <Box
+      <Box 
         component="main"
         sx={{
+          backgroundColor: '#323287',
           alignItems: 'center',
           display: 'flex',
           flexGrow: 1,
           minHeight: '100%'
         }}
-      > 
+      >         
         <Container maxWidth="sm">
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            my: 5
+          }}
+        >
+          <LogoPrincipal/>        
+        </Box>
 
         <Card
             sx={{

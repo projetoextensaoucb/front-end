@@ -124,12 +124,7 @@ export default function registerInstitution() {
         }}
       >
         <Container maxWidth="sm">
-          <NextLink href="/institutions" passHref>
-            <Button component="a" startIcon={<ArrowBackIcon fontSize="small" />}>
-              Voltar
-            </Button>
-          </NextLink>
-
+          
           <Card
             sx={{
               display: "flex",
@@ -138,183 +133,190 @@ export default function registerInstitution() {
             }}
           >
             <CardContent>
-            <form onSubmit={formik.handleSubmit}>
-            <Box sx={{ my: 3 }}>
-              <Typography color="textPrimary" variant="h4">
-                Crie um novo instituição de extensão
-              </Typography>
-              <Typography color="textSecondary" gutterBottom variant="body2">
-                Forneça as informações abaixo para criação da instituição.
-              </Typography>
-            </Box>
 
-            {/* Box logo da instituição */}
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Avatar
-                src={
-                  selectedFile
-                    ? URL.createObjectURL(selectedFile)
-                    : "https://via.placeholder.com/400.png"
-                }
-                sx={{
-                  height: 120,
-                  mb: 2,
-                  width: 120,
-                }}
-              />
-            </Box>
+              <NextLink href="/settings" passHref>
+                <Button component="a" startIcon={<ArrowBackIcon fontSize="small" />}>
+                  Voltar
+                </Button>
+              </NextLink>
 
-            {/* Box adicionar logo */}
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Button variant="contained" onChange={handleFileSelect} component="label">
-                Adicionar Logo
-                <input hidden accept="image/*" multiple type="file" />
-              </Button>
-            </Box>
+              <form onSubmit={formik.handleSubmit}>
+                <Box sx={{ my: 3 }}>
+                  <Typography color="textPrimary" variant="h4">
+                    Crie uma nova instituição de extensão
+                  </Typography>
+                  <Typography color="textSecondary" gutterBottom variant="body2">
+                    Forneça as informações abaixo para criação da instituição.
+                  </Typography>
+                </Box>
 
-            {/* Box nome da instituição */}
-            <Box sx={{ paddingTop: 2 }}>
-              <TextField
-                error={Boolean(formik.touched.name && formik.errors.name)}
-                fullWidth
-                helperText={formik.touched.name && formik.errors.name}
-                label="Nome da instituição"
-                margin="normal"
-                name="name"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.name}
-                variant="outlined"
-              />
-            </Box>
+                {/* Box logo da instituição */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Avatar
+                    src={
+                      selectedFile
+                        ? URL.createObjectURL(selectedFile)
+                        : "https://via.placeholder.com/400.png"
+                    }
+                    sx={{
+                      height: 120,
+                      mb: 2,
+                      width: 120,
+                    }}
+                  />
+                </Box>
 
-            {/* Box endereço */}
-            <Box>
-              <TextField
-                error={Boolean(formik.touched.address && formik.errors.address)}
-                fullWidth
-                helperText={formik.touched.address && formik.errors.address}
-                label="Endereço"
-                margin="normal"
-                name="address"
-                multiline
-                maxRows={4}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.address}
-                variant="outlined"
-              />
-            </Box>
+                {/* Box adicionar logo */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button variant="contained" onChange={handleFileSelect} component="label">
+                    Adicionar Logo
+                    <input hidden accept="image/*" multiple type="file" />
+                  </Button>
+                </Box>
 
-            {/* Box breve resumo */}
-            <Box>
-              <TextField
-                error={Boolean(formik.touched.summary && formik.errors.summary)}
-                fullWidth
-                helperText={formik.touched.summary && formik.errors.summary}
-                label="Um breve resumo"
-                margin="normal"
-                name="summary"
-                multiline
-                maxRows={10}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.summary}
-                variant="outlined"
-              />
-            </Box>
+                {/* Box nome da instituição */}
+                <Box sx={{ paddingTop: 2 }}>
+                  <TextField
+                    error={Boolean(formik.touched.name && formik.errors.name)}
+                    fullWidth
+                    helperText={formik.touched.name && formik.errors.name}
+                    label="Nome da instituição"
+                    margin="normal"
+                    name="name"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                    variant="outlined"
+                  />
+                </Box>
 
-            {/* Box propostas da instituição */}
-            <Box>
-              <TextField
-                error={Boolean(formik.touched.description && formik.errors.description)}
-                fullWidth
-                helperText={formik.touched.description && formik.errors.description}
-                label="Proposta da instituição, responsáveis, atividades, história da entidade, contato..."
-                margin="normal"
-                name="description"
-                multiline
-                maxRows={10}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.description}
-                variant="outlined"
-              />
-            </Box>
+                {/* Box endereço */}
+                <Box>
+                  <TextField
+                    error={Boolean(formik.touched.address && formik.errors.address)}
+                    fullWidth
+                    helperText={formik.touched.address && formik.errors.address}
+                    label="Endereço"
+                    margin="normal"
+                    name="address"
+                    multiline
+                    maxRows={4}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.address}
+                    variant="outlined"
+                  />
+                </Box>
 
-            <Box sx={{ width: "100%", py: 2 }}>
-              <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={6}>
-                  {/* Box data de início */}
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                      label="Data de início"
-                      value={startDate}
-                      onChange={(newValue) => {
-                        setStartDate(newValue);
-                      }}
-                      format="YYYY-MM-DD"
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </LocalizationProvider>
-                </Grid>
-                <Grid item xs={6}>
-                  {/* Box data de encerramento */}
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                      label="Data de encerramento"
-                      value={endDate}
-                      onChange={(newValue) => {
-                        setEndDate(newValue);
-                      }}
-                      format="YYYY-MM-DD"
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </LocalizationProvider>
-                </Grid>
-              </Grid>
-            </Box>
+                {/* Box breve resumo */}
+                <Box>
+                  <TextField
+                    error={Boolean(formik.touched.summary && formik.errors.summary)}
+                    fullWidth
+                    helperText={formik.touched.summary && formik.errors.summary}
+                    label="Um breve resumo"
+                    margin="normal"
+                    name="summary"
+                    multiline
+                    maxRows={10}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.summary}
+                    variant="outlined"
+                  />
+                </Box>
 
-            {/* Box quantidades de vagas da instituição */}
-            <Box sx={{ py: 2 }}>
-              <TextField
-                helperText={formik.touched.vacancies && formik.errors.vacancies}
-                error={Boolean(formik.touched.vacancies && formik.errors.vacancies)}
-                type="number"
-                InputProps={{ inputProps: { min: 0 } }}
-                onChange={formik.handleChange}
-                name="vacancies"
-                value={formik.values.vacancies}
-                label="Quantidade de vagas"
-              />
-            </Box>
+                {/* Box propostas da instituição */}
+                <Box>
+                  <TextField
+                    error={Boolean(formik.touched.description && formik.errors.description)}
+                    fullWidth
+                    helperText={formik.touched.description && formik.errors.description}
+                    label="Proposta da instituição, responsáveis, atividades, história da entidade, contato..."
+                    margin="normal"
+                    name="description"
+                    multiline
+                    maxRows={10}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.description}
+                    variant="outlined"
+                  />
+                </Box>
 
-            {/* Box cadastrar */}
-            <Box sx={{ py: 2 }}>
-              <Button
-                color="primary"
-                disabled={formik.isSubmitting}
-                fullWidth
-                size="large"
-                type="submit"
-                variant="contained"
-              >
-                Cadastrar
-              </Button>
-            </Box>
-          </form>
+                <Box sx={{ width: "100%", py: 2 }}>
+                  <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                    <Grid item xs={6}>
+                      {/* Box data de início */}
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                          label="Data de início"
+                          value={startDate}
+                          onChange={(newValue) => {
+                            setStartDate(newValue);
+                          }}
+                          format="YYYY-MM-DD"
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </LocalizationProvider>
+                    </Grid>
+                    <Grid item xs={6}>
+                      {/* Box data de encerramento */}
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                          label="Data de encerramento"
+                          value={endDate}
+                          onChange={(newValue) => {
+                            setEndDate(newValue);
+                          }}
+                          format="YYYY-MM-DD"
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </LocalizationProvider>
+                    </Grid>
+                  </Grid>
+                </Box>
+
+                {/* Box quantidades de vagas da instituição */}
+                <Box sx={{ py: 2 }}>
+                  <TextField
+                    helperText={formik.touched.vacancies && formik.errors.vacancies}
+                    error={Boolean(formik.touched.vacancies && formik.errors.vacancies)}
+                    type="number"
+                    InputProps={{ inputProps: { min: 0 } }}
+                    onChange={formik.handleChange}
+                    name="vacancies"
+                    value={formik.values.vacancies}
+                    label="Quantidade de vagas"
+                  />
+                </Box>
+
+                {/* Box cadastrar */}
+                <Box sx={{ py: 2 }}>
+                  <Button
+                    color="primary"
+                    disabled={formik.isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                  >
+                    Cadastrar
+                  </Button>
+                </Box>
+              </form>
             </CardContent>
           </Card>
         </Container>

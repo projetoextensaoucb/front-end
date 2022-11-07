@@ -134,12 +134,13 @@ export function CustomerListResults({ customers }) {
               <TableRow>
                 <TableCell>ID</TableCell>
                 <TableCell>Nome</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Matricula</TableCell>
+                <TableCell>E-mail</TableCell>
+                <TableCell>Matrícula</TableCell>
                 <TableCell>Telefone</TableCell>
                 <TableCell>Data de registro</TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
               {customers.slice(0, limit).map((customer) => (
                 <TableRow
@@ -151,8 +152,8 @@ export function CustomerListResults({ customers }) {
                   <TableCell>{customer.id}</TableCell>
                   <TableCell>{customer.name}</TableCell>
                   <TableCell>{customer.email}</TableCell>
-                  <TableCell>{customer.matriculation}</TableCell>
-                  <TableCell>{customer.telephone}</TableCell>
+                  <TableCell>{(customer.matriculation) == null ? '' : (customer.matriculation).toUpperCase()}</TableCell>
+                  <TableCell>{(customer.telephone)}</TableCell>
                   <TableCell>{customer.createdAt}</TableCell>
                 </TableRow>
               ))}

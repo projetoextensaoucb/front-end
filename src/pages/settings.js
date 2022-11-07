@@ -28,7 +28,7 @@ const Settings = () => {
   return (
     <>
       <Head>
-        <title>Configurações | Extensão - UCB</title>
+        <title>Administrador | Extensão - UCB</title>
       </Head>
       <Box
         component="main"
@@ -38,7 +38,7 @@ const Settings = () => {
         }}
       >
         <Typography sx={{ m: 3 }} variant="h4">
-          Configurações
+          Administrador
         </Typography>
 
         <Box
@@ -56,11 +56,29 @@ const Settings = () => {
             </NextLink>
           )}
 
-          <NextLink href="/registerCourse" passHref>
-            <Button variant="outlined" size="medium" startIcon={<AddIcon />} sx={{ ml: 1 }}>
-              Criar curso
-            </Button>
-          </NextLink>
+          {user && (
+            <NextLink href="/activities" passHref>
+              <Button variant="outlined" size="medium" startIcon={<AddIcon />} sx={{ ml: 1 }}>
+                Criar atividade
+              </Button>
+            </NextLink>
+          )}
+
+          {user && (
+            <NextLink href="/registerInstitution" passHref>
+              <Button variant="outlined" size="medium" startIcon={<AddIcon />} sx={{ ml: 1 }}>
+                Criar instituição
+              </Button>
+            </NextLink>
+          )}
+
+          {user && (
+            <NextLink href="/registerCourse" passHref>
+              <Button variant="outlined" size="medium" startIcon={<AddIcon />} sx={{ ml: 1 }}>
+                Criar curso
+              </Button>
+            </NextLink>
+          )}
         </Box>
       </Box>
     </>
