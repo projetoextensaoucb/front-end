@@ -1,12 +1,12 @@
+import axios from "axios";
+import { BASE_API } from "src/configs/appconfigs";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { getUserSession } from "src/configs/userSession";
 import { DashboardLayout } from "../components/dashboard-layout";
 import { CustomerListToolbar } from "../components/customer/customer-list-toolbar";
 import { CustomerListResults } from "../components/customer/customer-list-results";
-import axios from "axios";
-import { BASE_API } from "src/configs/appconfigs";
-import { getUserSession } from "src/configs/userSession";
-import Head from "next/head";
-import { useRouter } from "next/router";
 import { Box, Container, CircularProgress } from "@mui/material";
 
 const Customers = () => {

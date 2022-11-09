@@ -1,32 +1,15 @@
+import axios from 'axios'
+import * as Yup from 'yup';
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios'
-import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  FormHelperText,
-  Link,
-  TextField,
-  Typography,
-  Select,
-  FormControl,
-  CircularProgress,
-  Card,
-  CardContent
-} from '@mui/material';
-
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import { LogoPrincipal } from 'src/components/logoPrincipal';
+import { getUserSession } from 'src/configs/userSession';
 import { useState, useEffect } from 'react'
 import { BASE_API } from 'src/configs/appconfigs';
-import { getUserSession } from 'src/configs/userSession';
-import { LogoPrincipal } from 'src/components/logoPrincipal';
+import { Box, Button, Checkbox, Container, FormHelperText, Link, TextField, Typography, Select, FormControl, CircularProgress, Card, CardContent, MenuItem, InputLabel } from '@mui/material';
+import Voltar from "src/components/voltar";
 
 const Register = () => {
   const [course, setCourse] = useState("");
@@ -170,7 +153,7 @@ useEffect(() => {
       <Box
         component="main"
         sx={{
-          backgroundColor: '#323287',
+          backgroundColor: '#1F1F55',
           alignItems: 'center',
           display: 'flex',
           flexGrow: 1,
@@ -199,18 +182,7 @@ useEffect(() => {
 
             <CardContent>
 
-              <NextLink
-                href="/"
-                passHref
-                
-              >
-                <Button
-                  component="a"
-                  startIcon={<ArrowBackIcon fontSize="small" />}
-                >
-                  Voltar
-                </Button>
-              </NextLink>
+              <Voltar destino='/users'/>
 
               <form onSubmit={formik.handleSubmit}>
                 <Box sx={{ my: 3 }}>

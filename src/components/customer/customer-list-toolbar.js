@@ -1,16 +1,7 @@
 import NextLink from 'next/link';
 import { Search as SearchIcon } from '../../icons/search';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  TextField,
-  InputAdornment,
-  SvgIcon,
-  Typography
-} from '@mui/material';
+import { Box, Button, Card, CardContent, TextField, InputAdornment, SvgIcon, Typography } from '@mui/material';
+import Voltar from "src/components/voltar";
 
 export const CustomerListToolbar = (props) => (
   <Box {...props}>
@@ -24,17 +15,7 @@ export const CustomerListToolbar = (props) => (
       }}
     >
     <Box sx={{ mb: 10 }}>
-          <NextLink
-            href="/settings"
-            passHref
-          >
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon fontSize="small" />}
-            >
-              Voltar
-            </Button>
-          </NextLink>
+      <Voltar destino='/settings'/>
     </Box>
 
     <Typography
