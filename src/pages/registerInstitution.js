@@ -7,12 +7,11 @@ import { BASE_API } from "src/configs/appconfigs";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import Head from "next/head";
-import NextLink from "next/link";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, Button, Container, Avatar, TextField, Typography, Grid, Card, CardContent } from "@mui/material";
+import Voltar from "src/components/voltar";
 export default function registerInstitution() {
   const router = useRouter();
   const [startDate, setStartDate] = useState(Date());
@@ -134,11 +133,7 @@ export default function registerInstitution() {
           >
             <CardContent>
 
-              <NextLink href="/settings" passHref>
-                <Button component="a" startIcon={<ArrowBackIcon fontSize="small" />}>
-                  Voltar
-                </Button>
-              </NextLink>
+              <Voltar destino='/settings'/>
 
               <form onSubmit={formik.handleSubmit}>
                 <Box sx={{ my: 3 }}>

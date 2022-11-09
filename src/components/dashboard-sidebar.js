@@ -95,10 +95,11 @@ export const DashboardSidebar = (props) => {
         
         {/* Botão de logout do sistema */}
         <Button color="secondary" variant="outlined" size="medium" sx={{ m: 1 }} onClick={logout}>
+          <LogoutIcon fontSize="small" sx={{mr: 0.5}}></LogoutIcon>
           Sair
         </Button>
         
-        <Divider sx={{ borderColor: "neutral.900" }} />
+        <Divider sx={{ borderColor: "neutral.900" }}/>
       </Box>
     </>
   );

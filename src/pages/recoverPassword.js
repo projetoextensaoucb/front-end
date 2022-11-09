@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import * as Yup from 'yup';
 import Head from 'next/head';
-import NextLink from 'next/link';
 import { useFormik } from 'formik';
 import { getUserSession } from 'src/configs/userSession';
 import { BASE_API } from 'src/configs/appconfigs';
 import { LogoPrincipal } from 'src/components/logoPrincipal';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Box, Button, Container, TextField, Typography, LinearProgress, Card, CardContent } from '@mui/material';
+import Voltar from "src/components/voltar";
 
 export default function RedefinePassword() {
   const [loading, setLoading] = useState(false);
@@ -55,7 +54,7 @@ export default function RedefinePassword() {
       <Box
         component="main"
         sx={{
-          backgroundColor: '#323287',
+          backgroundColor: '#1F1F55',
           alignItems: 'center',
           display: 'flex',
           flexGrow: 1,
@@ -84,17 +83,7 @@ export default function RedefinePassword() {
           >
             <CardContent>
 
-              <NextLink
-                href="/login"
-                passHref
-              >
-                <Button 
-                  component="a"
-                  startIcon={<ArrowBackIcon fontSize="small"/>}
-                >
-                  Voltar
-                </Button>
-              </NextLink>
+              <Voltar destino='/login'/>
               
               <form onSubmit={handleSubmit}>
                 <Box sx={{ my: 3 }}>
