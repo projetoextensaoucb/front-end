@@ -14,6 +14,8 @@ export default function Dashboard() {
 
   const [session, setSession] = useState()
   const router = useRouter()
+
+  
   useEffect(() => {
     const verifySession = async () => {
       if(!getUserSession()) { 
