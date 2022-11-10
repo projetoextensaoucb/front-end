@@ -5,6 +5,30 @@ import Voltar from "src/components/voltar";
 
 export const CustomerListToolbar = (props) => (
   <Box {...props}>
+
+    <Box sx={{mb: 2}}>
+      <Typography variant="h4">Usuários</Typography>
+    </Box>
+        
+    <Box 
+      sx={{
+        display: "flex",
+        justifyContent: "flex-end"
+      }}
+    >
+      <NextLink
+        href="/registerUser"
+        passHref
+      >
+      <Button
+        color="primary"
+        variant="contained"
+      >
+        Cadastrar um novo Usuário
+        </Button>
+      </NextLink>
+    </Box>
+
     <Box
       sx={{
         alignItems: 'center',
@@ -14,31 +38,7 @@ export const CustomerListToolbar = (props) => (
         m: -1
       }}
     >
-    <Box sx={{ mb: 10 }}>
-      <Voltar destino='/settings'/>
-    </Box>
-
-    <Typography
-        sx={{ m: 1 }}
-        variant="h4"
-    >
-      Usuários
-    </Typography>
     
-    <Box sx={{ mt: 3 }}>       
-      <NextLink
-        href="/register"
-        passHref
-      >
-      <Button
-        color="primary"
-        variant="contained"
-      >
-        Cadastrar um novo Usuário
-      </Button>
-      </NextLink>
-    </Box>
-
     </Box>
     <Box sx={{ mt: 3 }}>
       <Card>

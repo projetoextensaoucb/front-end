@@ -57,7 +57,7 @@ const Settings = () => {
           )}
 
           {user && (
-            <NextLink href="/activities" passHref>
+            <NextLink href="/registerActivities" passHref>
               <Button variant="outlined" size="small" startIcon={<AddIcon />} sx={{ ml: 1 }}>
                 Criar atividade
               </Button>
