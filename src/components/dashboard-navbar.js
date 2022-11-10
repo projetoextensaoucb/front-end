@@ -10,45 +10,46 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   boxShadow: theme.shadows[3]
 }));
 
+
+
 export const DashboardNavbar = (props) => {
   const session = getUserSession()
 
   const { onSidebarOpen, ...other } = props;
+    return (
+      <>
+        <DashboardNavbarRoot
+          sx={{
+            left: {
+              lg: 245
+            },
+            width: {
+              lg: 'calc(100% - 280)'
+            }
+          }}
+          {...other}>
+          <AppBar>
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={onSidebarOpen}
+              >
+                <MenuIcon/>
+              </IconButton>
+              
+              <Box sx={{ flexGrow: 1 }} />
 
-  return (
-    <>
-
-      <DashboardNavbarRoot
-        sx={{
-          left: {
-            lg: 245
-          },
-          width: {
-            lg: 'calc(100% - 280)'
-          }
-        }}
-        {...other}>
-        <AppBar>
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={onSidebarOpen}
-            >
-              <MenuIcon/>
-            </IconButton>
-            
-            <Box sx={{ flexGrow: 1 }} />
-
-            <p>{(session.name) == null ? '' : (session.name).toUpperCase()} (RA: {(session.matriculation) == null ? '' : (session.matriculation).toUpperCase()})</p>
-            
-          </Toolbar>
-        </AppBar>
-      </DashboardNavbarRoot>
-    </>
-  );
+              {/* Provisório */}
+              {getUserSession() == null ? '' : (<p>{(session.name) == null ? '' : session.name.toUpperCase()} (RA: {(session.matriculation) == null ? '' : session.matriculation.toUpperCase()})</p>)}
+              
+            </Toolbar>
+          </AppBar>
+        </DashboardNavbarRoot>
+      </>
+    ); 
 };
 
 DashboardNavbar.propTypes = {

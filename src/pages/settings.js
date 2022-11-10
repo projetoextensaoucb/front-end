@@ -50,15 +50,15 @@ const Settings = () => {
         >
           {user && (
             <NextLink href="/users" passHref>
-              <Button variant="outlined" size="medium" startIcon={<UsersIcon />} sx={{ mr: 1 }}>
-                Usuários
+              <Button variant="outlined" size="small" startIcon={<UsersIcon />} sx={{ ml: 2 }}>
+                Listar usuários
               </Button>
             </NextLink>
           )}
 
           {user && (
             <NextLink href="/activities" passHref>
-              <Button variant="outlined" size="medium" startIcon={<AddIcon />} sx={{ ml: 1 }}>
+              <Button variant="outlined" size="small" startIcon={<AddIcon />} sx={{ ml: 1 }}>
                 Criar atividade
               </Button>
             </NextLink>
@@ -66,7 +66,7 @@ const Settings = () => {
 
           {user && (
             <NextLink href="/registerInstitution" passHref>
-              <Button variant="outlined" size="medium" startIcon={<AddIcon />} sx={{ ml: 1 }}>
+              <Button variant="outlined" size="small" startIcon={<AddIcon />} sx={{ ml: 1 }}>
                 Criar instituição
               </Button>
             </NextLink>
@@ -74,7 +74,7 @@ const Settings = () => {
 
           {user && (
             <NextLink href="/registerCourse" passHref>
-              <Button variant="outlined" size="medium" startIcon={<AddIcon />} sx={{ ml: 1 }}>
+              <Button variant="outlined" size="small" startIcon={<AddIcon />} sx={{ ml: 1, mr: 2 }}>
                 Criar curso
               </Button>
             </NextLink>

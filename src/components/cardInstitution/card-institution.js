@@ -239,14 +239,15 @@ export const CardInstitution = ({ institution }) => {
         >
           {isAdmin && (
             <>
-              <Button color="primary" hidden={isSubscriber} variant="contained">
+              <Button color="primary" hidden={isSubscriber} variant="contained" sx={{ ml: 1 }}>
                 Ocultar
               </Button>
 
               <Button color="primary" hidden={isSubscriber} variant="contained">
                 Excluir
               </Button>
-              <NextLink href={"/editProject"}>
+
+              <NextLink href={"/editInstitution"}>
                 <Button color="primary" hidden={isSubscriber} variant="contained">
                   Editar
                 </Button>
@@ -258,6 +259,7 @@ export const CardInstitution = ({ institution }) => {
             hidden={isSubscriber}
             onClick={subscriptionProject}
             variant="contained"
+            sx={{ mr: 1 }}
           >
             Inscrever-se
           </Button>
