@@ -6,8 +6,8 @@ import { AccountProfile } from "../account/account-profile";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Box, Card, Container, Table, TableBody, TableCell, TableHead, TableRow, Typography, Dialog, AppBar, Slide, Toolbar, IconButton, CloseIcon  } from "@mui/material"; // DataGrid, GridColDef, GridValueGetterParams,TablePagination
-
+import { Grid, Box, Card, Container, Table, TableBody, TableCell, TableHead, TableRow, Typography, Dialog, AppBar, Slide, Toolbar, IconButton } from "@mui/material"; // DataGrid, GridColDef, GridValueGetterParams,TablePagination
+import CloseIcon from "@mui/icons-material/Close";
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
