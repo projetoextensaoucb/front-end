@@ -99,7 +99,7 @@ export default function registerInstitution() {
           router.push("/institutions");
         })
         .catch((error) => {
-          if (error.response) {
+          if (error.response.data) {
             alert(`${error.response.data.message}`);
             console.log(error.response.data);
             window.location.reload();

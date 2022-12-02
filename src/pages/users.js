@@ -32,7 +32,9 @@ const Customers = () => {
           setLoading(false);
         })
         .catch((error) => {
-          alert(error.response.data.message);
+          if (error.response.data) {
+            alert(error.response.data.message);
+          }
           router.push("/");
         });
     } else {
