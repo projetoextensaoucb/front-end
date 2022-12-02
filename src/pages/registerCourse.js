@@ -61,7 +61,7 @@ export default function RegisterCourse() {
             window.location.reload();
           })
           .catch(error => {
-            if (error.response) {
+            if (error.response.data) {
               alert(`${error.response.data.message}`)
               console.log(error.response.data)
                window.location.reload();

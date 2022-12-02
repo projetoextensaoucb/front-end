@@ -62,7 +62,7 @@ export const CardInstitution = ({ institution }) => {
         setIsSubscriber(true);
       })
       .catch((error) => {
-        if (error.response) {
+        if (error.response.data) {
           alert(`${error.response.data.message}`);
           console.log(error.response.data);
           window.location.reload();

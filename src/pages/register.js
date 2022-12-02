@@ -133,7 +133,7 @@ useEffect(() => {
           router.push('/login')
         })
         .catch(error => {
-          if (error.response) {
+          if (error.response.data) {
             alert(`${error.response.data.message}`)
             console.log(error.response.data)
             window.location.reload(); // refresh page

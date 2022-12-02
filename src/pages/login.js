@@ -55,7 +55,8 @@ const Login = () => {
           }
         })
         .catch(error => {
-          if (error.response) {
+          console.log(error);
+          if (error.response.data) {
             alert(`${error.response.data.message}`)
             console.log(error.response.data)
             window.location.reload();
