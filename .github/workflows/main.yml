@@ -1,4 +1,5 @@
-name: Deploy
+name: Deploy to Production
+
 
 on:
   pull_request:
@@ -8,11 +9,84 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build artifact
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        name: Checkout
+
+      - name: Installing dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Creating deployment artifact
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        run: tar -czf "${GITHUB_SHA}".tar.gz out
+      
+      - name: Storing artifact
+        uses: actions/upload-artifact@v2
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "projetoextensaoucbdev" #Must be unique in Heroku
-          heroku_email: "devprojetoextensaoucb@gmail.com"
-          buildpack: "https://github.com/mars/create-react-app-buildpack.git"
+          name: app-build
+          path: ${{ github.sha }}.tar.gz
+          retention-days: 1
+  prepare-release:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Upload to server
+    steps:
+      - uses: actions/download-artifact@v2
+        name: Downloading artifact
+        with:
+          name: app-build
+      
+      - name: Uploading to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_KEY }}
+          port: 22
+          source: ${{ github.sha }}.tar.gz
+          target: /tmp/
+
+      - name: Extracting files
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_KEY }}
+          port: 22
+          script: |
+            sudo mkdir -p /home/project/releases/${{ github.sha }}
+            sudo tar -xzf /tmp/${{ github.sha }}.tar.gz -C /home/project/releases/${{ github.sha }}
+  set-release:
+    runs-on: ubuntu-latest
+    needs: prepare-release
+    name: Activate release
+    steps:
+      - name: Activating release
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_KEY }}
+          port: 22
+          script: |
+            sudo ln -s -n -f /home/project/releases/${{ github.sha }}/out /var/www/html/current
+  clean-up:
+    runs-on: ubuntu-latest
+    needs: set-release
+    name: Clean up
+    steps:
+      - name: Activating release
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_KEY }}
+          port: 22
+          script: |
+            rm /tmp/*.tar.gz
+             cd /home/project/releases && ls -t -1 | tail -n +6 | xargs rm -rf
