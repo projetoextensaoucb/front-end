@@ -15,8 +15,9 @@ const Settings = () => {
 
   useEffect(() => {
     const verifySession = async () => {
-      if (!getUserSession()) {
-        router.push("/login");
+      if (getUserSession() != "admin") {
+        alert("Apenas administradores do sistema podem utilizar o menu admin.")
+        router.push("/");
       } else {
         const userSession = getUserSession().roles.find((role) => role === "admin");
         setUser(userSession);

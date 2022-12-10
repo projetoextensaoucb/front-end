@@ -12,41 +12,39 @@ import { Box, Button, Checkbox, Container, FormHelperText, Link, TextField, Typo
 import Voltar from "src/components/voltar";
 
 const Register = () => {
-  const [course, setCourse] = useState("");
-  const [courseList, setCourseList] = useState([{}]);
+  const [course, setCourse] = useState([]);
+  const [courseList, setCourseList] = useState([]);
   const [loading, setLoading] = useState(false);
   const user = getUserSession();
   var courseId = 1;
+  const listCourses = [];
 
   const handleChange = (event) => {
     setCourse(event.target.value);
-    console.log(course);
+    console.log(setCourse);
     console.log(courseList);
     courseList.forEach( element => {
       if( element.name === course ) {
-        courseId = element.id
-        console.log(courseId)
-      }
-    })
+      courseId = element.id
+      console.log(courseId)
+    }
+  })
   };
 
-useEffect(() => {
+  useEffect(() => {
     setLoading(true);
-    if (user.accessToken) {    
-      axios.get(`${BASE_API}/course/all`
-      ).then((response) => {
-          var listCourses = [];
-          response.data.courses.forEach(element => {
-            listCourses.push(element)
-          });
+    axios.get(`${BASE_API}/course/all`)
+        .then((response) => {
+          setCourseList(response.data.courses);
           setLoading(false);
         })
         .catch((error) => {
-          alert(error.message)
-          router.push('/')
+          if (error.response.data) {
+            alert(error.response.data.message);
+          }
+          router.push("/");
         });
-    }
-  }, [])
+  }, []);
 
   const router = useRouter();
   const formik = useFormik({
@@ -61,7 +59,8 @@ useEffect(() => {
       cpf: '',
       rg: '',
       policy: false,
-      foreigner: false
+      foreigner: false,
+      roles: ['aluno']
     },
     validationSchema: Yup.object({
 
@@ -182,7 +181,7 @@ useEffect(() => {
 
             <CardContent>
 
-              <Voltar destino='/users'/>
+              <Voltar destino='/login'/>
 
               <form onSubmit={formik.handleSubmit}>
                 <Box sx={{ my: 3 }}>
@@ -190,7 +189,7 @@ useEffect(() => {
                     color="textPrimary"
                     variant="h4"
                   >
-                    Crie uma nova conta
+                    Crie uma conta
                   </Typography>
                   <Typography
                     color="textSecondary"
@@ -205,7 +204,7 @@ useEffect(() => {
                   error={Boolean(formik.touched.name && formik.errors.name)}
                   fullWidth
                   helperText={formik.touched.name && formik.errors.name}
-                  label="Nome"
+                  label="Nome completo"
                   margin="normal"
                   name="name"
                   onBlur={formik.handleBlur}
@@ -218,7 +217,7 @@ useEffect(() => {
                   error={Boolean(formik.touched.email && formik.errors.email)}
                   fullWidth
                   helperText={formik.touched.email && formik.errors.email}
-                  label="Email"
+                  label="E-mail"
                   margin="normal"
                   name="email"
                   onBlur={formik.handleBlur}
@@ -229,7 +228,7 @@ useEffect(() => {
                   variant="outlined"
                 />
 
-                {/* <TextField
+                <TextField
                   error={Boolean(formik.touched.matriculation && formik.errors.matriculation)}
                   fullWidth
                   helperText={formik.touched.matriculation && formik.errors.matriculation}
@@ -240,7 +239,7 @@ useEffect(() => {
                   onChange={formik.handleChange}
                   value={formik.values.matriculation}
                   variant="outlined"
-                /> */}
+                />
 
                 <FormControl sx={{ my: 1, minWidth: 1 }}>
                   <InputLabel>Curso</InputLabel>
@@ -249,23 +248,24 @@ useEffect(() => {
                     value={course}
                     onChange={handleChange}
                     label="Curso"
-                    name="Curso"
+                    name="curso"
                     labelId="demo-simple-select-readonly-label"
                     id="demo-simple-select-readonly"
                   >
-                    { loading ?
-                      <Box>
-                        <CircularProgress />
+                    {
+                      loading ?
+                      <Box textAlign={'center'}>
+                        <CircularProgress fullWidth></CircularProgress>
                       </Box>
                       :
                       courseList.map((course) => (
-                        <MenuItem
-                          value={course.name}
-                          key={course.id}>
-                          {course.name}
-                        </MenuItem>
-                      ))
-                    }
+                      <MenuItem
+                        value={course.name}
+                        key={course.id}
+                      >
+                        {course.name}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
 
@@ -273,7 +273,7 @@ useEffect(() => {
                   error={Boolean(formik.touched.institutionalEmail && formik.errors.institutionalEmail)}
                   fullWidth
                   helperText={formik.touched.institutionalEmail && formik.errors.institutionalEmail}
-                  label="Email Universitário"
+                  label="E-mail Universitário"
                   margin="normal"
                   name="institutionalEmail"
                   onBlur={formik.handleBlur}
@@ -296,25 +296,28 @@ useEffect(() => {
                   value={formik.values.password}
                   variant="outlined"
                 />
+                
                 {/* TELEFONES */}
-                {/* <Box
+                <Box
                   sx={{
                     alignItems: 'center',
                     display: 'flex',
-                    m: -1
                   }}
                 >
                   <TextField
                     error={Boolean(formik.touched.telephone && formik.errors.telephone)}
                     fullWidth
                     helperText={formik.touched.telephone && formik.errors.telephone}
-                    label="Telefone Pessoal"
+                    label="Telefone pessoal"
                     margin="normal"
                     name="telephone"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     value={formik.values.telephone}
                     variant="outlined"
+                    sx={{
+                      mr: 1,
+                    }}
                   />
 
                   <TextField
@@ -328,8 +331,11 @@ useEffect(() => {
                     onChange={formik.handleChange}
                     value={formik.values.residentialTelephone}
                     variant="outlined"
+                    sx={{
+                      ml: 1,
+                    }}
                   />
-                </Box> */}
+                </Box>
 
                 {/* RG E CPF */}
 
@@ -431,7 +437,7 @@ useEffect(() => {
                   color="textSecondary"
                   variant="body2"
                 >
-                  Tem uma conta?
+                  Já tem uma conta?
                   {' '}
                   <NextLink
                     href="/login"

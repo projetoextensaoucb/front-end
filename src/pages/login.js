@@ -114,7 +114,18 @@ const Login = () => {
                   gutterBottom
                   variant="body2"
                 >
-                  Utilize o seu e-mail, e-mail universitário ou matrícula.
+                  Para logar, utilize o seu e-mail, e-mail universitário ou matrícula. Se ainda não possuir log-in, você pode se cadastrar clicando {' '}
+                  <NextLink
+                    href="/register"
+                    passHref
+                  >
+                    <Link
+                      variant="subtitle2"
+                      underline="hover"
+                    >
+                      aqui
+                    </Link>
+                  </NextLink>.
                 </Typography>
               </Box>
 
@@ -182,9 +193,8 @@ const Login = () => {
                 Entrar
                 </Button>
               </Box>
-
               <Box
-              textAlign={'right'}
+                textAlign={'right'}
               >
                 <NextLink
                   href="/recoverPassword"
