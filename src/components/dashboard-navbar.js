@@ -43,7 +43,7 @@ export const DashboardNavbar = (props) => {
               <Box sx={{ flexGrow: 1 }} />
 
               {/* Provisório */}
-              {getUserSession() == null ? '' : (<p>{(session.name) == null ? '' : session.name.toUpperCase()} (RA: {(session.matriculation) == null ? '' : session.matriculation.toUpperCase()})</p>)}
+              {getUserSession() == null ? '' : (<Typography>{(session.name) == null ? '' : session.name.toUpperCase()} (RA: {(session.matriculation) == null ? '' : session.matriculation.toUpperCase()})</Typography>)}
               
             </Toolbar>
           </AppBar>
