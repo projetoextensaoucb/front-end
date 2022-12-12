@@ -6,20 +6,20 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export const CardInstitution = ({ institution }) => {
-  const formmatedStartDate = new Date(institution.startDate);
-  const formmatedEndDate = new Date(institution.endDate);
-  var finalStartDate =
-    formmatedStartDate.getDate() +
-    "/" +
-    (formmatedStartDate.getMonth() + 1) +
-    "/" +
-    formmatedStartDate.getFullYear();
-  var finalEndDate =
-    formmatedEndDate.getDate() +
-    "/" +
-    (formmatedEndDate.getMonth() + 1) +
-    "/" +
-    formmatedEndDate.getFullYear();
+  // const formmatedStartDate = new Date(institution.createdAt);
+  // const formmatedEndDate = new Date(institution.endDate);
+  // var finalStartDate =
+  //   formmatedStartDate.getDate() +
+  //   "/" +
+  //   (formmatedStartDate.getMonth() + 1) +
+  //   "/" +
+  //   formmatedStartDate.getFullYear();
+  // var finalEndDate =
+  //   formmatedEndDate.getDate() +
+  //   "/" +
+  //   (formmatedEndDate.getMonth() + 1) +
+  //   "/" +
+  //   formmatedEndDate.getFullYear();
 
   const [isSubscriber, setIsSubscriber] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -150,13 +150,13 @@ export const CardInstitution = ({ institution }) => {
                 <Typography description="Coordenador" variant="body2">
                   {institution.description}
                   <Link href="https://ucb.catolica.edu.br/portal/wp-content/uploads/2022/03/EDITAL-UCB-016.2022-PROGRAMA-SER1-2022-REPUBLICACAO.pdf">
-                    {" edital aqui."}
+                    {institution.link}
                   </Link>
                 </Typography>
               </Typography>
             </Box>
 
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -170,9 +170,9 @@ export const CardInstitution = ({ institution }) => {
                   {finalStartDate}
                 </Typography>
               </Typography>
-            </Box>
+            </Box> */}
 
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -186,7 +186,7 @@ export const CardInstitution = ({ institution }) => {
                   {finalEndDate}
                 </Typography>
               </Typography>
-            </Box>
+            </Box> */}
 
             <Box
               sx={{
