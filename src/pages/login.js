@@ -59,7 +59,7 @@ const Login = () => {
           if (error.response.data) {
             alert(`${error.response.data.message}`)
             console.log(error.response.data)
-            window.location.reload();
+            router.push('/login')
           }
         })
     }
