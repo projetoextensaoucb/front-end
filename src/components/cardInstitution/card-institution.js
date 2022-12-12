@@ -47,7 +47,7 @@ export const CardInstitution = ({ institution }) => {
     const session = getUserSession();
     axios
       .post(
-        `${BASE_API}/project/subscription`,
+        `${BASE_API}/institution/subscription`,
         {
           projectId: institution.id,
         },

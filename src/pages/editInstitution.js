@@ -91,7 +91,7 @@ export default function registerInstitution() {
       projectFormData.append("city", formik.values.city);
       projectFormData.append("image", selectedFile);
       axios
-        .post(`${BASE_API}/project/create`, projectFormData, {
+        .post(`${BASE_API}/institution/create`, projectFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "x-access-token": userSession.accessToken,
