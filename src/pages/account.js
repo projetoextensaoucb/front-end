@@ -9,12 +9,12 @@ import { useRouter } from 'next/router';
 const Account = () => {
   const router = useRouter()
   useEffect(() => {
-    const verifySession = async () => {
-      if(!getUserSession()) { 
-        router.push('/login')
-      }
+    const user = getUserSession();
+    if (user) {
+      // req...
+    } else {
+      router.push('/login')
     }
-    verifySession()
   }, [])
   return(
   <>

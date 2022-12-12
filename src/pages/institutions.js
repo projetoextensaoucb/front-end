@@ -38,28 +38,33 @@ export default function Products() {
   useEffect(() => {
     setLoading(true);
     const user = getUserSession();
-    const hasAccess = user.roles.find((role) => role === "admin");
-    setUser(hasAccess);
-
-    if (!getUserSession()) {
-      router.push("/login");
-    }
-
+    if (user) {
+      const hasAccess = user.roles.find((role) => role === "admin");
+      setUser(hasAccess);
+      
+      if (!getUserSession()) {
+        router.push("/login");
+      }
     axios
-      .get(`${BASE_API}/project/all`, {
-        // Editar para institutions/all
+      .get(`${BASE_API}/institution/all`, {
         headers: {
           "x-access-token": user.accessToken,
         },
       })
       .then((response) => {
-        setInstitutions(response.data.projects); // Editar depois para institutions
+        if (response.status == 200) {
+          setInstitutions(response.data.institutions);
+          setSearchInstitutions(response.data.institutions);
+        }
         setLoading(false);
       })
       .catch((error) => {
         confirm(error);
         router.push("/");
       });
+    } else {
+      router.push("/login");
+    }
   }, []);
 
   const handleClickOpen = () => {
