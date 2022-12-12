@@ -39,7 +39,7 @@ export const ActivitiesCard = ({ activitie, childToParent, ...rest }) => {
               display: "flex",
             }}
           >
-            <Typography color="textSecondary" display="inline" sx={{ px: 1 }} variant="body2">
+            {/* <Typography color="textSecondary" display="inline" sx={{ px: 1 }} variant="body2">
               <Button
                 color="primary"
                 variant="contained"
@@ -47,7 +47,7 @@ export const ActivitiesCard = ({ activitie, childToParent, ...rest }) => {
               >
                 Cadastrar Atividade
               </Button>
-            </Typography>
+            </Typography> */}
             <Typography color="textSecondary" display="inline" sx={{ px: 1, height: "100%" }} variant="body2">
               <Button
                 color="primary"
