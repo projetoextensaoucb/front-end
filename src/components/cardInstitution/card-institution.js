@@ -150,7 +150,7 @@ export const CardInstitution = ({ institution }) => {
                 <Typography description="Coordenador" variant="body2">
                   {institution.description}
                   <Link href="https://ucb.catolica.edu.br/portal/wp-content/uploads/2022/03/EDITAL-UCB-016.2022-PROGRAMA-SER1-2022-REPUBLICACAO.pdf">
-                    {institution.link}
+                    {institution.link} 
                   </Link>
                 </Typography>
               </Typography>
