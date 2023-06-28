@@ -14,18 +14,6 @@ const Settings = () => {
   const [user, setUser] = React.useState({});
 
   useEffect(() => {
-    const userAuth = getUserSession();
-    if (userAuth) {
-      if (userAuth.roles.find((el)=> el !== 'admin')) {
-        alert("Apenas administradores do sistema podem utilizar o menu admin.")
-        router.push("/");
-      } else {
-        const userSession = getUserSession().roles.find((role) => role === "admin");
-        setUser(userSession);
-      }
-    } else {
-      router.push('/login')
-    }
   }, []);
 
   return (
